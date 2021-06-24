@@ -14,9 +14,10 @@ title: Project Template
 ---
 
 ## Team
--  E/17/090, Name, [email](mailto:name@email.com)
--  eNumber, Name, [email](mailto:name@email.com)
--  eNumber, Name, [email](mailto:name@email.com)
+-  E/17/090, Achintha Harshamal, [email](achinthafharshamal@gmail.com)
+-  E/17/027, Pubudu Bandara, [email](pubuducb@gmail.com)
+-  E/17/219, Ishara Nawarathna, [email](yc.ishara@gmail.com
+)
 
 <!-- Image (photo/drawing of the final hardware) should be here -->
 
@@ -64,8 +65,8 @@ What was achieved, future developments, commercialization plans
 
 ## Links
 
-- [Project Repository](https://github.com/cepdnaclk/{{ page.repository-name }}){:target="_blank"}
-- [Project Page](https://cepdnaclk.github.io/{{ page.repository-name}}){:target="_blank"}
+- [Project Repository](https://github.com/cepdnaclk/{{ page.e17-3yp-Remote-Gatekeeping-System }}){:target="_blank"}
+- [Project Page](https://cepdnaclk.github.io/{{ page.e17-3yp-Remote-Gatekeeping-System}}){:target="_blank"}
 - [Department of Computer Engineering](http://www.ce.pdn.ac.lk/)
 - [University of Peradeniya](https://eng.pdn.ac.lk/)
 
