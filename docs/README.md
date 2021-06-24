@@ -16,8 +16,7 @@ title: Project Template
 ## Team
 -  E/17/090, Achintha Harshamal, [email](achinthafharshamal@gmail.com)
 -  E/17/027, Pubudu Bandara, [email](pubuducb@gmail.com)
--  E/17/219, Ishara Nawarathna, [email](yc.ishara@gmail.com
-)
+-  E/17/219, Ishara Nawarathna, [email](yc.ishara@gmail.com)
 
 <!-- Image (photo/drawing of the final hardware) should be here -->
 
