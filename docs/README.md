@@ -56,7 +56,7 @@ All items and costs
 
 | Item          | Quantity  | Unit Cost  | Total  |
 | ------------- |:---------:|:----------:|-------:|
-| Sample item   | 5         | 10 LKR     | 500 LKR |
+| Sample item   | 5         | 10 LKR     | 50 LKR |
 
 ## Conclusion
 
