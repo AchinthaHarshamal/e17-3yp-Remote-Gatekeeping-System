@@ -9,14 +9,14 @@ title: Project Template
 
 [comment]: # "This is the standard layout for the project, but you can clean this and use your own template"
 
-# Project Title
+# Remote Gatekeeping System
 
 ---
 
 ## Team
--  E/17/090, Achintha Harshamal, [email](achinthafharshamal@gmail.com)
--  E/17/027, Pubudu Bandara, [email](pubuducb@gmail.com)
--  E/17/219, Ishara Nawarathna, [email](yc.ishara@gmail.com)
+-  E/17/090, Achintha Harshamal, <achinthafharshamal@gmail.com>
+-  E/17/027, Pubudu Bandara, <pubuducb@gmail.com>
+-  E/17/219, Ishara Nawarathna, <yc.ishara@gmail.com>
 
 <!-- Image (photo/drawing of the final hardware) should be here -->
 
