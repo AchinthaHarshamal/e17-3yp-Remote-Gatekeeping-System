@@ -66,13 +66,7 @@ _not completed_
 ## Detailed budget
 
 _not completed_
-<!--
-All items and costs
-
-| Item          | Quantity  | Unit Cost  | Total  |
-| ------------- |:---------:|:----------:|-------:|
-| Sample item   | 5         | 10 LKR     | 50 LKR | 
--->
+<!--All items and costs-->
 
 ## Conclusion
 
@@ -84,7 +78,7 @@ _not completed_
 - [Project Repository](https://github.com/cepdnaclk/e17-3yp-Remote-Gatekeeping-System){:target="_blank"}
 - [Project Page](https://cepdnaclk.github.io/e17-3yp-Remote-Gatekeeping-System){:target="_blank"}
 - [Department of Computer Engineering](http://www.ce.pdn.ac.lk/){:target="_blank"}
-- [University of Peradeniya](https://eng.pdn.ac.lk/){:target="_blank"}
+- [University of Peradeniya](https://www.pdn.ac.lk/){:target="_blank"}
 
 [//]: # (Please refer this to learn more about Markdown syntax)
 [//]: # (https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
