@@ -1,8 +1,15 @@
 ___
 # Remote Gatekeeping System
 ### 3rd Year Project - Computer Engineering - UoP
-### Project web site : [https://cepdnaclk.github.io/e17-3yp-Remote-Gatekeeping-System/]()
+### Project web site : https://cepdnaclk.github.io/e17-3yp-Remote-Gatekeeping-System/
 ___
+## Team Members
+- E/17/090, Achintha Harshamal, [email](mailto:achinthafharshamal@gmail.com), [GitHub](https://github.com/AchinthaHarshamal)
+- E/17/027, Pubudu Bandara, [email](mailto:pubuducb@gmail.com), [GitHub](https://github.com/pubuducb)
+- E/17/219, Ishara Nawarathna, [email](mailto:yc.ishara@gmail.com), [GitHub](https://github.com/IsharaNawarathna)
+## Supervisors
+- Dr. Isuru Nawinne, [email](mailto:isurunawinne@eng.pdn.ac.lk)
+- Dr. Mahanama Wickramasinghe, [email](mailto:mahanamaw@eng.pdn.ac.lk)
 ## Overview
 In the busy and complicated lifestyle today, keeping interactions with outsiders is, inefficient, impractical and vulnerable.
 The ongoing pandemic has worsen the situatoin. 
