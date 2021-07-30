@@ -40,7 +40,7 @@ Features of the control unit:
 This is used for safely receive the delivery package from the delivery person without having any physical interactions with the delivery person. It doesn't matter where the homeowner when the delivery person comes to the door, delivery can be get into the hands of homeowner without having to worry about the facts such as delivey might get lost or damaged.  
   
   How it works:  
-  1.[Whenever the delivery person is at the gate, he can request the inside person to open up the smart mail box.]   
+  1.Whenever the delivery person is at the gate, he can request the inside person to open up the smart mail box.   
   2.Inside user(home owner) gets a notification to his/her phone , informing that there is a delivery person is at the gate.  
   3.Inside user can access the camera module in the control unit and get a photo of the delivery person and see if that is an actual delivery person.  
   4.Inside user can commiunicate with the delivery person using the intercom system which is integrated to the control unit.  
@@ -62,7 +62,8 @@ This is used to lock and unlock the gate remotely.Functionality is very simiar t
   5.Inside user can unlock the gate.  
   6.Outside person can open the gate and enter.
   
-NOTE : Only the locking/unlocking mechanism is provided with the system and the gate will not be provided. This lock can be applied only for basic gates and not supported to various types/ different orientations of gates.  
+>NOTE : 
+>  Only the locking/unlocking mechanism is provided with the system and the gate will not be provided. This lock can be applied only for basic gates and not supported to various types/ different orientations of gates.  
   
   
 ## Mobile controlling interface
