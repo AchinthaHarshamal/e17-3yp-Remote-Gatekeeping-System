@@ -31,18 +31,18 @@ Our goal is to provide a user-friendly and completely automated solution for the
 _not completed_
 
 ## Smart mailbox
-This is used for safely receive the delivery package from the delivery person without having any physical interactions with the delivery person. It doesn't matter where the homeowner when the delivery person comes to the door, delivery can be get into the hands of homeowner without having to worry about the facts such as delivey might get lost or damaged.
-  How it works:
-  1.Whenever the delivery person is at the gate, he can request the delivery person to open up the smart mail box.  
-  2.Inside user(home owner) gets a notification to his/her phone , informing that there is a delivery person is at the gate.
-  3.Inside user can access the camera module in the control unit and get a photo of the delivery person and see if that is an actual delivery person.
-  4.Inside user can commiunicate with the delivery person using the intercom system which is integrated to the control unit.
-  5.Inside user can unlock and open up the smart mail box.
-  6.Delivery person can place the delivery package inside the smart mailbox.
-  7.Inside user can close and relock the smart mailbox.
+This is used for safely receive the delivery package from the delivery person without having any physical interactions with the delivery person. It doesn't matter where the homeowner when the delivery person comes to the door, delivery can be get into the hands of homeowner without having to worry about the facts such as delivey might get lost or damaged.  
+  How it works:  
+  1.Whenever the delivery person is at the gate, he can request the delivery person to open up the smart mail box.    
+  2.Inside user(home owner) gets a notification to his/her phone , informing that there is a delivery person is at the gate.  
+  3.Inside user can access the camera module in the control unit and get a photo of the delivery person and see if that is an actual delivery person.  
+  4.Inside user can commiunicate with the delivery person using the intercom system which is integrated to the control unit.  
+  5.Inside user can unlock and open up the smart mail box.  
+  6.Delivery person can place the delivery package inside the smart mailbox.  
+  7.Inside user can close and relock the smart mailbox.    
   
-The speciality of this component is that the homeowners can get the delivery package without having to be at the home when the delivery arrives to the home.They can safetly receive deliveries and it doesn't matter where they are at. 
-Another advantage is that , it reduces the human interactions significantly. This is a very good solution for ongoing corona outbreak as we
+The speciality of this component is that the homeowners can get the delivery package without having to be at the home when the delivery arrives to the home.They can safetly receive deliveries and it doesn't matter where they are at.   
+Another advantage is that , it reduces the human interactions significantly. This is a very good solution for ongoing corona outbreak as we    
 
 ## Remote gate unlocking system
 _not completed_
