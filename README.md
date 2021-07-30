@@ -19,7 +19,7 @@ Since people in Sri Lanka are so busy today, they can’t pay much attention abo
 So, we thought we can come up with a system of interconnected devices (inspired from IoT) to make the life easy for the people.
 
 Our goal is to provide a user-friendly and completely automated solution for the above problems, which will be a success even after the end of the pandemic.
-## Features
+## Main Components
 - [Smart mailbox](#smart-mailbox)
 - [Control unit with intercom](#control-unit-with-intercom)
 - [Remote gate unlocking system](#remote-gate-unlocking-system)
