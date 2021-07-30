@@ -28,7 +28,12 @@ Our goal is to provide a user-friendly and completely automated solution for the
 
 
 ## Control unit with intercom
-_not completed_
+This is the main component of the system. This is where the iot device is at and it contorls the behaviour of the whole system. Control unit is mainly interacted by the outside user(delivery person, postman) and this helps the inside user(homeowner) to control the whole system.    
+Features of the control unit:    
+1.Camera module : Can be used to take a photo remotely of the outside user. Controlled by the inside user.  
+2.Intercom-System : Consits with a speaker and a microphone. Used to intercom communication between inside user and the outside user.  
+3.Outside user can give their contact information to the inside user.  
+4.Controlling the smart mailbox and smart gatelocking system.  
 
 ## Smart mailbox
 This is used for safely receive the delivery package from the delivery person without having any physical interactions with the delivery person. It doesn't matter where the homeowner when the delivery person comes to the door, delivery can be get into the hands of homeowner without having to worry about the facts such as delivey might get lost or damaged.  
