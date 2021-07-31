@@ -1,8 +1,13 @@
-
+import Navbar from "./components/layout/Navbar";
+import {BrowserRouter} from 'react-router-dom';
 
 function App() {
   return (
-   <h1>Start</h1>
+
+    <BrowserRouter>
+      <Navbar/>
+    </BrowserRouter>
+    
   );
 }
 
