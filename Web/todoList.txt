@@ -1,1 +1,16 @@
-# finde a favicon icon
+# find a favicon icon
+# Home : finde the download image
+# Home : Banner description
+# Home : banne desing
+
+
+//D:\e17-3yp-Remote-Gatekeeping-System\Web\gate-keeper\node_modules\materialize-css\dist\js\materialize.min.js
+//D:\e17-3yp-Remote-Gatekeeping-System\Web\gate-keeper\node_modules\materialize-css\dist\css\materialize.min.css
+
+
+
+react-router-dom
+
+
+
+
