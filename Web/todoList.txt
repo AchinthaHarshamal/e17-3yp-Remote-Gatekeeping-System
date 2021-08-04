@@ -14,8 +14,8 @@ redux
 react-redux
 
 created store 
-createc rootReducer  , dashboardReducer, authReducer 
-added the <provider> wrapper into index.js
+created rootReducer  , dashboardReducer, authReducer 
+added the <provider> wrapper into index.jss
 
 
 
