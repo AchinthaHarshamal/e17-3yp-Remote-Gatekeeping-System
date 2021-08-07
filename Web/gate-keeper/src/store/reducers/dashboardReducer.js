@@ -7,8 +7,6 @@ const initState = {
         {id: '5' , from : 'Sam' , to:'Node1' , dataType :'image' , time : '22/45/2021'},
         {id: '6' , from : 'Janaka' , to:'Node2' , dataType :'Voice' , time : '22/45/2021'},
         {id: '7' , from : 'Jkal' , to:'Node3' , dataType :'Voice' , time : '22/45/2021'}
-
-
     ]
 }
 const dashboardReducer = (state = initState , action) =>{
@@ -16,4 +14,5 @@ const dashboardReducer = (state = initState , action) =>{
 }
 
 
-export default dashboardReducer;
+
+export default dashboardReducer; 
