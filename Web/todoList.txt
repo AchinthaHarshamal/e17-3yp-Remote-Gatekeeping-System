@@ -17,10 +17,10 @@ create-react-app <project name>
 npx 
 create-react-app <project name>
 
-
-react-router-dom
-redux
-react-redux
+install 
+    react-router-dom
+    redux
+    react-redux
 
 created store 
 created rootReducer  , dashboardReducer, authReducer 
@@ -28,10 +28,12 @@ added the <provider> wrapper into index.jss
 
 
 
-installed react-thunk
+installed 
+    react-thunk
 
-react-redux-firebase
-redux-firestore
+installed
+    react-redux-firebase
+    redux-firestore
 
 
 
