@@ -30,5 +30,8 @@ added the <provider> wrapper into index.jss
 
 installed react-thunk
 
+react-redux-firebase
+redux-firestore
+
 
 

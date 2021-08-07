@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import Hlist from './Hlist';
+import Messages from './Messages';
+
 class Dashbord extends Component {
 
     render() {
@@ -10,8 +11,7 @@ class Dashbord extends Component {
         return (
             <div className="container">
                 <h1>Hello Dashboard</h1> 
-                <Hlist messages={messages}/>
-
+                <Messages messages={messages}/>
             </div>
         )
     }
@@ -22,6 +22,8 @@ const mapStateToProps =(state) => {
         messages: state.dboard.messages
     }
 }
+
+
 
 export default connect(mapStateToProps)(Dashbord);
 
