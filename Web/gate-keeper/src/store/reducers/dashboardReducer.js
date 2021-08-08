@@ -14,10 +14,12 @@ const dashboardReducer = (state = initState , action) =>{
     switch (action.type){
         case 'DOWNLOAD_MESSAGE':
              console.log('Request messages : ' , action.id)
+             return state
+        default : 
+            return state
 
     }
    
-    return state 
 }
 
 
