@@ -9,6 +9,10 @@ import rootReducer from './store/reducers/rootReducer';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 
+import { getFirebase, ReactReduxFirebaseProvider } from "react-redux-firebase";
+import firebase from "./config/fbConfig";
+import { createFirestoreInstance } from "redux-firestore";
+
 
 const store = createStore(rootReducer ,applyMiddleware(thunk));
 
