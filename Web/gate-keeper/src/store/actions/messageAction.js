@@ -9,7 +9,7 @@ export const downloadMsg = (id) => {
             to: 'device 1',
             time: d,
             dataType:'Test',
-            id : id+150
+            id : Math.floor(Math.random() *10000)
 
         }).then(() => {
             dispatch({type :'DOWNLOAD_MESSAGE' , id});
