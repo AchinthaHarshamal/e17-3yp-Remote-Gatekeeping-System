@@ -1,3 +1,5 @@
+
+
 # find a favicon icon
 # Home : finde the download image
 # Home : Banner description
@@ -7,16 +9,31 @@
 //D:\e17-3yp-Remote-Gatekeeping-System\Web\gate-keeper\node_modules\materialize-css\dist\js\materialize.min.js
 //D:\e17-3yp-Remote-Gatekeeping-System\Web\gate-keeper\node_modules\materialize-css\dist\css\materialize.min.css
 
+npm
 
+npm install creat-react-app -g
+create-react-app <project name>
 
-react-router-dom
-redux
-react-redux
+npx 
+create-react-app <project name>
+
+install 
+    react-router-dom
+    redux
+    react-redux
 
 created store 
 created rootReducer  , dashboardReducer, authReducer 
 added the <provider> wrapper into index.jss
 
+
+
+installed 
+    react-thunk
+
+installed
+    react-redux-firebase
+    redux-firestore
 
 
 

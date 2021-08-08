@@ -10,9 +10,9 @@ const  Home = () => {
                 <div className="col  s12 m7 offset-m1">
                     <Banner />
                 </div>
+                
                 <div className="col  s12 m3  ">
                     <Dowonload />
-                  
                 </div>
             </div>
             
