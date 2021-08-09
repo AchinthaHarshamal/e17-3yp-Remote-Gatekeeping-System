@@ -10,21 +10,7 @@ const  Messages  = ({messages , downloadMsg}) =>  {
     const rows = messages &&  messages.map( (msg) =>{
       
         return (
-            // <div class="col s6 l3" key = {msg.id} onClick={() => {downloadMsg(msg.id)}}>
-            //     <div class="card horizontal z-depth-0 deep-purple lighten-2">
-            //         <div class="card-content white-text ">  
-            //             <span class="card-title" >{msg.dataType}</span>
-            //             <p>From : {msg.from}</p>
-            //             <p>To: {msg.to} </p>
-            //             <p>Date : </p>
-            //         </div>
-            //         <div className= "card-image">
-            //             <i class="material-icons blue-text">{ msg.dataType=== 'Image' ? 'download': 'play_arrow' }</i>
-            //             {/* <img src={downloadImage} alt="some img here" /> */}
-            //         </div>
-            //     </div>
-                
-            // </div>
+            
             <tr key = {msg.id} onClick={() => {downloadMsg(msg.id)}}>
                 <td>{msg.from}</td>
                 <td>{msg.to}</td>
@@ -36,9 +22,7 @@ const  Messages  = ({messages , downloadMsg}) =>  {
     })
     
     return (
-        // <div className ="row">
-        //     {cards}
-        // </div>
+       
 
         <table className="striped highlighth responsive-table">
             <thead>
