@@ -30,6 +30,7 @@ const mapStateToProps =(state) => {
     return {
         // messages: state.dboard.messages
         messages : state.firestore.ordered.messages
+
     }
 }
 

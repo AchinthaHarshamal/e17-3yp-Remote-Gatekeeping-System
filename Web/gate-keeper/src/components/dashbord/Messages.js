@@ -6,7 +6,7 @@ import downloadImage from '../../img/download.jpg'
 
 const  Messages  = ({messages , downloadMsg}) =>  {
 
-    console.log("inside" ,messages)
+    //console.log("inside" ,messages)
     const rows = messages &&  messages.map( (msg) =>{
       
         return (
@@ -15,7 +15,7 @@ const  Messages  = ({messages , downloadMsg}) =>  {
                 <td>{msg.from}</td>
                 <td>{msg.to}</td>
                 <td>{msg.dataType}</td>
-                <td>{msg.id}</td>
+                <td>{msg.UID}</td>
             </tr>
 
         )
