@@ -7,7 +7,7 @@ import { compose } from 'redux';
 class Dashbord extends Component {
 
     render() {
-        //console.log(this.props.messages)
+       
         const {messages} = this.props;
         //console.log(messages)
         
@@ -16,7 +16,7 @@ class Dashbord extends Component {
             <div className="container">
                 <h1>Hello Dashboard</h1> 
                     <Messages messages={messages}/>
-                 {/*res*/}
+                
 
             </div>
         ) 
