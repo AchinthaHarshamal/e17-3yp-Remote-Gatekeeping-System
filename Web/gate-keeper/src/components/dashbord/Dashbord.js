@@ -3,13 +3,15 @@ import {connect} from 'react-redux';
 import Messages from './Messages';
 import {firestoreConnect} from 'react-redux-firebase'
 import { compose } from 'redux';
+import { Redirect } from 'react-router-dom'
 
 class Dashbord extends Component {
 
     render() {
        
-        const {messages} = this.props;
+        const {messages , auth } = this.props;
         //console.log(messages)
+        if(!auth.uid) return <Redirect to='/'/>
         
         
         return (
@@ -29,7 +31,8 @@ const mapStateToProps =(state) => {
     //console.log("dboard " , state.dboard.messages)
     return {
         // messages: state.dboard.messages
-        messages : state.firestore.ordered.messages
+        messages : state.firestore.ordered.messages,
+        auth : state.firebase.auth
 
     }
 }
