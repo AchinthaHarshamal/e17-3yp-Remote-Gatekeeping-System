@@ -21,9 +21,14 @@ const store = createStore(
   applyMiddleware(thunk.withExtraArgument({getFirebase ,getFirestore }))
 );
 
+
+const rrfConfig = {
+  userProfile: 'users',
+  useFirestoreForProfile: true // Firestore for Profile instead of Realtime DB
+}
 const rrfProps = {
   firebase,
-  config: fbConfig,
+  config: rrfConfig,
   dispatch: store.dispatch,
   createFirestoreInstance,
 };
