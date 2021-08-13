@@ -5,6 +5,7 @@ import Home from "./components/home/Home";
 import SignedUp from "./components/auth/SignedUp";
 import SignedIn from "./components/auth/SignedIn";
 import Dashbord  from "./components/dashbord/Dashbord";
+import AuthNode from "./components/auth/AuthNode";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
          <Route exact path='/' component={Home}></Route>
          <Route path='/signin' component={SignedIn}></Route>
          <Route path='/signup' component={SignedUp}></Route>
+         <Route path='/authnode' component={AuthNode}></Route>
          <Route path='/dashboard' component={Dashbord}></Route>
 
          <Home />

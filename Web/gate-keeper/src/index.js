@@ -11,8 +11,7 @@ import thunk from 'redux-thunk';
 
 import { getFirebase, ReactReduxFirebaseProvider } from "react-redux-firebase";
 
-import fbConfig from "./config/fbConfig";
-import firebase from 'firebase/app';
+import firebase from "./config/fbConfig";
 import { createFirestoreInstance,getFirestore } from "redux-firestore";
 
 
@@ -26,11 +25,12 @@ const rrfConfig = {
   userProfile: 'users',
   useFirestoreForProfile: true // Firestore for Profile instead of Realtime DB
 }
+
 const rrfProps = {
   firebase,
   config: rrfConfig,
   dispatch: store.dispatch,
-  createFirestoreInstance,
+  createFirestoreInstance
 };
 
 ReactDOM.render(
