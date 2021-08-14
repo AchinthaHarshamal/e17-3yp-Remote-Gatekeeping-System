@@ -9,7 +9,7 @@ class Dashbord extends Component {
 
     render() {
        
-        const {messages , auth} = this.props;
+        const {users , auth} = this.props;
         //console.log(messages)
         
         if(!auth.uid) return <Redirect to='/'/>
@@ -19,7 +19,7 @@ class Dashbord extends Component {
         return (
             <div className="container">
                 <h1>Hello Dashboard</h1> 
-                    <Messages messages={messages}/>
+                    {/* <Messages messages={messages}/> */}
                 
 
             </div>
@@ -28,12 +28,14 @@ class Dashbord extends Component {
 }
 
 const mapStateToProps =(state) => {
-    console.log('state ' , state)
-    //console.log('fb' ,state.firestore.ordered.messages)
+    // console.log('state ' , state)
+   // console.log('fb' ,state.firestore.ordered.messages)
+    console.log('fb' ,state.firestore)
+
     //console.log("dboard " , state.dboard.messages)
     return {
         // messages: state.dboard.messages
-        messages : state.firestore.ordered.messages,
+        users : state.firestore.ordered.users,
         auth : state.firebase.auth,
         
 
@@ -45,7 +47,7 @@ const mapStateToProps =(state) => {
 export default compose(
     connect(mapStateToProps),
     firestoreConnect([
-        {collection : 'messages'}
+        {collection : 'users'}
     ])
 )(Dashbord);
 
