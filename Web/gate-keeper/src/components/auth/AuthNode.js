@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import {connect} from 'react-redux'
+import { nodeInit } from '../../store/actions/authActions'
 
 class AuthNode extends Component {
 
@@ -8,7 +10,7 @@ class AuthNode extends Component {
 
 
     handleChange = (e) => {
-        console.log(e.target.value);
+        //console.log(e.target.value);
         this.setState({
             [e.target.id]:e.target.value
         })
@@ -16,8 +18,9 @@ class AuthNode extends Component {
     handleSubmit =(e)=>{
         
         e.preventDefault();
-        //this.props.signIn(this.state)
-        console.log(this.state);
+        //console.log(this.state);
+        this.props.nodeInit(this.state)
+        
     }
 
     render() {
@@ -44,4 +47,13 @@ class AuthNode extends Component {
     }
 }
 
-export default AuthNode
+
+const mapDispatchtoProps = (dispatch) => {
+    return {
+        //signIn : (creads) => dispatch(signIn(creads))
+        nodeInit : (nodeId) => dispatch(nodeInit(nodeId))
+    }
+}
+
+
+export default connect(null,mapDispatchtoProps)(AuthNode)

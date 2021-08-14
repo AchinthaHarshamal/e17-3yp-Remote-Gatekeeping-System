@@ -8,6 +8,7 @@ export class SignedIn extends Component {
         email:'',
         password:''
     }
+
     handleChange = (e) => {
         //console.log(e);
         this.setState({
@@ -51,7 +52,6 @@ export class SignedIn extends Component {
 
 const mapStateToProps = (state) => {
     return{
-        authError : state.auth.authError,
         auth : state.firebase.auth
     }
 } 

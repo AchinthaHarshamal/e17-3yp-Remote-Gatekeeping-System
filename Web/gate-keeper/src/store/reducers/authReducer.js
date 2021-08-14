@@ -3,11 +3,12 @@ const authReducer = (state = initState , action) =>{
 
     switch(action.type){
         case 'INIT_NODE':
-            console.log('Successfully Initialize the node')
+            console.log('Successfully Initialize the node',state)
             return state
         case 'INIT_NODE_FAILE':
             console.log('Faile to initialize the node')
             return state
+            
         case 'LOGIN_ERROR':
             console.log('Login error')
             return {
