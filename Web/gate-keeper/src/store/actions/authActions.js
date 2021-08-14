@@ -7,7 +7,7 @@ export const nodeInit = (id) => {
 
         firestor.collection('nodes').doc(id.nodeId).get().then((resp)=>{
             //console.log("dats " ,resp.data())
-            if (resp.exists /*&& !(resp.data().initialized)*/) {
+            if (resp.exists && !(resp.data().initialized)) {
                 console.log('Document data:', resp.data());
                 dispatch({type : 'INIT_NODE'});
             }
