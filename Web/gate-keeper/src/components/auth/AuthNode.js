@@ -27,10 +27,10 @@ class AuthNode extends Component {
     }
 
     render() {
-        //const {nodeAvilable} = this.props
-        //console.log('avilable : ' ,nodeAvilable)
+        const {nodeAvilable,nodeError} = this.props.node
+        //console.log('avilable : ' ,nodeAvilable , nodeError) 
 
-        //if(nodeAvilable) return <Redirect to='/signup'/>
+         if(nodeAvilable) return <Redirect to='/signup'/>
 
 
         return (
@@ -46,7 +46,7 @@ class AuthNode extends Component {
                     <div className="input-field">
                         <button className="btn blue lighten-1 z-depth-0">Inititialize</button>
                         <div className="red-text center">
-                            {/* {authError ? <p> {authError} </p> : null} */}
+                            {nodeError ? <p>{nodeError} </p>  :null }  
                         </div>
                     </div>
                 </form>
@@ -56,14 +56,16 @@ class AuthNode extends Component {
     }
 }
 
-/*
+
 const mapStateToProps =(state) => {
     //console.log('state Auth' , state.auth)
     return{
-        nodeAvilable : state.auth.nodeAvilable
+        node : state.auth
+        
     } 
 }
-*/
+
+
 const mapDispatchtoProps = (dispatch) => {
     return {
         //signIn : (creads) => dispatch(signIn(creads))
@@ -72,4 +74,4 @@ const mapDispatchtoProps = (dispatch) => {
 }
 
 
-export default connect(null, mapDispatchtoProps)(AuthNode)
+export default connect(mapStateToProps, mapDispatchtoProps)(AuthNode)

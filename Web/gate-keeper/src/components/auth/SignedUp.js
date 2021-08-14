@@ -10,9 +10,7 @@ export class SignedUp extends Component {
         lastName : '',
         productId : '',
         email:'',
-        password:'',
-
-        
+        password:''
     }
     handleChange = (e) => {
         //console.log(e);
@@ -29,8 +27,14 @@ export class SignedUp extends Component {
 
 
     render() {
-        const {auth} = this.props
-        if(auth.uid) return <Redirect to='/dashboard'/>
+        const {auth,nodeAvilable} = this.props
+        console.log(nodeAvilable)
+        if(auth.uid) {
+            return <Redirect to='/dashboard'/>
+        }else if(!nodeAvilable){
+            
+            return <Redirect to='/'/>
+        }
 
         return (
             <div className="container">
@@ -89,7 +93,9 @@ export class SignedUp extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        auth : state.firebase.auth
+        auth : state.firebase.auth,
+        nodeAvilable : state.auth.nodeAvilable
+       
     }
 }
 

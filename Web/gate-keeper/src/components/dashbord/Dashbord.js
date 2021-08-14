@@ -9,9 +9,11 @@ class Dashbord extends Component {
 
     render() {
        
-        const {messages , auth } = this.props;
+        const {messages , auth} = this.props;
         //console.log(messages)
+        
         if(!auth.uid) return <Redirect to='/'/>
+        
         
         
         return (
@@ -32,7 +34,8 @@ const mapStateToProps =(state) => {
     return {
         // messages: state.dboard.messages
         messages : state.firestore.ordered.messages,
-        auth : state.firebase.auth
+        auth : state.firebase.auth,
+        
 
     }
 }
