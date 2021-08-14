@@ -9,7 +9,8 @@ const authReducer = (state = initState , action) =>{
             console.log('Successfully Initialize the node')
             return {
                 ...state,
-                nodeAvilable :true
+                nodeAvilable :true,
+                nodeError:""            
             }
         case 'INIT_NODE_FAILE':
             console.log('Faile to initialize the node')
@@ -17,6 +18,12 @@ const authReducer = (state = initState , action) =>{
                 ...state,
                 nodeAvilable :false,
                 nodeError:"Node is already initialized or Node ID is wrog"
+            }
+        case 'INIT_NODE_ERROR':
+            console.log('Some error has occured')
+            return {
+                ...state,
+                nodeError: action.err.message
             }
             
         case 'LOGIN_ERROR':

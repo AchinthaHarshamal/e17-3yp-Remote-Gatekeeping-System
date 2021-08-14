@@ -5,7 +5,8 @@ export const nodeInit = (id) => {
     return (dispatch , getState , {getFirestore}) =>{
         const firestor = getFirestore();
 
-        firestor.collection('nodes').doc(id.nodeId).get().then((resp)=>{
+        firestor.collection('nodes').doc(id.nodeId).get()
+        .then((resp)=>{
             //console.log("dats " ,resp.data())
             if (resp.exists && !(resp.data().initialized)) {
                 console.log('Document data:', resp.data());
@@ -16,7 +17,9 @@ export const nodeInit = (id) => {
                 dispatch({type : 'INIT_NODE_FAILE'});
             }
            
-        })        
+        }).catch((err)=>{
+                dispatch({type : 'INIT_NODE_ERROR',err})
+        })   
     }
 }
 

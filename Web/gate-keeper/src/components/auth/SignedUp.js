@@ -28,12 +28,12 @@ export class SignedUp extends Component {
 
     render() {
         const {auth,nodeAvilable} = this.props
-        console.log(nodeAvilable)
+        //console.log(nodeAvilable)
         if(auth.uid) {
             return <Redirect to='/dashboard'/>
         }else if(!nodeAvilable){
             
-            return <Redirect to='/'/>
+            return <Redirect to='/authnode'/>
         }
 
         return (
