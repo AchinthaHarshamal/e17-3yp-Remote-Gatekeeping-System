@@ -1,4 +1,5 @@
 const initState = {
+    nodeId: '',
     nodeAvilable : false ,
     nodeError:''
 }
@@ -9,6 +10,7 @@ const authReducer = (state = initState , action) =>{
             console.log('Successfully Initialize the node')
             return {
                 ...state,
+                nodeId: action.nodeId,
                 nodeAvilable :true,
                 nodeError:""            
             }
@@ -40,7 +42,10 @@ const authReducer = (state = initState , action) =>{
             }
         case 'SIGNOUT_SUCCESS':
             console.log('Signout success')
-            return state
+            return {
+                ...state,
+                nodeAvilable :false
+            }
         case 'SIGNUP_SUCCES':
             console.log('Signup success')
             return {

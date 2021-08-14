@@ -8,7 +8,7 @@ export class SignedUp extends Component {
     state = {
         firstName :'',
         lastName : '',
-        productId : '',
+        productId : this.props.nodeId,
         email:'',
         password:''
     }
@@ -60,8 +60,9 @@ export class SignedUp extends Component {
 
                         {/* product ID */}
                         <div className="input-field col s12 m6">
-                            <label htmlFor="productId">Product ID</label>
-                            <input type="text" id="productId" onChange={this.handleChange}/>
+                            <label htmlFor="productId" >Product ID </label>
+                            <input type="text" id="productId"  value={this.state.productId}/> 
+                            
                         </div>
                        
                         {/* email */}
@@ -94,7 +95,8 @@ export class SignedUp extends Component {
 const mapStateToProps = (state) => {
     return {
         auth : state.firebase.auth,
-        nodeAvilable : state.auth.nodeAvilable
+        nodeAvilable : state.auth.nodeAvilable,
+        nodeId : state.auth.nodeId
        
     }
 }
