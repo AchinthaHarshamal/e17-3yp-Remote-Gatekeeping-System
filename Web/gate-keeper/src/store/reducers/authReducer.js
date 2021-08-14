@@ -1,5 +1,5 @@
 const initState = {
-    nodeInit :false 
+    nodeAvilable :false 
 }
 const authReducer = (state = initState , action) =>{
 
@@ -8,13 +8,13 @@ const authReducer = (state = initState , action) =>{
             console.log('Successfully Initialize the node')
             return {
                 ...state,
-                nodeInit :true
+                nodeAvilable :true
             }
         case 'INIT_NODE_FAILE':
             console.log('Faile to initialize the node')
             return {
                 ...state,
-                nodeInit :false
+                nodeAvilable :false
             }
             
         case 'LOGIN_ERROR':

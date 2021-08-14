@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
+
 import {connect} from 'react-redux'
 import { nodeInit } from '../../store/actions/authActions'
+
+import {Redirect} from 'react-router-dom'
 
 class AuthNode extends Component {
 
@@ -18,12 +21,18 @@ class AuthNode extends Component {
     handleSubmit =(e)=>{
         
         e.preventDefault();
-        //console.log(this.state);
+        console.log(this.state);
         this.props.nodeInit(this.state)
         
     }
 
     render() {
+        //const {nodeAvilable} = this.props
+        //console.log('avilable : ' ,nodeAvilable)
+
+        //if(nodeAvilable) return <Redirect to='/signup'/>
+
+
         return (
             <div className="container">
                 <form onSubmit={this.handleSubmit} className="white">
@@ -47,7 +56,14 @@ class AuthNode extends Component {
     }
 }
 
-
+/*
+const mapStateToProps =(state) => {
+    //console.log('state Auth' , state.auth)
+    return{
+        nodeAvilable : state.auth.nodeAvilable
+    } 
+}
+*/
 const mapDispatchtoProps = (dispatch) => {
     return {
         //signIn : (creads) => dispatch(signIn(creads))
@@ -56,4 +72,4 @@ const mapDispatchtoProps = (dispatch) => {
 }
 
 
-export default connect(null,mapDispatchtoProps)(AuthNode)
+export default connect(null, mapDispatchtoProps)(AuthNode)

@@ -7,21 +7,16 @@ export const nodeInit = (id) => {
 
         firestor.collection('nodes').doc(id.nodeId).get().then((resp)=>{
             //console.log("dats " ,resp.data())
-            if (resp.exists && !(resp.data().initialized)) {
-                //console.log('Document data:', resp.data());
+            if (resp.exists /*&& !(resp.data().initialized)*/) {
+                console.log('Document data:', resp.data());
                 dispatch({type : 'INIT_NODE'});
             }
             else {
-                //console.log('No such document!');
+                console.log('No such document!');
                 dispatch({type : 'INIT_NODE_FAILE'});
             }
            
-        })
-
-
-         
-
-        
+        })        
     }
 }
 
