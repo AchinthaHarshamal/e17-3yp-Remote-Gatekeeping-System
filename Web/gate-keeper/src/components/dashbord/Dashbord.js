@@ -26,8 +26,8 @@ class Dashbord extends Component {
 }
 
 const mapStateToProps =(state) => {
-    //console.log('state ' , state)
-    console.log('fb' ,state.firestore.ordered.messages)
+    console.log('state ' , state)
+    //console.log('fb' ,state.firestore.ordered.messages)
     //console.log("dboard " , state.dboard.messages)
     return {
         // messages: state.dboard.messages
