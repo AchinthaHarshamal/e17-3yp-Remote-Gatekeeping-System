@@ -81,8 +81,8 @@ export class SignedUp extends Component {
 
                     {/*Submit Button*/}
                     <div className="row">
-                        <div className="input-field col s12 m6">
-                            <button className="btn blue lighten-1 z-depth-0">Sign Up</button>
+                        <div className="input-field col s12 m12">
+                            <button className="btn blue lighten-1 z-depth-0" id="signup-btn">Sign Up</button>
                         </div>
                     </div>   
                 </form>

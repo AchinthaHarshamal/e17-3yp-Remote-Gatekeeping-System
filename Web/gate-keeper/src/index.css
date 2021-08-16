@@ -16,14 +16,20 @@ body {
 }
 
 form{
-    padding: 10px;
-    margin-top: 25px;
+    padding: 20px 40px;
+    margin : 10% 20% 20% 20%; 
+    border-radius: 0.5em;
+    box-shadow: 1em;
   }
 
 form button , form h5{
     margin: 20px 0px ;
+    
 }
 
+form button {
+    margin-left: 86%;
+}
 
 
 
