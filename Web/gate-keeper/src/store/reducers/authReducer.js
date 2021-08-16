@@ -19,7 +19,7 @@ const authReducer = (state = initState , action) =>{
             return {
                 ...state,
                 nodeAvilable :false,
-                nodeError:"Node is already initialized or Node ID is wrog"
+                nodeError:"Serial Number Is Already Used or Invalid Serial Number."
             }
         case 'INIT_NODE_ERROR':
             console.log('Some error has occured')
@@ -32,7 +32,7 @@ const authReducer = (state = initState , action) =>{
             console.log('Login error')
             return {
                 ...state,
-                authError : 'Login failed'
+                authError : action.err.message
             }
         case 'LOGIN_SUCCESS':
             console.log('Login success')

@@ -41,7 +41,7 @@ export class SignedUp extends Component {
                 <form onSubmit={this.handleSubmit} className="white">
                      {/*Title SignedUp*/}
                     <div className="row">
-                        <h5 className="col s12 m6 grey-text text-darken-3">Sign Up</h5>
+                        <h5 className="col s12 m6 grey-text text-darken-3">Create Your Account</h5>
                     </div>
                     
                     {/* input fileds  */}

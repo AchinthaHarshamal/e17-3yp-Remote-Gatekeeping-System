@@ -8,15 +8,13 @@ import { Redirect } from 'react-router-dom'
 
 class Dashbord extends Component {
 
-    loadComponent = (messages ,authId) =>{
-       
-        console.log('messages' ,messages)
-        if(isLoaded(messages)){
-            
+    loadComponent = (authId) =>{
+        if(isLoaded(authId)){
             return(
                 <div>
-                    <h1>Hello Dashboard</h1> 
-                     <Messages messages={messages} authId = {authId}/>
+                    <h3>Hello User</h3> 
+                    <h5>History of conversation</h5>
+                     <Messages  authId = {authId}/>
                 </div>
             )
         }
@@ -29,17 +27,14 @@ class Dashbord extends Component {
 
     render() {
        
-        const {messages , auth} = this.props;
+        const {auth} = this.props;
         //console.log(messages)
-        
+
         if(!auth.uid) return <Redirect to='/'/>
-        
-        
         
         return (
             <div className="container">
-                
-                {this.loadComponent(messages,auth.uid)}
+                {this.loadComponent(auth.uid)}
             </div>
         ) 
     }
@@ -47,34 +42,18 @@ class Dashbord extends Component {
 
 const mapStateToProps =(state) => {
     // console.log('state ' , state)
-   // console.log('fb' ,state.firestore.ordered.messages)
-    // console.log('fb' ,state.firestore)
+    // console.log('fb' ,state.firestore.ordered.messages)
+    // console.log('fb' ,state.firefase)
 
     //console.log("dboard " , state.dboard.messages)
     return {
         // messages: state.dboard.messages
-        messages : state.firestore.ordered.messages,
         auth : state.firebase.auth,
-        
-
+        profile: state.firebase.profile
     }
 }
 
 
 
-export default compose(
-    connect(mapStateToProps),
-    
-    firestoreConnect(props =>[
-            {
-                
-                collection : 'users',
-                doc: props.auth.uid,
-                subcollections: [
-                    { collection: 'messages'}
-                   ],
-                storeAs : 'messages'
-            }]
-    )
-)(Dashbord);
+export default connect(mapStateToProps)(Dashbord);
 
