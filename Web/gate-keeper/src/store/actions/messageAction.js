@@ -1,12 +1,15 @@
 
 export const downloadMsg = (id) => {
-    return (dispatch, getState,{getFirebase , getFirestore}) =>{
+    return (dispatch, getState ,{getFirebase , getFirestore}) =>{
         // make async call to datase
         let d = new Date() ;
         const firestore = getFirestore();
+        const profile = getState().firebase.profile;
+        const authorId = getState().firebase.auth.uid;
+
         firestore.collection('messages').add({
-            from: 'Node ' + Math.floor(Math.random() *5) ,
-            to: 'device '+ Math.floor(Math.random() *3) ,
+            from: profile.firstName,
+            to: profile.lastName,
             time: d,
             dataType:'Test',
             UID : Math.floor(Math.random() *10000)
