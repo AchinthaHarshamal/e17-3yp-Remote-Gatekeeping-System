@@ -10,7 +10,9 @@ body {
     /* background : url(img/backImg.png) no-repeat;*/
     background-size: 100%;
     background-position: bottom;
-    background-color: #b8bce2;
+    /*background-color: #b8bce2;*/
+    background-image: linear-gradient(to bottom, rgb(20, 120, 242) , rgb(252, 253, 255));
+
 }
 
 form{
