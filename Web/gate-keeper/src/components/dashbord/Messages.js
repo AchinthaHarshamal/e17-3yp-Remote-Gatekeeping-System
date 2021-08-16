@@ -1,21 +1,28 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { downloadMsg } from '../../store/actions/messageAction'
-import downloadImage from '../../img/download.jpg'
+
+import {firestoreConnect ,isLoaded} from 'react-redux-firebase';
+import { compose } from 'redux';
 
 
-const  Messages  = ({messages , downloadMsg}) =>  {
 
-    //console.log("inside" ,messages)
+const  Messages  = (props) =>  {
+
+   
+    const {messages ,authId, downloadMsg} = props
+    //console.log("inside" ,messages , authId)
     const rows = messages &&  messages.map( (msg) =>{
-      
+        //console.log('authid' ,authId)
         return (
-            
-            <tr key = {msg.id} onClick={() => {downloadMsg(msg.id)}}>
+           
+            //onClick={() => {downloadMsg(authId)}}
+            <tr key = {msg.id} >
                 <td>{msg.from}</td>
                 <td>{msg.to}</td>
                 <td>{msg.dataType}</td>
-                <td>{msg.UID}</td>
+                {/* <td>{msg.time.toDate().toString()}</td> */}
+                {msg.time ? <td> {msg.time.toDate().toString()} </td> : null}
             </tr>
 
         )
@@ -49,5 +56,32 @@ const mapDispatchToProps = (dispatch) =>{
     }
 }
 
+const mapStateToProps =(state) => {
+    // console.log('state ' , state)
+    // console.log('fb' ,state.firestore.ordered.messages)
+    //console.log('fb' ,state.firestore)
 
-export default connect(null , mapDispatchToProps)(Messages)
+    //console.log("dboard " , state.dboard.messages)
+    return {
+        //messages: state.dboard.messages
+
+        messages : state.firestore.ordered.messages,
+    }
+}
+
+
+export default compose(
+    connect(mapStateToProps , mapDispatchToProps),
+    firestoreConnect(props =>[
+        {
+            
+            collection : 'users',
+            doc: props.authId,
+            subcollections: [
+                { collection: 'messages'}
+               ],
+            storeAs : 'messages'
+        }]
+)
+    
+)(Messages)
