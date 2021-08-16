@@ -8,7 +8,7 @@ const  Dowonload = () => {
                 <div className="card-image">
                     <img src={downloadImage} alt="sah hello" />
                     
-                    <a class="btn-floating halfway-fab waves-effect waves-light deep-purple accent-2"><i class="material-icons">download</i></a>
+                    <a class="btn-floating halfway-fab waves-effect waves-light teal accent-3"><i class="material-icons">download</i></a>
                 </div>
                 <div class="card-content white-text ">  
                     <span className="card-title">Download the app</span>
