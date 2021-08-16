@@ -1,15 +1,35 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import Messages from './Messages';
-import {firestoreConnect} from 'react-redux-firebase'
+import {firestoreConnect ,isLoaded} from 'react-redux-firebase'
 import { compose } from 'redux';
 import { Redirect } from 'react-router-dom'
 
+
 class Dashbord extends Component {
+
+    loadComponent = (messages ,authId) =>{
+       
+        console.log('messages' ,messages)
+        if(isLoaded(messages)){
+            
+            return(
+                <div>
+                    <h1>Hello Dashboard</h1> 
+                     <Messages messages={messages} authId = {authId}/>
+                </div>
+            )
+        }
+        else (
+                <div>
+                    <h1>Loading...</h1> 
+                </div>
+        )
+    }
 
     render() {
        
-        const {users , auth} = this.props;
+        const {messages , auth} = this.props;
         //console.log(messages)
         
         if(!auth.uid) return <Redirect to='/'/>
@@ -18,10 +38,8 @@ class Dashbord extends Component {
         
         return (
             <div className="container">
-                <h1>Hello Dashboard</h1> 
-                    {/* <Messages messages={messages}/> */}
                 
-
+                {this.loadComponent(messages,auth.uid)}
             </div>
         ) 
     }
@@ -30,12 +48,12 @@ class Dashbord extends Component {
 const mapStateToProps =(state) => {
     // console.log('state ' , state)
    // console.log('fb' ,state.firestore.ordered.messages)
-    console.log('fb' ,state.firestore)
+    // console.log('fb' ,state.firestore)
 
     //console.log("dboard " , state.dboard.messages)
     return {
         // messages: state.dboard.messages
-        users : state.firestore.ordered.users,
+        messages : state.firestore.ordered.messages,
         auth : state.firebase.auth,
         
 
@@ -46,8 +64,17 @@ const mapStateToProps =(state) => {
 
 export default compose(
     connect(mapStateToProps),
-    firestoreConnect([
-        {collection : 'users'}
-    ])
+    
+    firestoreConnect(props =>[
+            {
+                
+                collection : 'users',
+                doc: props.auth.uid,
+                subcollections: [
+                    { collection: 'messages'}
+                   ],
+                storeAs : 'messages'
+            }]
+    )
 )(Dashbord);
 

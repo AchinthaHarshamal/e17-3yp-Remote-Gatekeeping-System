@@ -4,18 +4,19 @@ import { downloadMsg } from '../../store/actions/messageAction'
 import downloadImage from '../../img/download.jpg'
 
 
-const  Messages  = ({messages , downloadMsg}) =>  {
+const  Messages  = ({messages ,authId, downloadMsg}) =>  {
 
     //console.log("inside" ,messages)
     const rows = messages &&  messages.map( (msg) =>{
-      
+        //console.log('authid' ,authId)
         return (
-            
-            <tr key = {msg.id} onClick={() => {downloadMsg(msg.id)}}>
+           
+            <tr key = {msg.id} onClick={() => {downloadMsg(authId)}}>
                 <td>{msg.from}</td>
                 <td>{msg.to}</td>
                 <td>{msg.dataType}</td>
-                <td>{msg.UID}</td>
+                {/* <td>{msg.time.toDate().toString()}</td> */}
+                {msg.time ? <td> {msg.time.toDate().toString()} </td> : null}
             </tr>
 
         )
