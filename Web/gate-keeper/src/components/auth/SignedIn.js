@@ -8,6 +8,7 @@ export class SignedIn extends Component {
         email:'',
         password:''
     }
+
     handleChange = (e) => {
         //console.log(e);
         this.setState({
@@ -23,6 +24,7 @@ export class SignedIn extends Component {
     }
     render() {
         const {authError ,auth} = this.props
+        console.log('Auth'  , authError)
         if(auth.uid) return <Redirect to='/dashboard'/>
         return (
             <div className="container">
@@ -37,7 +39,7 @@ export class SignedIn extends Component {
                         <input type="password" id="password" onChange={this.handleChange}/>
                     </div>
                     <div className="input-field">
-                        <button className="btn blue lighten-1 z-depth-0">Login</button>
+                        <button className="btn blue lighten-1 z-depth-0">Sign In</button>
                         <div className="red-text center">
                             {authError ? <p> {authError} </p> : null}
                         </div>
@@ -51,7 +53,6 @@ export class SignedIn extends Component {
 
 const mapStateToProps = (state) => {
     return{
-        authError : state.auth.authError,
         auth : state.firebase.auth
     }
 } 

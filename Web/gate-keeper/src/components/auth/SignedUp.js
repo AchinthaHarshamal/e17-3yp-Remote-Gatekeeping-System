@@ -8,11 +8,9 @@ export class SignedUp extends Component {
     state = {
         firstName :'',
         lastName : '',
-        productId : '',
+        productId : this.props.nodeId,
         email:'',
-        password:'',
-
-        
+        password:''
     }
     handleChange = (e) => {
         //console.log(e);
@@ -29,15 +27,21 @@ export class SignedUp extends Component {
 
 
     render() {
-        const {auth} = this.props
-        if(auth.uid) return <Redirect to='/dashboard'/>
+        const {auth,nodeAvilable} = this.props
+        //console.log(nodeAvilable)
+        if(auth.uid) {
+            return <Redirect to='/dashboard'/>
+        }else if(!nodeAvilable){
+            
+            return <Redirect to='/authnode'/>
+        }
 
         return (
             <div className="container">
                 <form onSubmit={this.handleSubmit} className="white">
                      {/*Title SignedUp*/}
                     <div className="row">
-                        <h5 className="col s12 m6 grey-text text-darken-3">Sign Up</h5>
+                        <h5 className="col s12 m6 grey-text text-darken-3">Create Your Account</h5>
                     </div>
                     
                     {/* input fileds  */}
@@ -56,8 +60,9 @@ export class SignedUp extends Component {
 
                         {/* product ID */}
                         <div className="input-field col s12 m6">
-                            <label htmlFor="productId">Product ID</label>
-                            <input type="text" id="productId" onChange={this.handleChange}/>
+                            <label htmlFor="productId" >Product ID </label>
+                            <input type="text" id="productId"  value={this.state.productId}/> 
+                            
                         </div>
                        
                         {/* email */}
@@ -89,7 +94,10 @@ export class SignedUp extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        auth : state.firebase.auth
+        auth : state.firebase.auth,
+        nodeAvilable : state.auth.nodeAvilable,
+        nodeId : state.auth.nodeId
+       
     }
 }
 

@@ -1,18 +1,38 @@
-const initState = {}
+const initState = {
+    nodeId: '',
+    nodeAvilable : false ,
+    nodeError:''
+}
 const authReducer = (state = initState , action) =>{
 
     switch(action.type){
         case 'INIT_NODE':
             console.log('Successfully Initialize the node')
-            return state
+            return {
+                ...state,
+                nodeId: action.nodeId,
+                nodeAvilable :true,
+                nodeError:""            
+            }
         case 'INIT_NODE_FAILE':
             console.log('Faile to initialize the node')
-            return state
+            return {
+                ...state,
+                nodeAvilable :false,
+                nodeError:"Serial Number Is Already Used or Invalid Serial Number."
+            }
+        case 'INIT_NODE_ERROR':
+            console.log('Some error has occured')
+            return {
+                ...state,
+                nodeError: action.err.message
+            }
+            
         case 'LOGIN_ERROR':
             console.log('Login error')
             return {
                 ...state,
-                authError : 'Login failed'
+                authError : action.err.message
             }
         case 'LOGIN_SUCCESS':
             console.log('Login success')
@@ -22,7 +42,10 @@ const authReducer = (state = initState , action) =>{
             }
         case 'SIGNOUT_SUCCESS':
             console.log('Signout success')
-            return state
+            return {
+                ...state,
+                nodeAvilable :false
+            }
         case 'SIGNUP_SUCCES':
             console.log('Signup success')
             return {

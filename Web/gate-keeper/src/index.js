@@ -22,7 +22,7 @@ const store = createStore(
 
 
 const rrfConfig = {
-  userProfile: 'users',
+  userProfile: 'user',
   useFirestoreForProfile: true // Firestore for Profile instead of Realtime DB
 }
 
