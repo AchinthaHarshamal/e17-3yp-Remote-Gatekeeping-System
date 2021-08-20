@@ -8,12 +8,12 @@ const AuthContextProvider = (props) => {
     const [user,setUser] = useState();
     const [loading, setLoading] = useState(true);
 
-    const signup = ({email , password}) => {
+    const signup = ({email, password}) => {
         return auth.createUserWithEmailAndPassword(email, password);
     }
 
     const signin = ({email , password}) => {
-        console.log("Email : " ,email ,"password", password)
+        //console.log("Email : " ,email ,"password", password)
         return auth.signInWithEmailAndPassword(email , password);
     }
 

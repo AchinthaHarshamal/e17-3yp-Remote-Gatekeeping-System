@@ -8,7 +8,6 @@ import { AuthContext } from '../../contexts/AuthContext'
 function SignedIn() {
 
     const initValues = { email : '' , password: ''} 
-
     const {signin} = useContext(AuthContext)
     const [values, setValues] = useState(initValues)
 
@@ -25,7 +24,7 @@ function SignedIn() {
         
         e.preventDefault();
         const auth  = await signin(values)
-        console.log(auth.user.uid);
+        //console.log("user id: " ,auth.user.uid);
         
     }
 

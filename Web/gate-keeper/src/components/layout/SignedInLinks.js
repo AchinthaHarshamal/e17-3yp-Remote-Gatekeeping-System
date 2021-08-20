@@ -4,6 +4,7 @@ import {  NavLink } from 'react-router-dom';
 
 const SignedInLinks = (props) => {
     
+    
     return (
         <ul className="right">
             <li><NavLink to="/dashboard">Dashboard</NavLink></li>
