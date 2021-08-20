@@ -1,8 +1,4 @@
 import React, { Component } from 'react'
-
-import {connect} from 'react-redux'
-import { nodeInit } from '../../store/actions/authActions'
-
 import {Redirect} from 'react-router-dom'
 
 class AuthNode extends Component {
@@ -21,17 +17,16 @@ class AuthNode extends Component {
     handleSubmit =(e)=>{
         
         e.preventDefault();
-        console.log(this.state);
-        this.props.nodeInit(this.state)
-        
+        console.log(this.state);  
     }
 
     render() {
+        /*
         const {nodeAvilable,nodeError} = this.props.node
         //console.log('avilable : ' ,nodeAvilable , nodeError) 
 
-         if(nodeAvilable) return <Redirect to='/signup'/>
-
+        if(nodeAvilable) return <Redirect to='/signup'/>
+        */
 
         return (
             <div className="container">
@@ -46,7 +41,7 @@ class AuthNode extends Component {
                     <div className="input-field">
                         <button className="btn blue lighten-1 z-depth-0">Next</button>
                         <div className="red-text center">
-                            {nodeError ? <p>{nodeError} Please Check Again! </p>  :null }  
+                            {/* {nodeError ? <p>{nodeError} Please Check Again! </p>  :null }   */}
                         </div>
                     </div>
                 </form>
@@ -57,21 +52,6 @@ class AuthNode extends Component {
 }
 
 
-const mapStateToProps =(state) => {
-    //console.log('state Auth' , state.auth)
-    return{
-        node : state.auth
-        
-    } 
-}
 
 
-const mapDispatchtoProps = (dispatch) => {
-    return {
-        //signIn : (creads) => dispatch(signIn(creads))
-        nodeInit : (nodeId) => dispatch(nodeInit(nodeId))
-    }
-}
-
-
-export default connect(mapStateToProps, mapDispatchtoProps)(AuthNode)
+export default AuthNode

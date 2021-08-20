@@ -1,8 +1,5 @@
 import React from 'react';
-import { Link, NavLink } from 'react-router-dom';
-import SignedIn from '../auth/SignedIn';
-import SignedUp from '../auth/SignedUp';
-import AuthNode from '../auth/AuthNode';
+import { NavLink } from 'react-router-dom';
 
 
 const SignedOutLinks = ()=> {
