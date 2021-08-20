@@ -6,13 +6,14 @@ export const AuthContext = createContext();
 
 const AuthContextProvider = (props) => {
     const [user,setUser] = useState();
-    const [loading, setLoading] = useStatee(true);
+    const [loading, setLoading] = useState(true);
 
     const signup = ({email , password}) => {
         return auth.createUserWithEmailAndPassword(email, password);
     }
 
     const signin = ({email , password}) => {
+        console.log("Email : " ,email ,"password", password)
         return auth.signInWithEmailAndPassword(email , password);
     }
 
@@ -38,7 +39,7 @@ const AuthContextProvider = (props) => {
 
     return (
       <AuthContext.Provider value = {value}>
-          {!loaprops.children}
+          {!loading  && props.children}
       </AuthContext.Provider>
     )
 }
