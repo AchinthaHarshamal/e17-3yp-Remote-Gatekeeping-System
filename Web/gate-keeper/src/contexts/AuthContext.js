@@ -6,6 +6,7 @@ export const AuthContext = createContext();
 
 const AuthContextProvider = (props) => {
     const [user,setUser] = useState();
+    const [userId, setUserId] = useState(null)
     const [loading, setLoading] = useState(true);
 
     const signup = ({email, password}) => {
@@ -27,10 +28,16 @@ const AuthContextProvider = (props) => {
         signin,
         signout
     }
+
+    const takeNode = (uid) =>{
+        
+    }
     useEffect(() => {
         const userState  = auth.onAuthStateChanged( user => {
-            console.log("User : " ,user)
+            //console.log("User : " ,user)
             setUser(user)
+            if(user) setUserId(user.uid)
+            console.log("User Id :" , userId)
             setLoading(false)
         })
     })

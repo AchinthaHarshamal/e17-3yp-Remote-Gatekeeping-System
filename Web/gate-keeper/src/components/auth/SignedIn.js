@@ -8,9 +8,9 @@ import { AuthContext } from '../../contexts/AuthContext'
 function SignedIn() {
 
     const initValues = { email : '' , password: ''} 
-    const {signin} = useContext(AuthContext)
+    const {signin ,user} = useContext(AuthContext)
     const [values, setValues] = useState(initValues)
-
+    const [errorMsg, setErrorMsg] = useState(null)
 
     const handleChange = (e) => {
         //console.log(e);
@@ -23,12 +23,22 @@ function SignedIn() {
     const handleSubmit = async (e)=>{
         
         e.preventDefault();
-        const auth  = await signin(values)
-        //console.log("user id: " ,auth.user.uid);
-        
+        try{
+            const auth  = await signin(values)
+            //console.log("user id: " ,auth.user.uid);
+            setErrorMsg(null)
+        }catch(err){
+            //console.log('Error' , err.message)
+            setErrorMsg("Wrong Password or Email ! Try again")
+        }
+    }
+
+    if(user)  {
+        return <Redirect to='/dashboard'/>
     }
 
     return (
+        
         <div className="container">
             <form onSubmit={handleSubmit} className="white">
                 <h5 className="grey-text text-darken-3">Sign In</h5>
@@ -43,7 +53,8 @@ function SignedIn() {
                 <div className="input-field">
                     <button className="btn blue lighten-1 z-depth-0">Sign In</button>
                     <div className="red-text center">
-                        {/* {authError ? <p> {authError} </p> : null} */}
+                              
+                     {errorMsg ? <p>{errorMsg}</p> : null}
                     </div>
                 </div>
             </form>
