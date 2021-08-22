@@ -1,57 +1,63 @@
-import React, { Component } from 'react'
+import React, { useState , useContext} from 'react'
 import {Redirect} from 'react-router-dom'
-
-class AuthNode extends Component {
-
-    state={
-        nodeId: ''
-    }
+import { DataContext } from '../../contexts/DataContext';
+import firebase from 'firebase';
 
 
-    handleChange = (e) => {
-        //console.log(e.target.value);
-        this.setState({
-            [e.target.id]:e.target.value
-        })
-    }
-    handleSubmit =(e)=>{
-        
-        e.preventDefault();
-        console.log(this.state);  
-    }
-
-    render() {
-        /*
+/*
         const {nodeAvilable,nodeError} = this.props.node
         //console.log('avilable : ' ,nodeAvilable , nodeError) 
 
         if(nodeAvilable) return <Redirect to='/signup'/>
         */
 
-        return (
-            <div className="container">
-                <form onSubmit={this.handleSubmit} className="white">
-                    <h5 className="grey-text text-darken-3">Connect Your Device</h5>
+const  AuthNode = () => {
 
-                    <div className="input-field">
-                        <label htmlFor="nodeId">Serial Number</label>
-                        <input type="text" id="nodeId" onChange={this.handleChange}/>
-                    </div>
-
-                    <div className="input-field">
-                        <button className="btn blue lighten-1 z-depth-0">Next</button>
-                        <div className="red-text center">
-                            {/* {nodeError ? <p>{nodeError} Please Check Again! </p>  :null }   */}
-                        </div>
-                    </div>
-                </form>
-
-            </div>
-        )
+    
+    const [serialNumber, setSerialNumber] = useState('');
+  
+    const handleChange = (e) => {
+        setSerialNumber(e.target.value)
     }
+    const handleSubmit =(e)=>{
+        e.preventDefault();
+        const dbRef = firebase.database().ref();
+        dbRef.child("users/testUserId").get().then((snapshot) => {
+          if (snapshot.exists()) {
+            console.log(snapshot.val());
+          } else {
+            console.log("No data available");
+          }
+        }).catch((error) => {
+          console.error(error);
+        });
+    }
+
+
+    return (
+        <div className="container">
+            <form onSubmit={handleSubmit} className="white">
+                <h5 className="grey-text text-darken-3">Connect Your Device</h5>
+
+                <div className="input-field">
+                    <label htmlFor="nodeId">Serial Number</label>
+                    <input type="text" id="nodeId" onChange={handleChange}/>
+                </div>
+
+                <div className="input-field">
+                    <button className="btn blue lighten-1 z-depth-0">Next</button>
+                    <div className="red-text center">
+                        {/* {nodeError ? <p>{nodeError} Please Check Again! </p>  :null }   */}
+                    </div>
+                </div>
+            </form>
+        </div>
+    )
 }
 
-
-
-
 export default AuthNode
+
+
+
+
+

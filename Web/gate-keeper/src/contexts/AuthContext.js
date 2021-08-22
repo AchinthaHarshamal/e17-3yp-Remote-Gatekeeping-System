@@ -1,5 +1,5 @@
 import React  , {createContext , useState , useEffect}from 'react'
-import { auth } from '../config/fbConfig';
+import { auth  ,db} from '../config/fbConfig';
 
 
 export const AuthContext = createContext();
@@ -24,12 +24,13 @@ const AuthContextProvider = (props) => {
 
     const value = {
         user , 
+        userId,
         signup,
         signin,
         signout
     }
 
-    const takeNode = (uid) =>{
+    const takeNode = (serialNum) =>{
         
     }
     useEffect(() => {

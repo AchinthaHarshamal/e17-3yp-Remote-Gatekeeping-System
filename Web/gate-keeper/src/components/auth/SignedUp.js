@@ -1,99 +1,110 @@
-import React, { Component } from 'react'
+import React, { useState , useContext} from 'react'
 import { Redirect } from 'react-router-dom'
+import { AuthContext } from '../../contexts/AuthContext'
 
 
-export class SignedUp extends Component {
+const  SignedUp = () => {
 
-    state = {
+    const {userId , signup} = useContext(AuthContext)
+    const [userInfo, setUserInfo] = useState({
         firstName :'',
         lastName : '',
         productId : '',
         email:'',
         password:''
-    }
-    handleChange = (e) => {
+    })
+
+
+    const handleChange = (e) => {
         //console.log(e);
-        this.setState({
-            [e.target.id]:e.target.value
+        const {id , value} = e.target
+        setUserInfo({
+           ...userInfo,
+           [id] :value
         })
     }
-    handleSubmit =(e)=>{
+    const handleSubmit =async (e)=>{
         
         e.preventDefault();
+
+        
+        try{
+            const userCredential = await signup({email : userInfo.email ,password: userInfo.password})
+            console.log("UserCredential : " , userCredential)
+        }catch(err){
+            console.log("Error  : " , err.code)
+        }
+          
+ 
         //console.log(this.state);
-        this.props.signUp(this.state)
+       
+    }
+
+    if(userId)  {
+        return <Redirect to='/dashboard'/>
     }
 
 
-    render() {
-        /*
-        const {auth,nodeAvilable} = this.props
-        //console.log(nodeAvilable)
-        if(auth.uid) {
-            return <Redirect to='/dashboard'/>
-        }else if(!nodeAvilable){
-            
-            return <Redirect to='/authnode'/>
-        }
-        */
-        return (
-            <div className="container">
-                <form onSubmit={this.handleSubmit} className="white">
-                     {/*Title SignedUp*/}
-                    <div className="row">
-                        <h5 className="col s12 m6 grey-text text-darken-3">Create Your Account</h5>
+    return (
+        <div className="container">
+            <form onSubmit={handleSubmit} className="white">
+                {/*Title SignedUp*/}
+                <div className="row">
+                    <h5 className="col s12 m6 grey-text text-darken-3">Create Your Account</h5>
+                </div>
+                
+                {/* input fileds  */}
+                <div className="row">
+                    {/* first name */}
+                    <div className="input-field col s12 m6">
+                        <label htmlFor="firstName">First Name</label>
+                        <input type="text" id="firstName" onChange={handleChange}/>
+                    </div>
+
+                    {/* last name */}
+                    <div className="input-field col s12 m6">
+                        <label htmlFor="lastName">Last Name</label>
+                        <input type="text" id="lastName" onChange={handleChange}/>
+                    </div>
+
+                    {/* product ID */}
+                    <div className="input-field col s12 m6">
+                        <label htmlFor="productId" >Product ID </label>
+                        <input type="text" id="productId"  /> 
+                        
+                    </div>
+                
+                    {/* email */}
+                    <div className="input-field col s12 m6">
+                        <label htmlFor="email">Email</label>
+                        <input type="email" id="email" onChange={handleChange}/>
                     </div>
                     
-                    {/* input fileds  */}
-                    <div className="row">
-                        {/* first name */}
-                        <div className="input-field col s12 m6">
-                            <label htmlFor="firstName">First Name</label>
-                            <input type="text" id="firstName" onChange={this.handleChange}/>
-                        </div>
-        
-                        {/* last name */}
-                        <div className="input-field col s12 m6">
-                            <label htmlFor="lastName">Last Name</label>
-                            <input type="text" id="lastName" onChange={this.handleChange}/>
-                        </div>
-
-                        {/* product ID */}
-                        <div className="input-field col s12 m6">
-                            <label htmlFor="productId" >Product ID </label>
-                            <input type="text" id="productId"  value={this.state.productId}/> 
-                            
-                        </div>
-                       
-                        {/* email */}
-                        <div className="input-field col s12 m6">
-                            <label htmlFor="email">Email</label>
-                            <input type="email" id="email" onChange={this.handleChange}/>
-                        </div>
-                        
-                        {/* password */}
-                        <div className="input-field col s12 m6">
-                            <label htmlFor="password">Password</label>
-                            <input type="password" id="password" onChange={this.handleChange}/>
-                        </div>
-                        
+                    {/* password */}
+                    <div className="input-field col s12 m6">
+                        <label htmlFor="password">Password</label>
+                        <input type="password" id="password" onChange={handleChange}/>
                     </div>
+                    
+                </div>
 
-                    {/*Submit Button*/}
-                    <div className="row">
-                        <div className="input-field col s12 m12">
-                            <button className="btn blue lighten-1 z-depth-0" id="signup-btn">Sign Up</button>
-                        </div>
-                    </div>   
-                </form>
-            </div>
-        )
-    }
+                {/*Submit Button*/}
+                <div className="row">
+                    <div className="input-field col s12 m12">
+                        <button className="btn blue lighten-1 z-depth-0" id="signup-btn">Sign Up</button>
+                    </div>
+                </div>   
+            </form>
+        </div>
+    )
 }
 
-
-
-
 export default SignedUp
+
+
+
+
+
+
 
  
