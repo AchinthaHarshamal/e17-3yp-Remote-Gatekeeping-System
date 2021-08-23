@@ -15,22 +15,31 @@ const  AuthNode = () => {
 
     
     const [serialNumber, setSerialNumber] = useState('');
-  
+    const {getNode} = useContext(DataContext);
     const handleChange = (e) => {
         setSerialNumber(e.target.value)
     }
-    const handleSubmit =(e)=>{
+    const handleSubmit = async (e)=>{
         e.preventDefault();
-        const dbRef = firebase.database().ref();
-        dbRef.child("users/testUserId").get().then((snapshot) => {
-          if (snapshot.exists()) {
-            console.log(snapshot.val());
-          } else {
-            console.log("No data available");
-          }
-        }).catch((error) => {
-          console.error(error);
-        });
+        try{
+            const node = await getNode(serialNumber);
+            console.log("Node success : ",node.val())
+        }catch(err){
+            console.log("some error")
+        }
+        
+
+       
+        // const dbRef = firebase.database().ref();
+        // dbRef.child("nodes/testId").get().then((snapshot) => {
+        //   if (snapshot.exists()) {
+        //     console.log(snapshot.val());
+        //   } else {
+        //     console.log("No data available");
+        //   }
+        // }).catch((error) => {
+        //   console.error(error);
+        // });
     }
 
 

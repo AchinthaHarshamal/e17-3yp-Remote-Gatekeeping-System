@@ -30,9 +30,6 @@ const AuthContextProvider = (props) => {
         signout
     }
 
-    const takeNode = (serialNum) =>{
-        
-    }
     useEffect(() => {
         const userState  = auth.onAuthStateChanged( user => {
             //console.log("User : " ,user)

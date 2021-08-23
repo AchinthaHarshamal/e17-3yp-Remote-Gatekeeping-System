@@ -8,12 +8,15 @@ const DataContextProvider = (props) => {
 
     const [dbRef, setDbRef] = useState(db.ref())
     
-
+    const getNode =(serialNumber) =>{
+        const dbRef = db.ref();
+        return dbRef.child("nodes/"+serialNumber).get()
+        
+    }
    
-
-
     const values = {
-        dbRef
+        dbRef,
+        getNode
     }
 
     return (
