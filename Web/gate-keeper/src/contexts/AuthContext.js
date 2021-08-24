@@ -19,6 +19,7 @@ const AuthContextProvider = (props) => {
     }
 
     const signout = () => {
+       
         return auth.signOut();
     }
 
@@ -34,8 +35,8 @@ const AuthContextProvider = (props) => {
         const userState  = auth.onAuthStateChanged( user => {
             //console.log("User : " ,user)
             setUser(user)
-            if(user) setUserId(user.uid)
-            console.log("User Id :" , userId)
+            
+            user ? setUserId(user.id) : setUserId(null)
             setLoading(false)
         })
     })

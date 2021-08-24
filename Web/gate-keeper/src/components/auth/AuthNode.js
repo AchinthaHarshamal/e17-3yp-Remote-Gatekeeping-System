@@ -1,48 +1,52 @@
 import React, { useState , useContext} from 'react'
 import {Redirect} from 'react-router-dom'
 import { DataContext } from '../../contexts/DataContext';
-import firebase from 'firebase';
 
 
-/*
-        const {nodeAvilable,nodeError} = this.props.node
-        //console.log('avilable : ' ,nodeAvilable , nodeError) 
-
-        if(nodeAvilable) return <Redirect to='/signup'/>
-        */
 
 const  AuthNode = () => {
 
     
-    const [serialNumber, setSerialNumber] = useState('');
-    const {getNode} = useContext(DataContext);
+    const [serialNumber, setSerialNumber] = useState();
+    const {getNode,nodeSet , node} = useContext(DataContext);
+    const [errorMsg, setErrorMsg] = useState(null)
+
     const handleChange = (e) => {
         setSerialNumber(e.target.value)
     }
+
     const handleSubmit = async (e)=>{
         e.preventDefault();
+        if(serialNumber ==''){
+            setErrorMsg("Serial Number is Required!")
+            return
+        } 
         try{
             const node = await getNode(serialNumber);
-            console.log("Node success : ",node.val())
+            //console.log("node " ,node.exists())
+            if(node.exists()  &&  !node.val().init ){
+               
+                setErrorMsg('')
+                nodeSet({node , serialNumber})
+
+                console.log("Node init state: ",node.val().init)
+                console.log("Node + seri : " , node ,serialNumber)
+
+            }else{
+                nodeSet({})
+                
+                setErrorMsg('Wrong Serial number Or Device Is Already Initialized')
+                console.log("Wrong Serial number Or Device Is Already Initialized")
+            }
+            
         }catch(err){
-            console.log("some error")
+            setErrorMsg(err.message)
+            console.log(err.message)
         }
         
-
-       
-        // const dbRef = firebase.database().ref();
-        // dbRef.child("nodes/testId").get().then((snapshot) => {
-        //   if (snapshot.exists()) {
-        //     console.log(snapshot.val());
-        //   } else {
-        //     console.log("No data available");
-        //   }
-        // }).catch((error) => {
-        //   console.error(error);
-        // });
     }
 
-
+    if(node) return <Redirect to='/signup'/>
     return (
         <div className="container">
             <form onSubmit={handleSubmit} className="white">
@@ -56,7 +60,7 @@ const  AuthNode = () => {
                 <div className="input-field">
                     <button className="btn blue lighten-1 z-depth-0">Next</button>
                     <div className="red-text center">
-                        {/* {nodeError ? <p>{nodeError} Please Check Again! </p>  :null }   */}
+                        {errorMsg ? <p>{errorMsg} Please Try Again! </p>  :null } 
                     </div>
                 </div>
             </form>

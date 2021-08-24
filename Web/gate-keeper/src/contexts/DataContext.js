@@ -6,18 +6,36 @@ export const DataContext = createContext();
 
 const DataContextProvider = (props) => {
 
-    const [dbRef, setDbRef] = useState(db.ref())
+    const [node, setNode] = useState(null)
+    const [serialNumber, setSerialNumber] = useState(null)
+
     
     const getNode =(serialNumber) =>{
         const dbRef = db.ref();
+
         return dbRef.child("nodes/"+serialNumber).get()
         
     }
+
+    const nodeSet = ({node , serialNumber} ) => {
+        console.log("serial numbere : " , serialNumber)
+        setNode(node)
+        setSerialNumber(serialNumber)
+    }
    
     const values = {
-        dbRef,
-        getNode
+        node , 
+        serialNumber ,
+        getNode,
+        nodeSet
     }
+
+    // useEffect(() => {
+    //     if(node){
+            
+    //     }
+        
+    // }, [node])
 
     return (
         <DataContext.Provider value = {values}>

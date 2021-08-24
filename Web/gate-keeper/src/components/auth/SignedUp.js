@@ -1,11 +1,13 @@
 import React, { useState , useContext} from 'react'
 import { Redirect } from 'react-router-dom'
 import { AuthContext } from '../../contexts/AuthContext'
+import { DataContext } from '../../contexts/DataContext'
 
 
 const  SignedUp = () => {
 
     const {userId , signup} = useContext(AuthContext)
+    const {serialNumber} = useContext(DataContext)
     const [userInfo, setUserInfo] = useState({
         firstName :'',
         lastName : '',
@@ -42,8 +44,12 @@ const  SignedUp = () => {
 
     if(userId)  {
         return <Redirect to='/dashboard'/>
-    }
+    }     
 
+    // console.log("serialNumber == null" , serialNumber == null , "serialNumbe :", serialNumber)
+    // if(serialNumber == null){
+    //     return <Redirect to='/authnode'/>
+    // }
 
     return (
         <div className="container">
