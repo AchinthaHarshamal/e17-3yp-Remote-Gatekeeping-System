@@ -1,77 +1,76 @@
-import React, { Component } from 'react'
-
-import {connect} from 'react-redux'
-import { nodeInit } from '../../store/actions/authActions'
-
+import React, { useState , useContext} from 'react'
 import {Redirect} from 'react-router-dom'
+import { DataContext } from '../../contexts/DataContext';
 
-class AuthNode extends Component {
 
-    state={
-        nodeId: ''
+
+const  AuthNode = () => {
+
+    
+    const [serialNumber, setSerialNumber] = useState();
+    const {getNode,nodeSet , node} = useContext(DataContext);
+    const [errorMsg, setErrorMsg] = useState(null)
+
+    const handleChange = (e) => {
+        setSerialNumber(e.target.value)
     }
 
-
-    handleChange = (e) => {
-        //console.log(e.target.value);
-        this.setState({
-            [e.target.id]:e.target.value
-        })
-    }
-    handleSubmit =(e)=>{
-        
+    const handleSubmit = async (e)=>{
         e.preventDefault();
-        console.log(this.state);
-        this.props.nodeInit(this.state)
+        if(serialNumber ==''){
+            setErrorMsg("Serial Number is Required!")
+            return
+        } 
+        try{
+            const node = await getNode(serialNumber);
+            //console.log("node " ,node.exists())
+            if(node.exists()  &&  !node.val().init ){
+               
+                setErrorMsg('')
+                nodeSet({node , serialNumber})
+
+                //console.log("Node init state: ",node.val().init)
+                //console.log("Seri : ",serialNumber)
+
+            }else{
+                nodeSet({})
+                
+                setErrorMsg('Wrong Serial number Or Device Is Already Initialized')
+                console.log("Wrong Serial number Or Device Is Already Initialized")
+            }
+            
+        }catch(err){
+            setErrorMsg(err.message)
+            console.log(err.message)
+        }
         
     }
 
-    render() {
-        const {nodeAvilable,nodeError} = this.props.node
-        //console.log('avilable : ' ,nodeAvilable , nodeError) 
+    if(node) return <Redirect to='/signup'/>
+    return (
+        <div className="container">
+            <form onSubmit={handleSubmit} className="white">
+                <h5 className="grey-text text-darken-3">Connect Your Device</h5>
 
-         if(nodeAvilable) return <Redirect to='/signup'/>
+                <div className="input-field">
+                    <label htmlFor="nodeId">Serial Number</label>
+                    <input type="text" id="nodeId" onChange={handleChange}/>
+                </div>
 
-
-        return (
-            <div className="container">
-                <form onSubmit={this.handleSubmit} className="white">
-                    <h5 className="grey-text text-darken-3">Connect Your Device</h5>
-
-                    <div className="input-field">
-                        <label htmlFor="nodeId">Serial Number</label>
-                        <input type="text" id="nodeId" onChange={this.handleChange}/>
+                <div className="input-field">
+                    <button className="btn blue lighten-1 z-depth-0">Next</button>
+                    <div className="red-text center">
+                        {errorMsg ? <p>{errorMsg} Please Try Again! </p>  :null } 
                     </div>
-
-                    <div className="input-field">
-                        <button className="btn blue lighten-1 z-depth-0">Next</button>
-                        <div className="red-text center">
-                            {nodeError ? <p>{nodeError} Please Check Again! </p>  :null }  
-                        </div>
-                    </div>
-                </form>
-
-            </div>
-        )
-    }
+                </div>
+            </form>
+        </div>
+    )
 }
 
-
-const mapStateToProps =(state) => {
-    //console.log('state Auth' , state.auth)
-    return{
-        node : state.auth
-        
-    } 
-}
+export default AuthNode
 
 
-const mapDispatchtoProps = (dispatch) => {
-    return {
-        //signIn : (creads) => dispatch(signIn(creads))
-        nodeInit : (nodeId) => dispatch(nodeInit(nodeId))
-    }
-}
 
 
-export default connect(mapStateToProps, mapDispatchtoProps)(AuthNode)
+

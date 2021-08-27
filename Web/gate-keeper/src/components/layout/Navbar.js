@@ -1,17 +1,22 @@
-import React from 'react';
+import React ,{useContext} from 'react';
 import {Link} from 'react-router-dom';
 import SignedInLinks from './SignedInLinks';
 import SignedOutLinks from './SignedOutLinks';
+import { AuthContext } from '../../contexts/AuthContext'
+
+
 import './navbar.css'
-// Auth state
-import { connect } from 'react-redux';
+
 
 
 const Navbar =(props)=> {
 
-    const {auth, profile} = props ;
+
+    const {user} = useContext(AuthContext)
+    const profile = {}
     //console.log(auth)
-    const links = auth.uid ? <SignedInLinks profile={profile} /> : <SignedOutLinks /> ;
+    const links = user ? <SignedInLinks profile={profile} /> : <SignedOutLinks /> ;
+   
     return (
         <div>
             <nav className="nav-wraper">
@@ -25,11 +30,5 @@ const Navbar =(props)=> {
     )
 }
 
-const mapStateToProps = (state) =>{
-    //console.log(state);
-    return{
-        auth: state.firebase.auth,
-        profile: state.firebase.profile
-    }
-}
-export default connect(mapStateToProps)(Navbar)
+
+export default Navbar
