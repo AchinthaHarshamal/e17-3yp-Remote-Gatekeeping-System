@@ -7,11 +7,10 @@ import { DataContext } from '../../contexts/DataContext'
 const  SignedUp = () => {
 
     const {userId , signup} = useContext(AuthContext)
-    const {serialNumber} = useContext(DataContext)
+    const {serialNumber,nodeInit} = useContext(DataContext)
     const [userInfo, setUserInfo] = useState({
         firstName :'',
         lastName : '',
-        productId : '',
         email:'',
         password:''
     })
@@ -32,9 +31,12 @@ const  SignedUp = () => {
         
         try{
             const userCredential = await signup({email : userInfo.email ,password: userInfo.password})
-            console.log("UserCredential : " , userCredential)
+            console.log("UserCredential : " , userCredential.user.uid)
+            const nodeinit= await nodeInit(userCredential.user.uid,userInfo.firstName, userInfo.lastName , 'http/something/somthing')
+            console.log('Done')
+           
         }catch(err){
-            console.log("Error  : " , err.code)
+            console.log("Signup Error  : " , err)
         }
           
  
@@ -76,7 +78,7 @@ const  SignedUp = () => {
                     {/* product ID */}
                     <div className="input-field col s12 m6">
                         <label htmlFor="productId" >Product ID </label>
-                        <input type="text" id="productId"  /> 
+                        <input type="text" id="productId"  value = {serialNumber}/> 
                         
                     </div>
                 

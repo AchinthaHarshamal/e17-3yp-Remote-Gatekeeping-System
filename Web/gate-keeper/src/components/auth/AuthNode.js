@@ -29,8 +29,8 @@ const  AuthNode = () => {
                 setErrorMsg('')
                 nodeSet({node , serialNumber})
 
-                console.log("Node init state: ",node.val().init)
-                console.log("Node + seri : " , node ,serialNumber)
+                //console.log("Node init state: ",node.val().init)
+                //console.log("Seri : ",serialNumber)
 
             }else{
                 nodeSet({})

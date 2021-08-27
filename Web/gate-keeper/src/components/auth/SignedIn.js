@@ -25,7 +25,7 @@ function SignedIn() {
         e.preventDefault();
         try{
             const auth  = await signin(values)
-            console.log("user id: " ,auth.user.uid);
+            //console.log("user id: " ,auth.user.uid);
             setErrorMsg(null)
         }catch(err){
             //console.log('Error' , err.message)

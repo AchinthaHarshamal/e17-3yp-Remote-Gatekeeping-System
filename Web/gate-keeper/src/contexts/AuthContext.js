@@ -6,7 +6,6 @@ export const AuthContext = createContext();
 
 const AuthContextProvider = (props) => {
     const [user,setUser] = useState();
-    const [userId, setUserId] = useState(null)
     const [loading, setLoading] = useState(true);
 
     const signup = ({email, password}) => {
@@ -25,7 +24,6 @@ const AuthContextProvider = (props) => {
 
     const value = {
         user , 
-        userId,
         signup,
         signin,
         signout
@@ -35,8 +33,6 @@ const AuthContextProvider = (props) => {
         const userState  = auth.onAuthStateChanged( user => {
             //console.log("User : " ,user)
             setUser(user)
-            
-            user ? setUserId(user.id) : setUserId(null)
             setLoading(false)
         })
     })
