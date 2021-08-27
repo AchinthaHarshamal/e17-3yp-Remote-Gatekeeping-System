@@ -1,25 +1,23 @@
-import React from 'react'
-import { connect } from 'react-redux';
+import React ,{useState , useContext} from 'react'
 import {  NavLink } from 'react-router-dom';
-import { signOut } from '../../store/actions/authActions';
+import { AuthContext } from '../../contexts/AuthContext';
+
 
 
 const SignedInLinks = (props) => {
     
+    const {signout} = useContext(AuthContext)
+    
     return (
         <ul className="right">
             <li><NavLink to="/dashboard">Dashboard</NavLink></li>
-            <li><a onClick = {props.signOut}>Log Out</a></li>
-            <li><NavLink to="/" className="btn btn-floating yello darken-5">{props.profile.initials}</NavLink></li>
+            <li><a onClick={signout}>Log Out</a></li>
+            <li><NavLink to="/" className="btn btn-floating yello darken-5">AB</NavLink></li>
         </ul>
 
     )
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        signOut :  () => dispatch(signOut()) 
-    }
-}
 
-export default connect(null , mapDispatchToProps)(SignedInLinks)
+
+export default SignedInLinks
