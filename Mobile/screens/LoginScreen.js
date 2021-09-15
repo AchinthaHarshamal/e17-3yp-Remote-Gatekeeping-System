@@ -2,8 +2,9 @@ import React from "react";
 import { View, Text, StyleSheet, TextInput, Image } from "react-native";
 
 import CustomButton from "../components/CustomButton";
+import Colors from "../constants/Colors";
 
-const Welcome = (props) => {
+const LoginScreen = (props) => {
   return (
     <View style={styles.screen}>
       <View style={styles.titleContainer}>
@@ -37,7 +38,9 @@ const Welcome = (props) => {
             style={styles.input}
           ></TextInput>
         </View>
-        <CustomButton></CustomButton>
+        <View style={styles.logInButton}>
+          <CustomButton onPress={props.onPress}>Log In</CustomButton>
+        </View>
       </View>
     </View>
   );
@@ -45,7 +48,7 @@ const Welcome = (props) => {
 
 const styles = StyleSheet.create({
   screen: {
-    backgroundColor: "#1616B2",
+    backgroundColor: Colors.primaryColor,
     flex: 1,
   },
   imageContainer: {
@@ -88,6 +91,10 @@ const styles = StyleSheet.create({
     color: "rgba(255, 255, 255, 0.5)",
     fontSize: 15,
   },
+  logInButton: {
+    alignItems: "center",
+    marginTop: 30,
+  },
 });
 
-export default Welcome;
+export default LoginScreen;
