@@ -1,7 +1,9 @@
 import React from "react";
 import { View, StyleSheet, TouchableOpacity, Text } from "react-native";
 
-const CustomButton = (props) => {
+import Colors from "../constants/Colors";
+
+const LogOutButton = (props) => {
   return (
     <TouchableOpacity onPress={props.onPress} activeOpacity={0.4}>
       <View style={styles.button}>
@@ -13,17 +15,19 @@ const CustomButton = (props) => {
 
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: "white",
-    paddingVertical: 10,
-    paddingHorizontal: 30,
-    borderRadius: 25,
-    width: 150,
+    backgroundColor: Colors.primaryColor,
+    paddingVertical: 5,
+    paddingHorizontal: 10,
+    borderRadius: 40,
+    width: 70,
     alignItems: "center",
+    marginBottom: 20,
   },
   buttonText: {
-    color: "#8A8989",
-    fontSize: 18,
+    color: "white",
+    fontSize: 12,
+    textAlign: "center",
   },
 });
 
-export default CustomButton;
+export default LogOutButton;
