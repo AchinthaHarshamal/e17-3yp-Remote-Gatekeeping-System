@@ -15,7 +15,7 @@ const  Home = () => {
         <div className="home">
             <div className="row">
                 <div className="col  s12 m7 offset-m1 grey lighten-2">
-                    Hello
+                    Hello Home
                 </div>
                 
                 <div className="col  s12 m3 grey lighten-3 ">
