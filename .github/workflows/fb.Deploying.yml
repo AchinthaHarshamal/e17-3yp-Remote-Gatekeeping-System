@@ -5,7 +5,7 @@ on:
     branches: 
       -  main 
     paths : 
-      - 'Web/gate-keeper/deploy.txt'
+      - 'Web/deploy.txt'
   
  
 
