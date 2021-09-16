@@ -7,7 +7,7 @@ import SignedIn from "./components/auth/SignedIn";
 import Dashbord  from "./components/dashbord/Dashbord";
 import AuthNode from "./components/auth/AuthNode";
 import Insert from "./components/dashbord/Insert";
-import Home from "./components/home/Home";
+import HomePage from "./components/home/HomePage";
 
 import AuthContextProvider from "./contexts/AuthContext";
 import DataContextProvider from "./contexts/DataContext";
@@ -22,7 +22,7 @@ function App() {
         <InitContextProvider>
         <Navbar/>
         <Switch>
-            <Route exact path='/' component={Home}></Route>
+            <Route exact path='/' component={HomePage}></Route>
             <Route path='/signin' component={SignedIn}></Route>
             <Route path='/signup' component={SignedUp}></Route>
             <Route path='/authnode' component={AuthNode}></Route>
