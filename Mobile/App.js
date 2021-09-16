@@ -8,6 +8,7 @@ import AppLoading from "expo-app-loading";
 import Navigation from "./navigation/Navigation";
 import WelcomePage from "./screens/WelcomePage";
 import LoginScreen from "./screens/LoginScreen";
+import PreviousEvents from "./screens/PreviousEvents";
 
 const fetchFonts = () => {
   return Font.loadAsync({
@@ -30,17 +31,19 @@ export default function App() {
     );
   }
 
-  const handleLogIn = () => {
-    setAuthorized(true);
-  };
+  // const handleLogIn = () => {
+  //   setAuthorized(true);
+  // };
 
-  const hangleLogOut = () => {
-    setAuthorized(false);
-  };
+  // const hangleLogOut = () => {
+  //   setAuthorized(false);
+  // };
 
-  if (authorized) {
-    return <WelcomePage onPress={hangleLogOut}></WelcomePage>;
-  }
+  // if (authorized) {
+  //   return <WelcomePage onPress={hangleLogOut}></WelcomePage>;
+  // }
 
-  return <LoginScreen onPress={handleLogIn}></LoginScreen>;
+  // return <LoginScreen onPress={handleLogIn}></LoginScreen>;
+
+  return <PreviousEvents></PreviousEvents>;
 }
