@@ -41,7 +41,7 @@ jobs:
       uses: actions/upload-artifact@master
       with:
         name: dist
-        path: './Web/gate-keeper'
+        path: './Web/gate-keeper/build'
 
   deploy:
     name: Deploy
@@ -55,7 +55,7 @@ jobs:
         uses: actions/download-artifact@master
         with:
           name: dist
-          path: './Web/gate-keeper'
+          path: './Web/gate-keeper/builld'
 
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
