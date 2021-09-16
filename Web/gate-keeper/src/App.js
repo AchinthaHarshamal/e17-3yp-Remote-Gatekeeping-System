@@ -2,12 +2,12 @@ import React , {Component} from "react";
 import {BrowserRouter ,Switch, Route} from 'react-router-dom';
 
 import Navbar from "./components/layout/Navbar";
-import Home from "./components/home/Home";
 import SignedUp from "./components/auth/SignedUp";
 import SignedIn from "./components/auth/SignedIn";
 import Dashbord  from "./components/dashbord/Dashbord";
 import AuthNode from "./components/auth/AuthNode";
 import Insert from "./components/dashbord/Insert";
+import Home from "./components/home/Home";
 
 import AuthContextProvider from "./contexts/AuthContext";
 import DataContextProvider from "./contexts/DataContext";
