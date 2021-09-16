@@ -55,7 +55,7 @@ jobs:
         uses: actions/download-artifact@master
         with:
           name: dist
-          path: './Web/gate-keeper/builld'
+          path: './Web/gate-keeper/build'
 
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
