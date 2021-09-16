@@ -1,6 +1,6 @@
 import React from "react";
 import { View, StyleSheet, Text, Image, TouchableOpacity } from "react-native";
-import Colors from "../constants/Colors";
+import Icon from "react-native-ionicons";
 
 const EventCard = (props) => {
   return (
@@ -8,7 +8,9 @@ const EventCard = (props) => {
       <View style={style.cardContainer}>
         <View style={style.imageConatiner}>
           <Image
-            source={require("../dummy data/dummyImages/e1.jpg")}
+            source={require("../dummy data/dummyImages/"
+              .concat(props.id)
+              .concat(".jpg"))}
             style={style.image}
           />
         </View>
@@ -18,6 +20,9 @@ const EventCard = (props) => {
           </View>
           <View style={style.descriptionContainer}>
             <Text style={style.description}>{props.description}</Text>
+          </View>
+          <View style={style.ratingsContainer}>
+            <Icon ios="ios-add" android="md-add" />
           </View>
         </View>
       </View>
@@ -42,7 +47,6 @@ const style = StyleSheet.create({
     overflow: "hidden",
   },
   detailsContainer: {
-    // borderWidth: 1,
     flex: 1,
     borderRadius: 12,
     marginLeft: 5,
@@ -68,6 +72,10 @@ const style = StyleSheet.create({
   },
   description: {
     fontSize: 15,
+  },
+  ratingsContainer: {
+    borderWidth: 1,
+    flex: 1,
   },
 });
 

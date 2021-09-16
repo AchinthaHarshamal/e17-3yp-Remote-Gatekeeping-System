@@ -1,4 +1,4 @@
-export default [
+export const PreviousEventsList = [
   {
     name: "Amazon Deliveries",
     id: "e1",
@@ -7,7 +7,7 @@ export default [
     description: "This was a delivery of the laptop",
     isMailBoxAccessed: true,
     voiceMessages: [],
-    imageURL: "./dummyImages/e1",
+    imageURL: "../dummy data/dummyImages/e1.jpg",
   },
   {
     name: "James Visiting",
@@ -17,7 +17,7 @@ export default [
     description: "This was the event when james visited",
     isMailBoxAccessed: false,
     voiceMessages: [],
-    imageURL: "./dummyImages/e2",
+    imageURL: "../dummy data/dummyImages/e2.jpg",
   },
   {
     name: "Pizza Hut delivery",
@@ -27,16 +27,26 @@ export default [
     description: "This was a pizza delivery from the pizza hut",
     isMailBoxAccessed: true,
     voiceMessages: [],
-    imageURL: "./dummyImages/e3",
+    imageURL: "../dummy data/dummyImages/e3.jpg",
   },
-  {
-    name: "Ebay delivery",
-    id: "e4",
-    data: (2020, 11, 12, 16, 15, 30, 0),
-    rating: 1,
-    description: "Tv delivery from the EBAY",
-    isMailBoxAccessed: true,
-    voiceMessages: [],
-    imageURL: "./dummyImages/e3",
-  },
+  // {
+  //   name: "Ebay delivery",
+  //   id: "e4",
+  //   data: (2020, 11, 12, 16, 15, 30, 0),
+  //   rating: 1,
+  //   description: "Tv delivery from the EBAY",
+  //   isMailBoxAccessed: true,
+  //   voiceMessages: [],
+  //   imageURL: "../dummy data/dummyImages/e3.jpg",
+  // },
+  // {
+  //   name: "Ebay delivery",
+  //   id: "e5",
+  //   data: (2020, 11, 12, 16, 15, 30, 0),
+  //   rating: 1,
+  //   description: "Tv delivery from the EBAY",
+  //   isMailBoxAccessed: true,
+  //   voiceMessages: [],
+  //   imageURL: "../dummy data/dummyImages/e3.jpg",
+  // },
 ];
