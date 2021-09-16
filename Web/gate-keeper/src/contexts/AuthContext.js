@@ -30,8 +30,7 @@ const AuthContextProvider = (props) => {
     }
 
     useEffect(() => {
-        const userState  = auth.onAuthStateChanged( user => {
-            //console.log("User : " ,user)
+        auth.onAuthStateChanged( user => {
             setUser(user)
             setLoading(false)
         })

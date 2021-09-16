@@ -3,21 +3,22 @@ html{
 
 }
 
+
 body {
     margin: 0;
     padding: 0;
     font-family: sans-serif;
-    /* background : url(img/backImg.png) no-repeat;*/
+    
     background-size: 100%;
     background-position: bottom;
-    /*background-color: #b8bce2;*/
-    background-image: linear-gradient(to bottom, rgb(20, 120, 242) , rgb(252, 253, 255));
+    
+    background-image: linear-gradient(to bottom, rgb(154, 154, 155) , rgb(173, 173, 173)); 
 
 }
 
 form{
-    padding: 20px 40px;
-    margin : 10% 20% 20% 20%; 
+    padding: 20px 30px;
+    margin : 10% 20% 10% 20%; 
     border-radius: 0.5em;
     box-shadow: 1em;
   }
@@ -31,9 +32,38 @@ form button {
     margin-left: 86%;
 }
 
+.signUp-container > form{
+    padding: 10px 20px;
+    margin : 2% 10%; 
+    border-radius: 0.5em;
+    box-shadow: 1em;
+   
+}
+
+
+.sidenav   li > a{
+    color: rgb(241, 241, 241) ;
+}
 
 
 
 
-  
-  
+.offsetC{
+    padding-left: 300px;
+    /* margin-left: 300px; */
+}
+@media only screen and (max-width : 992px) {
+    .offsetC {
+      padding-left: 0;
+    }
+}
+
+
+.navIcon >li{
+    padding: 0 10px;
+}
+.navContainer{
+    padding: 0 10px;
+}
+
+
