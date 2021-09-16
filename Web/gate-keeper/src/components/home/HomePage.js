@@ -5,7 +5,7 @@ import Dowonload from './Dowonload'
 import Banner from './Banner'
 
 
-const  Home = () => {
+const  HomePage = () => {
 
     const {user} = useContext(AuthContext)
 
@@ -15,7 +15,7 @@ const  Home = () => {
         <div className="home">
             <div className="row">
                 <div className="col  s12 m7 offset-m1 grey lighten-2">
-                    Hello Home Page
+                    Hello How are your
                 </div>
                 
                 <div className="col  s12 m3 grey lighten-3 ">
@@ -27,4 +27,4 @@ const  Home = () => {
     )
 }
 
-export default Home
+export default HomePage
