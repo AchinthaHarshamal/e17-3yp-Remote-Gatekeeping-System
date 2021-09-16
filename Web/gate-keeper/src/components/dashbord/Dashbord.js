@@ -17,7 +17,7 @@ const  Dashbord = ()=> {
 
     return (
         <div className='container offsetC'>
-            <h1>Hello dashboard this is some thing new</h1>
+            <h1>Hello</h1>
            
         </div>
         
