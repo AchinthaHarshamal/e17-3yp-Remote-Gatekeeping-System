@@ -39,14 +39,4 @@ export const PreviousEventsList = [
     voiceMessages: [],
     imageURL: "../dummy data/dummyImages/e3.jpg",
   },
-  // {
-  //   name: "Ebay delivery",
-  //   id: "e5",
-  //   data: (2020, 11, 12, 16, 15, 30, 0),
-  //   rating: 1,
-  //   description: "Tv delivery from the EBAY",
-  //   isMailBoxAccessed: true,
-  //   voiceMessages: [],
-  //   imageURL: "../dummy data/dummyImages/e3.jpg",
-  // },
 ];
