@@ -4,12 +4,9 @@ import Colors from "../constants/Colors";
 
 import EventCard from "../components/EventCard";
 import Header from "../components/Header";
-import selectIdContext from "../contextAPI/selectId";
 
 import { PreviousEventsList } from "../dummy data/DummyData";
 import { FlatList } from "react-native-gesture-handler";
-
-// const contextId;
 
 const PreviousEvents = (props) => {
   const renderPreviousEventList = (itemData) => {

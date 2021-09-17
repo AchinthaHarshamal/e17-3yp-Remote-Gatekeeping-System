@@ -16,14 +16,29 @@ const PreviousEventDetails = (props) => {
     }
   }
 
+  const imageSources = [
+    require("../assets/images/dummy/e1.jpg"),
+    require("../assets/images/dummy/e2.jpg"),
+    require("../assets/images/dummy/e3.jpg"),
+    require("../assets/images/dummy/e4.jpg"),
+  ];
+
+  let index;
+
+  for (let i = 0; i < PreviousEventsList.length; i++) {
+    if (PreviousEventsList[i].id == props.id) {
+      index = i;
+      break;
+    }
+  }
+
   return (
     <View style={style.screen}>
       <Header title={event.name} onBack={props.onBack}></Header>
       <View style={style.imageConatiner}>
-        <Image
-          source={require("../assets/images/dummy/e1.jpg")}
-          style={style.image}
-        />
+        <View style={style.imageConatiner}>
+          <Image source={imageSources[index]} style={style.image} />
+        </View>
       </View>
       <ScrollView>
         <EventDetailsCard

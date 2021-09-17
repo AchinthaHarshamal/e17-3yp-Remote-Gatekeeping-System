@@ -3,7 +3,6 @@ import { View, StyleSheet, Text, Image, TouchableOpacity } from "react-native";
 
 import { PreviousEventsList } from "../dummy data/DummyData";
 import RatingStars from "./RatingStars";
-import selectIdContext from "../contextAPI/selectId";
 
 const EventCard = (props) => {
   const imageSources = [
@@ -22,33 +21,23 @@ const EventCard = (props) => {
     }
   }
 
-  let ctxid;
-
-  const doThis = () => props.onPress;
-
   return (
-    <selectIdContext.Provider
-      value={{
-        id: ctxid,
-      }}
-    >
-      <TouchableOpacity onPress={doThis}>
-        <View style={style.cardContainer}>
-          <View style={style.imageConatiner}>
-            <Image source={imageSources[index]} style={style.image} />
+    <TouchableOpacity onPress={props.onPress.bind(null, props.id)}>
+      <View style={style.cardContainer}>
+        <View style={style.imageConatiner}>
+          <Image source={imageSources[index]} style={style.image} />
+        </View>
+        <View style={style.detailsContainer}>
+          <View style={style.nameContainer}>
+            <Text style={style.name}>{props.name}</Text>
           </View>
-          <View style={style.detailsContainer}>
-            <View style={style.nameContainer}>
-              <Text style={style.name}>{props.name}</Text>
-            </View>
-            <RatingStars rating={props.rating}></RatingStars>
-            <View style={style.descriptionContainer}>
-              <Text style={style.description}>{props.description}</Text>
-            </View>
+          <RatingStars rating={props.rating}></RatingStars>
+          <View style={style.descriptionContainer}>
+            <Text style={style.description}>{props.description}</Text>
           </View>
         </View>
-      </TouchableOpacity>
-    </selectIdContext.Provider>
+      </View>
+    </TouchableOpacity>
   );
 };
 

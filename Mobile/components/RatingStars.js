@@ -19,7 +19,12 @@ const RatingStars = (props) => {
     <View style={style.ratingsContainer}>
       {starArray.map((entry) => {
         return (
-          <AntDesign name={entry} size={24} color="black" key={Math.random()} />
+          <AntDesign
+            name={entry}
+            size={props.size || 24}
+            color="black"
+            key={Math.random()}
+          />
         );
       })}
     </View>
