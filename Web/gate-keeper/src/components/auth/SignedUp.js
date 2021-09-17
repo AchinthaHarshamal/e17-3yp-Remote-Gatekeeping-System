@@ -1,13 +1,13 @@
 import React, { useState , useContext} from 'react'
 import { Redirect } from 'react-router-dom'
 import { AuthContext } from '../../contexts/AuthContext'
-import { DataContext } from '../../contexts/DataContext'
+import {InitContext} from '../../contexts/InitContext'
 
 
 const  SignedUp = () => {
 
-    const {userId , signup} = useContext(AuthContext)
-    const {serialNumber,nodeInit} = useContext(DataContext)
+    const {user, signup} = useContext(AuthContext)
+    const {serialNumber,nodeInit} = useContext(InitContext)
     const [userInfo, setUserInfo] = useState({
         firstName :'',
         lastName : '',
@@ -17,44 +17,39 @@ const  SignedUp = () => {
 
 
     const handleChange = (e) => {
-        //console.log(e);
         const {id , value} = e.target
         setUserInfo({
            ...userInfo,
            [id] :value
         })
     }
+
     const handleSubmit =async (e)=>{
         
         e.preventDefault();
-
-        
         try{
             const userCredential = await signup({email : userInfo.email ,password: userInfo.password})
-            console.log("UserCredential : " , userCredential.user.uid)
+            //console.log("UserCredential : " , userCredential.user.uid)
             const nodeinit= await nodeInit(userCredential.user.uid,userInfo.firstName, userInfo.lastName , 'http/something/somthing')
-            console.log('Done')
+          
+            alert("Node is successfully initialized!")
            
         }catch(err){
-            console.log("Signup Error  : " , err)
+            alert("Signup Error  : " , err.message )
+            
         }
-          
- 
-        //console.log(this.state);
        
     }
 
-    if(userId)  {
+    
+    if(user !=null)  {
         return <Redirect to='/dashboard'/>
-    }     
-
-    // console.log("serialNumber == null" , serialNumber == null , "serialNumbe :", serialNumber)
-    // if(serialNumber == null){
-    //     return <Redirect to='/authnode'/>
-    // }
-
+    }  
+    
+    //console.log("seri : " , serialNumber)   
+    if(serialNumber== null) {return <Redirect to='/'/> }
     return (
-        <div className="container">
+        <div className="container signUp-container">
             <form onSubmit={handleSubmit} className="white">
                 {/*Title SignedUp*/}
                 <div className="row">
@@ -78,7 +73,7 @@ const  SignedUp = () => {
                     {/* product ID */}
                     <div className="input-field col s12 m6">
                         <label htmlFor="productId" >Product ID </label>
-                        <input type="text" id="productId"  value = {serialNumber}/> 
+                        <input type="text" id="productId"  value = 'id'/> 
                         
                     </div>
                 
@@ -99,7 +94,7 @@ const  SignedUp = () => {
                 {/*Submit Button*/}
                 <div className="row">
                     <div className="input-field col s12 m12">
-                        <button className="btn blue lighten-1 z-depth-0" id="signup-btn">Sign Up</button>
+                        <button className="btn grey darken-2 z-depth-0" id="signup-btn">Sign Up</button>
                     </div>
                 </div>   
             </form>

@@ -1,0 +1,66 @@
+name: fb_deploying CI
+
+on:
+  push:
+    branches: 
+      -  main 
+    paths : 
+      - 'Web/gate-keeper/deploy.txt'
+  
+ 
+
+jobs:
+  build:
+    name : Build
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [ 16.x]
+
+    steps:
+    
+    - uses: actions/checkout@master
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@master
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+        cache-dependency-path: 'Web/gate-keeper/package-lock.json'
+    
+    - name: Install dependencies
+      run: npm ci
+      working-directory: './Web/gate-keeper'
+
+    - name :  Run Build 
+      run: CI='' npm run build 
+      working-directory: './Web/gate-keeper'
+
+    - name: Archive Production Artifact
+      uses: actions/upload-artifact@master
+      with:
+        name: dist
+        path: './Web/gate-keeper/build'
+
+  deploy:
+    name: Deploy
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@master
+      - name: Download Artifact
+        uses: actions/download-artifact@master
+        with:
+          name: dist
+          path: './Web/gate-keeper/build'
+
+      - name: Deploy to Firebase
+        uses: w9jds/firebase-action@master
+        with:
+          args: deploy --only hosting
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+          PROJECT_PATH: './Web/gate-keeper'

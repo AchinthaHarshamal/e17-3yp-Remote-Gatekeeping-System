@@ -5,6 +5,8 @@ import { AuthContext } from '../../contexts/AuthContext'
 
 
 
+
+
 function SignedIn() {
 
     const initValues = { email : '' , password: ''} 
@@ -32,13 +34,10 @@ function SignedIn() {
             setErrorMsg("Wrong Password or Email ! Try again")
         }
     }
-
-    if(user)  {
+    if(user != null)  {
         return <Redirect to='/dashboard'/>
     }
-
-    return (
-        
+    return (  
         <div className="container">
             <form onSubmit={handleSubmit} className="white">
                 <h5 className="grey-text text-darken-3">Sign In</h5>
@@ -46,15 +45,17 @@ function SignedIn() {
                     <label htmlFor="email">Email</label>
                     <input type="email" id="email" onChange={handleChange}/>
                 </div>
+                
                 <div className="input-field">
                     <label htmlFor="password">Password</label>
                     <input type="password" id="password" onChange={handleChange}/>
                 </div>
+
                 <div className="input-field">
-                    <button className="btn blue lighten-1 z-depth-0">Sign In</button>
+                    <button className="btn grey darken-2 z-depth-0">Sign In</button>
                     <div className="red-text center">
                               
-                     {errorMsg ? <p>{errorMsg}</p> : null}
+                    {errorMsg ? <p>{errorMsg}</p> : null}
                     </div>
                 </div>
             </form>
