@@ -2,32 +2,32 @@ import React from "react";
 import { View, Text, StyleSheet, ScrollView } from "react-native";
 import Colors from "../constants/Colors";
 
-import BackButton from "../components/BackButton";
 import EventCard from "../components/EventCard";
+import Header from "../components/Header";
+import selectIdContext from "../contextAPI/selectId";
 
 import { PreviousEventsList } from "../dummy data/DummyData";
 import { FlatList } from "react-native-gesture-handler";
 
-const renderPreviousEventList = (itemData) => {
-  return (
-    <EventCard
-      name={itemData.item.name}
-      description={itemData.item.description}
-      image={itemData.item.imageURL}
-      id={itemData.item.id}
-    ></EventCard>
-  );
-};
+// const contextId;
 
 const PreviousEvents = (props) => {
+  const renderPreviousEventList = (itemData) => {
+    return (
+      <EventCard
+        name={itemData.item.name}
+        description={itemData.item.description}
+        image={itemData.item.imageURL}
+        id={itemData.item.id}
+        rating={itemData.item.rating}
+        onPress={props.onPress}
+      ></EventCard>
+    );
+  };
+
   return (
     <View style={styles.screen}>
-      <View style={styles.headerContainer}>
-        <Text style={styles.header}>Previous Events</Text>
-        <View style={styles.backButtonContainer}>
-          <BackButton>&#8592;</BackButton>
-        </View>
-      </View>
+      <Header title="Previous Events" onBack={props.onBack}></Header>
       <View style={styles.listContainer}>
         <FlatList
           data={PreviousEventsList}
