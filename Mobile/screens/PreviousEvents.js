@@ -1,10 +1,37 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, ScrollView } from "react-native";
+import Colors from "../constants/Colors";
+
+import EventCard from "../components/EventCard";
+import Header from "../components/Header";
+
+import { PreviousEventsList } from "../dummy data/DummyData";
+import { FlatList } from "react-native-gesture-handler";
 
 const PreviousEvents = (props) => {
+  const renderPreviousEventList = (itemData) => {
+    return (
+      <EventCard
+        name={itemData.item.name}
+        description={itemData.item.description}
+        image={itemData.item.imageURL}
+        id={itemData.item.id}
+        rating={itemData.item.rating}
+        onPress={props.onPress}
+      ></EventCard>
+    );
+  };
+
   return (
     <View style={styles.screen}>
-      <Text>The Previous Events!</Text>
+      <Header title="Previous Events" onBack={props.onBack}></Header>
+      <View style={styles.listContainer}>
+        <FlatList
+          data={PreviousEventsList}
+          renderItem={renderPreviousEventList}
+          contentContainerStyle={styles.list}
+        ></FlatList>
+      </View>
     </View>
   );
 };
@@ -12,8 +39,31 @@ const PreviousEvents = (props) => {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    justifyContent: "center",
+  },
+  headerContainer: {
+    height: 200,
+    borderBottomEndRadius: 100,
+    borderBottomLeftRadius: 10,
+    backgroundColor: Colors.primaryColor,
     alignItems: "center",
+    paddingTop: 80,
+  },
+  header: {
+    color: "white",
+    fontSize: 35,
+    fontWeight: "bold",
+  },
+  backButtonContainer: {
+    marginTop: 40,
+    marginLeft: 10,
+    alignSelf: "flex-start",
+  },
+  listContainer: {
+    flex: 1,
+  },
+  list: {
+    flexGrow: 1,
+    justifyContent: "flex-end",
   },
 });
 

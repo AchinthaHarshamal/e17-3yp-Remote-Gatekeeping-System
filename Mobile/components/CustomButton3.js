@@ -3,7 +3,7 @@ import { View, StyleSheet, TouchableOpacity, Text } from "react-native";
 
 import Colors from "../constants/Colors";
 
-const CustomButton2 = (props) => {
+const CustomButton3 = (props) => {
   return (
     <TouchableOpacity onPress={props.onPress} activeOpacity={0.4}>
       <View style={styles.button}>
@@ -19,15 +19,15 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
     paddingHorizontal: 30,
     borderRadius: 40,
-    width: 200,
+    width: 150,
     alignItems: "center",
     marginTop: 20,
   },
   buttonText: {
     color: "white",
-    fontSize: 18,
+    fontSize: 15,
     textAlign: "center",
   },
 });
 
-export default CustomButton2;
+export default CustomButton3;

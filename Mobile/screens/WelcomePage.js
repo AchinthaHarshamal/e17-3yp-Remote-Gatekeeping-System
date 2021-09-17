@@ -24,8 +24,8 @@ const WelcomePage = (props) => {
         <Text style={styles.greeting}>Welcome User!</Text>
       </View>
       <View style={styles.buttonContainer}>
-        <CustomButton2>Active Event</CustomButton2>
-        <CustomButton2>Previous Events</CustomButton2>
+        <CustomButton2 onPress={props.clickActive}>Active Event</CustomButton2>
+        <CustomButton2 onPress={props.clickPrev}>Previous Events</CustomButton2>
       </View>
       <View style={styles.LogOutButtonContainer}>
         <LogOutButton onPress={props.onPress}>Log Out</LogOutButton>
