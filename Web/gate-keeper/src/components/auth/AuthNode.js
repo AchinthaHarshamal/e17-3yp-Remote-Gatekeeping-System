@@ -1,42 +1,41 @@
 import React, { useState , useContext} from 'react'
 import {Redirect} from 'react-router-dom'
 import { DataContext } from '../../contexts/DataContext';
+import {InitContext} from '../../contexts/InitContext';
 
 
 
 const  AuthNode = () => {
 
     
-    const [serialNumber, setSerialNumber] = useState();
-    const {getNode,nodeSet , node} = useContext(DataContext);
+    const [sNumber, setSNumber] = useState()
+    const [nodeInit, setNodeInit] = useState(true)
     const [errorMsg, setErrorMsg] = useState(null)
 
+    const {getNode, setNode ,setSerialNumber} = useContext(InitContext)
+   
     const handleChange = (e) => {
-        setSerialNumber(e.target.value)
+        setSNumber(e.target.value)
     }
 
     const handleSubmit = async (e)=>{
         e.preventDefault();
-        if(serialNumber ==''){
+        if(sNumber ===''){
             setErrorMsg("Serial Number is Required!")
             return
         } 
         try{
-            const node = await getNode(serialNumber);
-            //console.log("node " ,node.exists())
-            if(node.exists()  &&  !node.val().init ){
-               
-                setErrorMsg('')
-                nodeSet({node , serialNumber})
+            const node = await getNode(sNumber);
 
-                //console.log("Node init state: ",node.val().init)
-                //console.log("Seri : ",serialNumber)
+            if(node.exists()  &&  !node.val().init ){
+                setSerialNumber(sNumber)
+                setNodeInit(node.val().init)
+                setNode(node)
+                setErrorMsg('')
 
             }else{
-                nodeSet({})
-                
+               
                 setErrorMsg('Wrong Serial number Or Device Is Already Initialized')
-                console.log("Wrong Serial number Or Device Is Already Initialized")
             }
             
         }catch(err){
@@ -45,8 +44,9 @@ const  AuthNode = () => {
         }
         
     }
-
-    if(node) return <Redirect to='/signup'/>
+    //console.log('node : ' ,nodeInit)
+    if(nodeInit === false) return <Redirect to='/signup'/>
+    
     return (
         <div className="container">
             <form onSubmit={handleSubmit} className="white">
@@ -55,13 +55,14 @@ const  AuthNode = () => {
                 <div className="input-field">
                     <label htmlFor="nodeId">Serial Number</label>
                     <input type="text" id="nodeId" onChange={handleChange}/>
+                    
                 </div>
 
                 <div className="input-field">
-                    <button className="btn blue lighten-1 z-depth-0">Next</button>
-                    <div className="red-text center">
+                    <button className="btn grey darken-2 z-depth-0">Next</button>
+                </div>
+                <div className="red-text center">
                         {errorMsg ? <p>{errorMsg} Please Try Again! </p>  :null } 
-                    </div>
                 </div>
             </form>
         </div>

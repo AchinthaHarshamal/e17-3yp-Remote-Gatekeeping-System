@@ -1,43 +1,27 @@
-import React, { Component } from 'react';
-import Messages from './Messages';
-import { Redirect } from 'react-router-dom'
+import React , {useContext , useState , useEffect} from 'react'
+import {Redirect} from 'react-router-dom'
+
+import { AuthContext } from '../../contexts/AuthContext'
+
+const  Dashbord = ()=> {
+
+    const {user} = useContext(AuthContext)
+   
 
 
-class Dashbord extends Component {
+    
 
-    // loadComponent = (authId) =>{
-    //     if(isLoaded(authId)){
-    //         return(
-    //             <div>
-    //                 <h3>Hello User</h3> 
-    //                 <h5>History of conversation</h5>
-    //                  <Messages  authId = {authId}/>
-    //             </div>
-    //         )
-    //     }
-    //     else (
-    //             <div>
-    //                 <h1>Loading...</h1> 
-    //             </div>
-    //     )
-    // }
+    if(user ==null)  {
+        return <Redirect to='/'/>
+    }   
 
-    render() {
-       
-        /*
-        const {auth} = this.props;
-        //console.log(messages)
-
-        if(!auth.uid) return <Redirect to='/'/>
-        */
-        return (
-            <div className="container">
-                {/* {this.loadComponent(auth.uid)} */}
-            </div>
-        ) 
-    }
+    return (
+        <div className='container offsetC'>
+            <h1>Hello</h1>
+           
+        </div>
+        
+    )
 }
 
-
-export default Dashbord;
-
+export default Dashbord
