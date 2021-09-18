@@ -1,5 +1,6 @@
-import React  , {createContext , useState , useEffect}from 'react'
-import { auth  ,db} from '../config/fbConfig';
+import React  , {createContext , useState , useEffect }from 'react'
+import { auth } from '../config/fbConfig';
+
 
 
 export const AuthContext = createContext();
@@ -7,7 +8,7 @@ export const AuthContext = createContext();
 const AuthContextProvider = (props) => {
     const [user,setUser] = useState();
     const [loading, setLoading] = useState(true);
-
+    
     const signup = ({email, password}) => {
         return auth.createUserWithEmailAndPassword(email, password);
     }
@@ -29,12 +30,15 @@ const AuthContextProvider = (props) => {
         signout
     }
 
+    
     useEffect(() => {
         auth.onAuthStateChanged( user => {
             setUser(user)
             setLoading(false)
         })
     })
+
+    
 
 
 

@@ -14,14 +14,14 @@ const InitContextProvider =(props)=>{
         return dbRef.child("nodes/"+serialNumber).get()
     }
 
-    const nodeInit = (userId,fname , lname , imgUrl) => {
+    const nodeInit = (userId,fname , lname , imgUrl, email) => {
         const nodeID = db.ref().child('initNode').push().key;
         const msgID = db.ref().child('messages/'+nodeID).push().key;
         //console.log('node ID : ' , nodeID)
         
         const userDate = {
             'admin' : true ,
-            'email' : 'some@email.com',
+            'email' : email,
             'fName' :fname, 
             'lName' :lname,
             'imgUrl' :imgUrl,

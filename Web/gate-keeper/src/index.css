@@ -67,3 +67,14 @@ form button {
 }
 
 
+/* Mainboard */
+
+.mainCard {
+    height:  150%;
+    background-color: blueviolet;
+}
+
+.mainTable {
+    padding-top: 5%  ;
+   
+}

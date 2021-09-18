@@ -26,7 +26,7 @@ function SignedIn() {
         
         e.preventDefault();
         try{
-            const auth  = await signin(values)
+            await signin(values)
             //console.log("user id: " ,auth.user.uid);
             setErrorMsg(null)
         }catch(err){

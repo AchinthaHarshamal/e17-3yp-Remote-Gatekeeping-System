@@ -1,24 +1,25 @@
-import React , {useContext , useState , useEffect} from 'react'
+import React , {useContext } from 'react'
 import {Redirect} from 'react-router-dom'
+import {BrowserRouter ,Switch, Route} from 'react-router-dom';
 
 import { AuthContext } from '../../contexts/AuthContext'
+import MainBoard from './status/MainBoard';
 
 const  Dashbord = ()=> {
 
     const {user} = useContext(AuthContext)
    
-
-
-    
-
     if(user ==null)  {
         return <Redirect to='/'/>
     }   
 
     return (
-        <div className='container offsetC'>
-            <h1>Hello</h1>
-           
+        <div className="offsetC">
+            <BrowserRouter>
+                <Switch>
+                    <Route path='/dashboard' component={MainBoard} />
+                </Switch>
+            </BrowserRouter>
         </div>
         
     )

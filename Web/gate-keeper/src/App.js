@@ -1,4 +1,4 @@
-import React , {Component} from "react";
+import React  from "react";
 import {BrowserRouter ,Switch, Route} from 'react-router-dom';
 
 import Navbar from "./components/layout/Navbar";
@@ -14,6 +14,7 @@ import DataContextProvider from "./contexts/DataContext";
 import InitContextProvider from "./contexts/InitContext";
 
 
+
 function App() {
   return (
     <BrowserRouter>
@@ -27,7 +28,7 @@ function App() {
             <Route path='/signup' component={SignedUp}></Route>
             <Route path='/authnode' component={AuthNode}></Route>
             <Route path='/dashboard' component={Dashbord}></Route>
-            <Route pat='/insert' component={Insert}></Route>
+            <Route path='/insert' component={Insert}></Route>
             {/* <Home /> */}
         </Switch>
         </InitContextProvider>

@@ -10,7 +10,7 @@ const Insert = () => {
         'to' : 'All',
         'msgUrl' : 'testUrl',
         'msgType' : 'text',
-        'time': (new Date()).toJSON()
+        'time': (new Date())
     })
     const {getMessages,getUserInfo } = useContext(DataContext)
 
