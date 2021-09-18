@@ -34,13 +34,14 @@ const PreviousEventDetails = (props) => {
 
   return (
     <View style={style.screen}>
-      <Header title={event.name} onBack={props.onBack}></Header>
-      <View style={style.imageConatiner}>
-        <View style={style.imageConatiner}>
-          <Image source={imageSources[index]} style={style.image} />
-        </View>
-      </View>
       <ScrollView>
+        <Header title={event.name} onBack={props.onBack}></Header>
+        <View style={style.imageConatiner}>
+          <View style={style.imageConatiner}>
+            <Image source={imageSources[index]} style={style.image} />
+          </View>
+        </View>
+
         <EventDetailsCard
           date={event.date}
           description={event.description}
