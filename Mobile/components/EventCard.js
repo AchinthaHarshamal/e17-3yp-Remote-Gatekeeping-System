@@ -21,8 +21,12 @@ const EventCard = (props) => {
     }
   }
 
+  const handleOnPress = () => {
+    props.onPress(props.id);
+  };
+
   return (
-    <TouchableOpacity onPress={props.onPress.bind(null, props.id)}>
+    <TouchableOpacity onPress={handleOnPress}>
       <View style={style.cardContainer}>
         <View style={style.imageConatiner}>
           <Image source={imageSources[index]} style={style.image} />

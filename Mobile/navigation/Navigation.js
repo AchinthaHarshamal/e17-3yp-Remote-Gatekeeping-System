@@ -13,9 +13,13 @@ const Navigation = (props) => {
   const [preEventDetails, setPrevEventDetails] = useState(false);
   const [activeEvent, setActiveEvent] = useState(false);
   const [closeEvent, setCloseEvent] = useState(false);
+
+  const [name, setName] = useState("");
   const [eventId, setEventId] = useState(false);
 
-  const handleLogIn = () => {
+  const handleLogIn = (n) => {
+    setName(n);
+    console.log(n);
     setAuthorized(true);
   };
   const hangleLogOut = () => {
@@ -70,6 +74,7 @@ const Navigation = (props) => {
         onPress={hangleLogOut}
         clickPrev={handlePreveEvent}
         clickActive={handleActiveEvent}
+        name={name}
       ></WelcomePage>
     );
   }

@@ -7,6 +7,8 @@ import AppLoading from "expo-app-loading";
 
 import Navigation from "./navigation/Navigation";
 import { event, set } from "react-native-reanimated";
+import CloseActiveEventScreen from "./screens/CloseActiveEventScreen";
+import WelcomePage from "./screens/WelcomePage";
 
 const fetchFonts = () => {
   return Font.loadAsync({
@@ -29,4 +31,6 @@ export default function App() {
   }
 
   return <Navigation></Navigation>;
+  // return <WelcomePage></WelcomePage>;
+  // return <CloseActiveEventScreen></CloseActiveEventScreen>;
 }
