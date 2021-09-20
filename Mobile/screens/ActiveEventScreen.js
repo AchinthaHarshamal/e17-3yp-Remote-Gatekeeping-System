@@ -1,13 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
 
 import Header from "../components/Header";
 import CustomButton3 from "../components/CustomButton3";
 import { ScrollView } from "react-native-gesture-handler";
+import { updateMailBoxAccess } from "../store/actions/mailBoxAccessAction";
+import { useDispatch } from "react-redux";
 
 import Colors from "../constants/Colors";
 
 const ActiveEventScreen = (props) => {
+  const [isMailBoxAccessed, setIsMailBoxAccessed] = useState(false);
+
+  const dispatch = useDispatch();
+
+  const mailBoxAccessActionHandler = () => {
+    dispatch(updateMailBoxAccess(isMailBoxAccessed));
+  };
+
+  const handleMailBoxAccess = () => {
+    setIsMailBoxAccessed(true);
+    mailBoxAccessActionHandler();
+  };
+
   return (
     <View style={styles.screen}>
       <Header title="Active Event" onBack={props.onBack}></Header>
@@ -30,7 +45,7 @@ const ActiveEventScreen = (props) => {
           <View style={styles.fieldContainer}>
             <Text style={styles.label}>Mail Box Access</Text>
             <View style={styles.buttonContainer}>
-              <CustomButton3>Open</CustomButton3>
+              <CustomButton3 onPress={handleMailBoxAccess}>Open</CustomButton3>
             </View>
           </View>
 

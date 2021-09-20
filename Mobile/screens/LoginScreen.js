@@ -9,14 +9,22 @@ import {
   Alert,
 } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
+import { useDispatch } from "react-redux";
 
 import CustomButton from "../components/CustomButton";
 import Colors from "../constants/Colors";
+import { loginStateAction } from "../store/actions/loginStateAction";
 
 const LoginScreen = (props) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const dispatch = useDispatch();
+
+  const handleAuthorization = () => {
+    dispatch(loginStateAction(true));
+  };
 
   const handleNameOnChanage = (input) => {
     setName(input);
@@ -31,64 +39,63 @@ const LoginScreen = (props) => {
   };
 
   const handleLogIn = () => {
-    if (name.length == 0 || email.length == 0 || password.length == 0) {
-      Alert.alert(
-        "Incorrect Details!",
-        "Please fill all the fields",
-        [
-          {
-            text: "OK",
-          },
-        ],
-        { cancelable: true }
-      );
-      return;
-    }
+    // if (name.length == 0 || email.length == 0 || password.length == 0) {
+    //   Alert.alert(
+    //     "Incorrect Details!",
+    //     "Please fill all the fields",
+    //     [
+    //       {
+    //         text: "OK",
+    //       },
+    //     ],
+    //     { cancelable: true }
+    //   );
+    //   return;
+    // }
 
-    if (!email.includes("@")) {
-      Alert.alert(
-        "Incorrect Details!",
-        "Please enter a valid Email",
-        [
-          {
-            text: "OK",
-          },
-        ],
-        { cancelable: true }
-      );
-      return;
-    }
+    // if (!email.includes("@")) {
+    //   Alert.alert(
+    //     "Incorrect Details!",
+    //     "Please enter a valid Email",
+    //     [
+    //       {
+    //         text: "OK",
+    //       },
+    //     ],
+    //     { cancelable: true }
+    //   );
+    //   return;
+    // }
 
-    if (password.length < 8) {
-      Alert.alert(
-        "Incorrect Details!",
-        "Password should be at least 8 characters!",
-        [
-          {
-            text: "OK",
-          },
-        ],
-        { cancelable: true }
-      );
-      return;
-    }
+    // if (password.length < 8) {
+    //   Alert.alert(
+    //     "Incorrect Details!",
+    //     "Password should be at least 8 characters!",
+    //     [
+    //       {
+    //         text: "OK",
+    //       },
+    //     ],
+    //     { cancelable: true }
+    //   );
+    //   return;
+    // }
 
-    if (name.length > 8) {
-      Alert.alert(
-        "Incorrect Details!",
-        "Please Enter Your Nickname!\n(Less than 10 characters)",
-        [
-          {
-            text: "OK",
-          },
-        ],
-        { cancelable: true }
-      );
-      return;
-    }
-
+    // if (name.length > 8) {
+    //   Alert.alert(
+    //     "Incorrect Details!",
+    //     "Please Enter Your Nickname!\n(Less than 10 characters)",
+    //     [
+    //       {
+    //         text: "OK",
+    //       },
+    //     ],
+    //     { cancelable: true }
+    //   );
+    //   return;
+    // }
+    handleAuthorization();
     props.onPress(name);
-    console.log(name, email, password);
   };
 
   return (
@@ -109,7 +116,6 @@ const LoginScreen = (props) => {
             <TextInput
               blurOnSubmit
               onChangeText={handleNameOnChanage}
-              autoFocus
               style={styles.input1}
               placeholder="Enter your name"
               placeholderTextColor="rgba(255, 255, 255, 0.5)"

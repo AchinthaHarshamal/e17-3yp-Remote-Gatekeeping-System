@@ -4,11 +4,15 @@ import Colors from "../constants/Colors";
 
 import EventCard from "../components/EventCard";
 import Header from "../components/Header";
+import { useSelector } from "react-redux";
 
-import { PreviousEventsList } from "../dummy data/DummyData";
-import { FlatList } from "react-native-gesture-handler";
+import { FlatList, State } from "react-native-gesture-handler";
 
 const PreviousEvents = (props) => {
+  const prevEvents = useSelector(
+    (state) => state.addPreviousEvent.previousEvents
+  );
+
   const renderPreviousEventList = (itemData) => {
     return (
       <EventCard
@@ -27,7 +31,7 @@ const PreviousEvents = (props) => {
       <Header title="Previous Events" onBack={props.onBack}></Header>
       <View style={styles.listContainer}>
         <FlatList
-          data={PreviousEventsList}
+          data={prevEvents}
           renderItem={renderPreviousEventList}
           contentContainerStyle={styles.list}
         ></FlatList>
