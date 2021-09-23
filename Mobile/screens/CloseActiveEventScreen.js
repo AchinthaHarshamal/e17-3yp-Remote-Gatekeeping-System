@@ -12,12 +12,34 @@ import Header from "../components/Header";
 import Colors from "../constants/Colors";
 import RatingStarsInteractive from "../components/RatingStarsInteractive";
 import CustomButton2 from "../components/CustomButton2";
-import CloseEventContext from "../contextAPI/CloseEventContext";
+import { useDispatch, useSelector } from "react-redux";
+import { addNewPrevEvent } from "../store/actions/addPreviousEventAction";
 
 const CloseActiveEventScreen = (props) => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [rating, setRating] = useState(0);
+
+  const mailBoxAccess = useSelector(
+    (state) => state.mailBoxAcess.mailBoxAccess
+  );
+
+  const dispatch = useDispatch();
+
+  const addNewEvent = () => {
+    dispatch(
+      addNewPrevEvent({
+        name: name,
+        id: Math.random().toString(),
+        date: new Date(2018, 11, 24, 10, 33, 30, 0),
+        rating: rating,
+        description: description,
+        isMailBoxAccessed: mailBoxAccess,
+        voiceMessages: [],
+        imageURL: "../dummy data/dummyImages/e1.jpg",
+      })
+    );
+  };
 
   const handelOnPress = () => {
     if ((name.length == 0) | (description.length == 0)) {
@@ -35,7 +57,7 @@ const CloseActiveEventScreen = (props) => {
     }
 
     props.onClose();
-    console.log("Ishara");
+    addNewEvent();
   };
 
   const handleNameOnChange = (name) => {
@@ -46,48 +68,43 @@ const CloseActiveEventScreen = (props) => {
     setDescription(desc);
   };
 
+  const handleRating = (rating) => {
+    setRating(rating);
+  };
+
   return (
-    <CloseEventContext.Provider
-      value={{
-        isMailBoxAccessed: false,
-        eventName: name,
-        eventDescription: description,
-        rating: 0,
-      }}
-    >
-      <KeyboardAvoidingView style={styles.screen}>
-        <Header onBack={props.onBack} title="CLOSING THE EVENT.."></Header>
-        <ScrollView>
-          <View style={styles.formInput}>
-            <TextInput
-              autoFocus={false}
-              style={styles.nameInput}
-              placeholder="Enter the name of the event"
-              onChangeText={handleNameOnChange}
-            ></TextInput>
-            <View style={styles.ratingStarContainer}>
-              <RatingStarsInteractive
-                rating={3}
-                size={50}
-              ></RatingStarsInteractive>
-              <Text style={styles.rateLabel}>Rate this event...</Text>
-            </View>
-            <View style={styles.descriptionContainer}>
-              <TextInput
-                multiline
-                autoFocus={false}
-                style={styles.description}
-                placeholder="Describe your experience..."
-                onChangeText={handleDesOnChange}
-              ></TextInput>
-            </View>
-            <View style={styles.buttonContainer}>
-              <CustomButton2 onPress={handelOnPress}>Close Event</CustomButton2>
-            </View>
+    <KeyboardAvoidingView style={styles.screen}>
+      <Header onBack={props.onBack} title="CLOSING THE EVENT.."></Header>
+      <ScrollView>
+        <View style={styles.formInput}>
+          <TextInput
+            autoFocus={false}
+            style={styles.nameInput}
+            placeholder="Enter the name of the event"
+            onChangeText={handleNameOnChange}
+          ></TextInput>
+          <View style={styles.ratingStarContainer}>
+            <RatingStarsInteractive
+              rating={handleRating}
+              size={50}
+            ></RatingStarsInteractive>
+            <Text style={styles.rateLabel}>Rate this event...</Text>
           </View>
-        </ScrollView>
-      </KeyboardAvoidingView>
-    </CloseEventContext.Provider>
+          <View style={styles.descriptionContainer}>
+            <TextInput
+              multiline
+              autoFocus={false}
+              style={styles.description}
+              placeholder="Describe your experience..."
+              onChangeText={handleDesOnChange}
+            ></TextInput>
+          </View>
+          <View style={styles.buttonContainer}>
+            <CustomButton2 onPress={handelOnPress}>Close Event</CustomButton2>
+          </View>
+        </View>
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 };
 

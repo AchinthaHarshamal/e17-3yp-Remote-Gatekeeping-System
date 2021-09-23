@@ -17,6 +17,7 @@ const RatingStars = (props) => {
 
   const handleOnPress = (key) => {
     setRating(key);
+    props.rating(key);
   };
 
   return (

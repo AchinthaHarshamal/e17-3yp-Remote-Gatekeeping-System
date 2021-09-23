@@ -4,14 +4,17 @@ import { View, Text, StyleSheet, Image } from "react-native";
 import Header from "../components/Header";
 import EventDetailsCard from "../components/EventDetailsCard";
 import { ScrollView } from "react-native-gesture-handler";
-
-import { PreviousEventsList } from "../dummy data/DummyData";
+import { useSelector } from "react-redux";
 
 const PreviousEventDetails = (props) => {
+  const prevEvents = useSelector(
+    (state) => state.addPreviousEvent.previousEvents
+  );
+
   let event;
-  for (let i = 0; i < PreviousEventsList.length; i++) {
-    if (PreviousEventsList[i].id == props.id) {
-      event = PreviousEventsList[i];
+  for (let i = 0; i < prevEvents.length; i++) {
+    if (prevEvents[i].id == props.id) {
+      event = prevEvents[i];
       break;
     }
   }
@@ -25,12 +28,14 @@ const PreviousEventDetails = (props) => {
 
   let index;
 
-  for (let i = 0; i < PreviousEventsList.length; i++) {
-    if (PreviousEventsList[i].id == props.id) {
+  for (let i = 0; i < prevEvents.length; i++) {
+    if (prevEvents[i].id == props.id) {
       index = i;
       break;
     }
   }
+
+  if (index == prevEvents.length) index = 0;
 
   return (
     <View style={style.screen}>

@@ -1,10 +1,16 @@
 import React from "react";
 import { View, StyleSheet, Text, Image, TouchableOpacity } from "react-native";
 
-import { PreviousEventsList } from "../dummy data/DummyData";
+import { useSelector } from "react-redux";
+
 import RatingStars from "./RatingStars";
 
 const EventCard = (props) => {
+  const prevEvents = useSelector(
+    (state) => state.addPreviousEvent.previousEvents
+  );
+
+  // below to be commented when fetching the image from the source
   const imageSources = [
     require("../assets/images/dummy/e1.jpg"),
     require("../assets/images/dummy/e2.jpg"),
@@ -14,12 +20,14 @@ const EventCard = (props) => {
 
   let index;
 
-  for (let i = 0; i < PreviousEventsList.length; i++) {
-    if (PreviousEventsList[i].id == props.id) {
+  for (let i = 0; i < prevEvents.length; i++) {
+    if (prevEvents[i].id == props.id) {
       index = i;
       break;
     }
   }
+
+  // above to be commented when fetching the image from the source
 
   const handleOnPress = () => {
     props.onPress(props.id);

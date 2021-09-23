@@ -7,8 +7,10 @@ import CloseActiveEventScreen from "../screens/CloseActiveEventScreen";
 import PreviousEvents from "../screens/PreviousEvents";
 import PreviousEventDetails from "../screens/PreviousEventDetails";
 
+import { useSelector } from "react-redux";
+
 const Navigation = (props) => {
-  const [authorized, setAuthorized] = useState(false);
+  const [welcomeScreen, setWelcomeScreen] = useState(false);
   const [prevEvents, setPrevEvents] = useState(false);
   const [preEventDetails, setPrevEventDetails] = useState(false);
   const [activeEvent, setActiveEvent] = useState(false);
@@ -17,21 +19,25 @@ const Navigation = (props) => {
   const [name, setName] = useState("");
   const [eventId, setEventId] = useState(false);
 
+  const authorization = useSelector((state) => state.loginState.authorized);
+  console.log(authorization);
+
   const handleLogIn = (n) => {
     setName(n);
-    console.log(n);
-    setAuthorized(true);
+    if (authorization) {
+      setWelcomeScreen(true);
+    }
   };
   const hangleLogOut = () => {
-    setAuthorized(false);
+    setWelcomeScreen(false);
   };
   const handlePreveEvent = () => {
     setPrevEvents(true);
-    setAuthorized(false);
+    setWelcomeScreen(false);
   };
   const handlePreveEventBack = () => {
     setPrevEvents(false);
-    setAuthorized(true);
+    setWelcomeScreen(true);
   };
   const handlePreveEventDetails = (id) => {
     setEventId(id);
@@ -45,12 +51,12 @@ const Navigation = (props) => {
 
   const handleActiveEvent = () => {
     setActiveEvent(true);
-    setAuthorized(false);
+    setWelcomeScreen(false);
   };
 
   const handleActiveEventBack = () => {
     setActiveEvent(false);
-    setAuthorized(true);
+    setWelcomeScreen(true);
   };
 
   const handleCloseEvent = () => {
@@ -65,10 +71,10 @@ const Navigation = (props) => {
 
   const handleClosing = () => {
     setCloseEvent(false);
-    setAuthorized(true);
+    setWelcomeScreen(true);
   };
 
-  if (authorized) {
+  if (welcomeScreen) {
     return (
       <WelcomePage
         onPress={hangleLogOut}
