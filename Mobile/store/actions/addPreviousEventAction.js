@@ -6,31 +6,40 @@ export const GET_EVENT_DETAILS = "GET_EVENT_DETAILS";
 export const fetchEvents = () => {
   return async (dispatch) => {
     //async code
-    const response = await fetch(
-      "https://remote-getekeeping-device-default-rtdb.firebaseio.com/events.json"
-    );
 
-    const resData = await response.json();
-
-    console.log(resData);
-
-    const loadedEvents = [];
-
-    for (const key in resData) {
-      loadedEvents.push(
-        new Event(
-          key,
-          resData[key].name,
-          new Date(2018, 11, 24, 10, 33, 30, 0),
-          resData[key].rating,
-          resData[key].description,
-          resData[key].mailBoxAccess,
-          null
-        )
+    try {
+      const response = await fetch(
+        "https://remote-getekeeping-device-default-rtdb.firebaseio.com/events.json"
       );
-    }
 
-    dispatch({ type: GET_EVENT_DETAILS, events: loadedEvents.reverse() });
+      if (!response.ok) {
+        throw new Error("Something went wrong!");
+      }
+
+      const resData = await response.json();
+
+      console.log(resData);
+
+      const loadedEvents = [];
+
+      for (const key in resData) {
+        loadedEvents.push(
+          new Event(
+            key,
+            resData[key].name,
+            new Date(2018, 11, 24, 10, 33, 30, 0),
+            resData[key].rating,
+            resData[key].description,
+            resData[key].mailBoxAccess,
+            null
+          )
+        );
+      }
+
+      dispatch({ type: GET_EVENT_DETAILS, events: loadedEvents.reverse() });
+    } catch (error) {
+      throw error;
+    }
   };
 };
 
@@ -45,7 +54,7 @@ export const addNewPrevEvent = (name, rating, description, mailBoxAccess) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          //might have to change
+          //need to implement the image URL and others
           name,
           rating,
           description,
