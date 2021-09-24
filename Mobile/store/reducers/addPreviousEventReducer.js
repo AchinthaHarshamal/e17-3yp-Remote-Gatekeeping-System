@@ -20,7 +20,7 @@ const addPreviousEventReducer = (state = initalState, action) => {
       const addEvent = new Event(
         action.newEvent.id,
         action.newEvent.name,
-        new Date(2018, 11, 24, 10, 33, 30, 0),
+        action.newEvent.date,
         action.newEvent.rating,
         action.newEvent.description,
         action.newEvent.mailBoxAccess,

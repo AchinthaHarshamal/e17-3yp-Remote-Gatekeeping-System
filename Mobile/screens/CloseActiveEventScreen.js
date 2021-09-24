@@ -27,7 +27,9 @@ const CloseActiveEventScreen = (props) => {
   const dispatch = useDispatch();
 
   const addNewEvent = () => {
-    dispatch(addNewPrevEvent(name, rating, description, mailBoxAccess));
+    dispatch(
+      addNewPrevEvent(name, rating, description, mailBoxAccess, new Date())
+    );
   };
 
   const handelOnPress = () => {

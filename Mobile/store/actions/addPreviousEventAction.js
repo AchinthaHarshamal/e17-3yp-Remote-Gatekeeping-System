@@ -27,7 +27,7 @@ export const fetchEvents = () => {
           new Event(
             key,
             resData[key].name,
-            new Date(2018, 11, 24, 10, 33, 30, 0),
+            new Date(resData[key].date),
             resData[key].rating,
             resData[key].description,
             resData[key].mailBoxAccess,
@@ -43,7 +43,13 @@ export const fetchEvents = () => {
   };
 };
 
-export const addNewPrevEvent = (name, rating, description, mailBoxAccess) => {
+export const addNewPrevEvent = (
+  name,
+  rating,
+  description,
+  mailBoxAccess,
+  date
+) => {
   return async (dispatch) => {
     //async code
     const response = await fetch(
@@ -59,6 +65,7 @@ export const addNewPrevEvent = (name, rating, description, mailBoxAccess) => {
           rating,
           description,
           mailBoxAccess,
+          date,
         }),
       }
     );
@@ -72,6 +79,7 @@ export const addNewPrevEvent = (name, rating, description, mailBoxAccess) => {
       newEvent: {
         id: resData.name,
         name: name,
+        date: date,
         rating: rating,
         description: description,
         mailBoxAccess: mailBoxAccess,
