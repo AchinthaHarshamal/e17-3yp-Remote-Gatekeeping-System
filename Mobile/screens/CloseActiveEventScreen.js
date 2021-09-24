@@ -15,6 +15,8 @@ import CustomButton2 from "../components/CustomButton2";
 import { useDispatch, useSelector } from "react-redux";
 import { addNewPrevEvent } from "../store/actions/addPreviousEventAction";
 
+import Event from "../Modal/Event";
+
 const CloseActiveEventScreen = (props) => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -28,16 +30,12 @@ const CloseActiveEventScreen = (props) => {
 
   const addNewEvent = () => {
     dispatch(
-      addNewPrevEvent({
-        name: name,
-        id: Math.random().toString(),
-        date: new Date(2018, 11, 24, 10, 33, 30, 0),
-        rating: rating,
-        description: description,
-        isMailBoxAccessed: mailBoxAccess,
-        voiceMessages: [],
-        imageURL: "../dummy data/dummyImages/e1.jpg",
-      })
+      addNewPrevEvent(
+        name, //name
+        rating, //rating
+        description,
+        mailBoxAccess
+      )
     );
   };
 

@@ -10,8 +10,9 @@ import Navigation from "./navigation/Navigation";
 import { event, set } from "react-native-reanimated";
 import CloseActiveEventScreen from "./screens/CloseActiveEventScreen";
 import WelcomePage from "./screens/WelcomePage";
-import { createStore } from "redux";
+import { createStore, applyMiddleware } from "redux";
 import mainReducer from "./store/reducers/mainReducer";
+import ReduxThunk from "redux-thunk";
 
 const fetchFonts = () => {
   return Font.loadAsync({
@@ -22,7 +23,8 @@ const fetchFonts = () => {
 
 const store = createStore(
   mainReducer,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  applyMiddleware(ReduxThunk)
+  // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 
 export default function App() {

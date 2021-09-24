@@ -7,7 +7,7 @@ import CloseActiveEventScreen from "../screens/CloseActiveEventScreen";
 import PreviousEvents from "../screens/PreviousEvents";
 import PreviousEventDetails from "../screens/PreviousEventDetails";
 
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 
 const Navigation = (props) => {
   const [welcomeScreen, setWelcomeScreen] = useState(false);
@@ -19,14 +19,12 @@ const Navigation = (props) => {
   const [name, setName] = useState("");
   const [eventId, setEventId] = useState(false);
 
-  const authorization = useSelector((state) => state.loginState.authorized);
-  console.log(authorization);
+  // const authorization = useSelector((state) => state.loginState.authorized);
+  // console.log(authorization);
 
   const handleLogIn = (n) => {
     setName(n);
-    if (authorization) {
-      setWelcomeScreen(true);
-    }
+    setWelcomeScreen(true);
   };
   const hangleLogOut = () => {
     setWelcomeScreen(false);

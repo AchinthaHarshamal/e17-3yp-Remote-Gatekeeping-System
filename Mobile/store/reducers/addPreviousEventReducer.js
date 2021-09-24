@@ -1,5 +1,10 @@
 import { PreviousEventsList } from "../../dummy data/DummyData";
-import { CLOSE_PREVIOUS_EVENT } from "../actions/addPreviousEventAction";
+import {
+  CLOSE_PREVIOUS_EVENT,
+  GET_EVENT_DETAILS,
+} from "../actions/addPreviousEventAction";
+
+import Event from "../../Modal/Event";
 
 const initalState = {
   previousEvents: PreviousEventsList,
@@ -7,8 +12,22 @@ const initalState = {
 
 const addPreviousEventReducer = (state = initalState, action) => {
   switch (action.type) {
+    case GET_EVENT_DETAILS:
+      return {
+        previousEvents: action.events,
+      };
     case CLOSE_PREVIOUS_EVENT:
-      return { previousEvents: [action.newEvent, ...state.previousEvents] };
+      const addEvent = new Event(
+        action.newEvent.id,
+        action.newEvent.name,
+        new Date(2018, 11, 24, 10, 33, 30, 0),
+        action.newEvent.rating,
+        action.newEvent.description,
+        action.newEvent.mailBoxAccess,
+        null
+      );
+
+      return { previousEvents: [addEvent, ...state.previousEvents] };
 
     default:
       return state;

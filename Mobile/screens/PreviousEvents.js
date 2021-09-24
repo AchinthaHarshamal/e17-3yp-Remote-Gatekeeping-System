@@ -1,17 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { View, Text, StyleSheet, ScrollView } from "react-native";
 import Colors from "../constants/Colors";
 
 import EventCard from "../components/EventCard";
 import Header from "../components/Header";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 import { FlatList, State } from "react-native-gesture-handler";
+
+import * as EventActions from "../store/actions/addPreviousEventAction";
 
 const PreviousEvents = (props) => {
   const prevEvents = useSelector(
     (state) => state.addPreviousEvent.previousEvents
   );
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(EventActions.fetchEvents());
+  }, [dispatch]);
 
   const renderPreviousEventList = (itemData) => {
     return (
