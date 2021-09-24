@@ -9,7 +9,7 @@ import {
   Alert,
 } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import CustomButton from "../components/CustomButton";
 import Colors from "../constants/Colors";
