@@ -1,15 +1,12 @@
 import { StatusBar } from "expo-status-bar";
 import { enableExpoCliLogging } from "expo/build/logs/Logs";
 import React, { useState, useContext } from "react";
-import { StyleSheet, Text, View, Image, TextInput } from "react-native";
 import * as Font from "expo-font";
 import AppLoading from "expo-app-loading";
 import { Provider } from "react-redux";
 
 import Navigation from "./navigation/Navigation";
-import { event, set } from "react-native-reanimated";
-import CloseActiveEventScreen from "./screens/CloseActiveEventScreen";
-import WelcomePage from "./screens/WelcomePage";
+
 import { createStore, applyMiddleware } from "redux";
 import mainReducer from "./store/reducers/mainReducer";
 import ReduxThunk from "redux-thunk";

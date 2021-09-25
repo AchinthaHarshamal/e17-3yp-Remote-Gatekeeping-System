@@ -2,25 +2,15 @@ import React, { useState } from "react";
 
 import LoginScreen from "../screens/LoginScreen";
 import WelcomePage from "../screens/WelcomePage";
-import ActiveEventScreen from "../screens/ActiveEventScreen";
-import CloseActiveEventScreen from "../screens/CloseActiveEventScreen";
-import PreviousEvents from "../screens/PreviousEvents";
-import PreviousEventDetails from "../screens/PreviousEventDetails";
-
-// import { useSelector } from "react-redux";
+import ActiveEventNavigator from "./ActiveEventStackNavigator/ActiveEventNavigator";
+import PreviousEventStackNavigator from "./PreviousEventStackNavigator/PreviousEventStackNavigator";
 
 const Navigation = (props) => {
   const [welcomeScreen, setWelcomeScreen] = useState(false);
-  const [prevEvents, setPrevEvents] = useState(false);
-  const [preEventDetails, setPrevEventDetails] = useState(false);
-  const [activeEvent, setActiveEvent] = useState(false);
-  const [closeEvent, setCloseEvent] = useState(false);
+  const [ActiveEventNav, setActiveEventNav] = useState(false);
+  const [PreviousEventStackNav, setPreviousEventStackNav] = useState(false);
 
   const [name, setName] = useState("");
-  const [eventId, setEventId] = useState(false);
-
-  // const authorization = useSelector((state) => state.loginState.authorized);
-  // console.log(authorization);
 
   const handleLogIn = (n) => {
     setName(n);
@@ -29,46 +19,24 @@ const Navigation = (props) => {
   const hangleLogOut = () => {
     setWelcomeScreen(false);
   };
-  const handlePreveEvent = () => {
-    setPrevEvents(true);
-    setWelcomeScreen(false);
-  };
-  const handlePreveEventBack = () => {
-    setPrevEvents(false);
-    setWelcomeScreen(true);
-  };
-  const handlePreveEventDetails = (id) => {
-    setEventId(id);
-    setPrevEvents(false);
-    setPrevEventDetails(true);
-  };
-  const handlePreveEventDetailsBack = () => {
-    setPrevEvents(true);
-    setPrevEventDetails(false);
-  };
 
   const handleActiveEvent = () => {
-    setActiveEvent(true);
+    setActiveEventNav(true);
     setWelcomeScreen(false);
   };
 
   const handleActiveEventBack = () => {
-    setActiveEvent(false);
+    setActiveEventNav(false);
     setWelcomeScreen(true);
   };
 
-  const handleCloseEvent = () => {
-    setCloseEvent(true);
-    setActiveEvent(false);
+  const handlePreveEvent = () => {
+    setPreviousEventStackNav(true);
+    setWelcomeScreen(false);
   };
 
-  const handleCloseEventBack = () => {
-    setCloseEvent(false);
-    setActiveEvent(true);
-  };
-
-  const handleClosing = () => {
-    setCloseEvent(false);
+  const handlePreveEventBack = () => {
+    setPreviousEventStackNav(false);
     setWelcomeScreen(true);
   };
 
@@ -83,37 +51,19 @@ const Navigation = (props) => {
     );
   }
 
-  if (prevEvents) {
+  if (ActiveEventNav) {
     return (
-      <PreviousEvents
-        onBack={handlePreveEventBack}
-        onPress={handlePreveEventDetails}
-      ></PreviousEvents>
-    );
-  }
-  if (preEventDetails) {
-    return (
-      <PreviousEventDetails
-        onBack={handlePreveEventDetailsBack}
-        id={eventId}
-      ></PreviousEventDetails>
+      <ActiveEventNavigator
+        onBack={handleActiveEventBack}
+      ></ActiveEventNavigator>
     );
   }
 
-  if (activeEvent) {
+  if (PreviousEventStackNav) {
     return (
-      <ActiveEventScreen
-        onBack={handleActiveEventBack}
-        onPress={handleCloseEvent}
-      ></ActiveEventScreen>
-    );
-  }
-  if (closeEvent) {
-    return (
-      <CloseActiveEventScreen
-        onBack={handleCloseEventBack}
-        onClose={handleClosing}
-      ></CloseActiveEventScreen>
+      <PreviousEventStackNavigator
+        onBack={handlePreveEventBack}
+      ></PreviousEventStackNavigator>
     );
   }
 
