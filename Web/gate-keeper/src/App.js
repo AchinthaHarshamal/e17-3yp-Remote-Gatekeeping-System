@@ -6,8 +6,10 @@ import SignedUp from "./components/auth/SignedUp";
 import SignedIn from "./components/auth/SignedIn";
 import Dashbord  from "./components/dashbord/Dashbord";
 import AuthNode from "./components/auth/AuthNode";
-import Insert from "./components/dashbord/Insert";
 import HomePage from "./components/home/HomePage";
+
+import Insert from "./components/dashbord/Insert";
+import UploadImg from "./components/dashbord/UploadImg";
 
 import AuthContextProvider from "./contexts/AuthContext";
 import DataContextProvider from "./contexts/DataContext";
@@ -29,7 +31,8 @@ function App() {
             <Route path='/authnode' component={AuthNode}></Route>
             <Route path='/dashboard' component={Dashbord}></Route>
             <Route path='/insert' component={Insert}></Route>
-            {/* <Home /> */}
+            <Route path='/upload' component={UploadImg}></Route>
+            
         </Switch>
         </InitContextProvider>
       </DataContextProvider>
