@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -22,6 +22,7 @@ const LoginScreen = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState();
 
   const dispatch = useDispatch();
 
@@ -82,21 +83,14 @@ const LoginScreen = (props) => {
       return;
     }
     setIsLoading(true);
-    await dispatch(authActions.signup(email, password));
-    setIsLoading(false);
-    props.onPress(name);
-  };
-
-  const handleNameOnChanage = (input) => {
-    setName(input);
-  };
-
-  const handleEmailOnChange = (input) => {
-    setEmail(input);
-  };
-
-  const handlePasswordOnChange = (input) => {
-    setPassword(input);
+    setError(null);
+    try {
+      await dispatch(authActions.signup(email, password));
+      props.onPress(name);
+    } catch (err) {
+      setError(err.message);
+      setIsLoading(false);
+    }
   };
 
   const handleLogIn = async () => {
@@ -155,10 +149,34 @@ const LoginScreen = (props) => {
       );
       return;
     }
+
     setIsLoading(true);
-    await dispatch(authActions.login(email, password));
-    setIsLoading(false);
-    props.onPress(name);
+    setError(null);
+    try {
+      await dispatch(authActions.login(email, password));
+      props.onPress(name);
+    } catch (err) {
+      setError(err.message);
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (error) {
+      Alert.alert("An Error Occurred!", error, [{ text: "Okay" }]);
+    }
+  }, [error]);
+
+  const handleNameOnChanage = (input) => {
+    setName(input);
+  };
+
+  const handleEmailOnChange = (input) => {
+    setEmail(input);
+  };
+
+  const handlePasswordOnChange = (input) => {
+    setPassword(input);
   };
 
   return (
