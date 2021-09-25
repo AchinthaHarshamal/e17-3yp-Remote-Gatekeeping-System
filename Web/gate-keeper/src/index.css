@@ -41,9 +41,6 @@ form button {
 }
 
 
-.sidenav   li > a{
-    color: rgb(241, 241, 241) ;
-}
 
 
 
@@ -70,11 +67,23 @@ form button {
 /* Mainboard */
 
 .mainCard {
-    height:  150%;
-    background-color: blueviolet;
+    padding: 2rem;
+    margin-top: 3rem;
+    font-size:  1.2rem;
+    text-align:  center;
+}
+.mainCard i {
+    vertical-align: text-bottom;
+}
+.mainCard span {
+    margin: 0 5%;
+    
 }
 
 .mainTable {
     padding-top: 5%  ;
    
+}
+.mainTable h5 {
+    padding: 1rem;
 }

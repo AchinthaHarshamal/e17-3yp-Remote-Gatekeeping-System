@@ -1,4 +1,4 @@
-import React , {useEffect , useContext} from 'react'
+import React , {  useEffect , useContext} from 'react'
 import { AuthContext } from '../../contexts/AuthContext';
 import { DataContext } from '../../contexts/DataContext';
 import M from 'materialize-css'
@@ -10,11 +10,12 @@ import { Link } from 'react-router-dom';
 const  SideNavDashboard = () => {
     
     const {signout} = useContext(AuthContext)
-    //const {userInfo} = useContext(DataContext)
-
+    const {userInfo} = useContext(DataContext)
+    
     useEffect(() => {
         const elems = document.querySelectorAll('.sidenav');
         M.Sidenav.init(elems,{});
+        console.log("Userinfo : " ,userInfo)
     })
 
     return (
@@ -25,10 +26,10 @@ const  SideNavDashboard = () => {
                         <div className="background ">
                         </div>
                             <a href="#user">
-                                <img className="circle" src="https://ichef.bbci.co.uk/news/976/cpsprodpb/6D6A/production/_116101082_cruise_reuters.jpg" />
+                                <img className="circle" src={userInfo.imgUrl} />
                             </a>
-                            <a href="#name"><span className="white-text name">John Doe</span></a>
-                            <a href="#email"><span className="white-text email">jdandturk@gmail.com</span></a>
+                            <a href="#name"><span className="white-text name">{userInfo.fName + " " +  userInfo.lName}</span></a>
+                            <a href="#email"><span className="white-text email">{userInfo.email}</span></a>
                         
                     </div>
                 </li>

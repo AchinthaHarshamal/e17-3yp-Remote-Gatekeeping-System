@@ -1,5 +1,9 @@
 import React , {useState , useEffect, useContext} from "react"
 import { DataContext } from "../../../contexts/DataContext"
+
+import NodeStatus from "./NodeStatus"
+import Users from "./Users"
+import MailBoxStatus from "./MailBoxStatus"
 import MsgTable from "./MsgTable"
 
 
@@ -17,18 +21,18 @@ const MainBoard = () => {
     })
     const {getMessages,getUserInfo } = useContext(DataContext)
     
+    //offset-m4
     return (
         <div className="container">
             <div class="row">
-                <div class="col s12 l4">
-                    <div className='mainCard'>
-                        Hello
-                    </div>
+                <div class="col s12 m4">
+                    <NodeStatus />
                 </div>
-                <div class="col s12 l4 offset-l4">
-                    <div className='mainCard'>
-                        Hello
-                    </div>
+                <div class="col s12 m4 ">
+                    <Users />
+                </div>
+                <div class="col s12 m4 ">
+                    <MailBoxStatus />
                 </div>
                 <div class="col s12">
                     
