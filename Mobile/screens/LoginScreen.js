@@ -7,23 +7,84 @@ import {
   Image,
   KeyboardAvoidingView,
   Alert,
+  ActivityIndicator,
 } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import CustomButton from "../components/CustomButton";
 import Colors from "../constants/Colors";
 import { loginStateAction } from "../store/actions/loginStateAction";
+import * as authActions from "../store/actions/authAction";
 
 const LoginScreen = (props) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const dispatch = useDispatch();
 
-  const handleAuthorization = () => {
-    dispatch(loginStateAction(true));
+  const signupHandler = async () => {
+    if (name.length == 0 || email.length == 0 || password.length == 0) {
+      Alert.alert(
+        "Incorrect Details!",
+        "Please fill all the fields",
+        [
+          {
+            text: "OK",
+          },
+        ],
+        { cancelable: true }
+      );
+      return;
+    }
+
+    if (!email.includes("@")) {
+      Alert.alert(
+        "Incorrect Details!",
+        "Please enter a valid Email",
+        [
+          {
+            text: "OK",
+          },
+        ],
+        { cancelable: true }
+      );
+      return;
+    }
+
+    if (password.length < 8) {
+      Alert.alert(
+        "Incorrect Details!",
+        "Password should be at least 8 characters!",
+        [
+          {
+            text: "OK",
+          },
+        ],
+        { cancelable: true }
+      );
+      return;
+    }
+
+    if (name.length > 8) {
+      Alert.alert(
+        "Incorrect Details!",
+        "Please Enter Your Nickname!\n(Less than 10 characters)",
+        [
+          {
+            text: "OK",
+          },
+        ],
+        { cancelable: true }
+      );
+      return;
+    }
+    setIsLoading(true);
+    await dispatch(authActions.signup(email, password));
+    setIsLoading(false);
+    props.onPress(name);
   };
 
   const handleNameOnChanage = (input) => {
@@ -38,63 +99,65 @@ const LoginScreen = (props) => {
     setPassword(input);
   };
 
-  const handleLogIn = () => {
-    // if (name.length == 0 || email.length == 0 || password.length == 0) {
-    //   Alert.alert(
-    //     "Incorrect Details!",
-    //     "Please fill all the fields",
-    //     [
-    //       {
-    //         text: "OK",
-    //       },
-    //     ],
-    //     { cancelable: true }
-    //   );
-    //   return;
-    // }
+  const handleLogIn = async () => {
+    if (name.length == 0 || email.length == 0 || password.length == 0) {
+      Alert.alert(
+        "Incorrect Details!",
+        "Please fill all the fields",
+        [
+          {
+            text: "OK",
+          },
+        ],
+        { cancelable: true }
+      );
+      return;
+    }
 
-    // if (!email.includes("@")) {
-    //   Alert.alert(
-    //     "Incorrect Details!",
-    //     "Please enter a valid Email",
-    //     [
-    //       {
-    //         text: "OK",
-    //       },
-    //     ],
-    //     { cancelable: true }
-    //   );
-    //   return;
-    // }
+    if (!email.includes("@")) {
+      Alert.alert(
+        "Incorrect Details!",
+        "Please enter a valid Email",
+        [
+          {
+            text: "OK",
+          },
+        ],
+        { cancelable: true }
+      );
+      return;
+    }
 
-    // if (password.length < 8) {
-    //   Alert.alert(
-    //     "Incorrect Details!",
-    //     "Password should be at least 8 characters!",
-    //     [
-    //       {
-    //         text: "OK",
-    //       },
-    //     ],
-    //     { cancelable: true }
-    //   );
-    //   return;
-    // }
+    if (password.length < 8) {
+      Alert.alert(
+        "Incorrect Details!",
+        "Password should be at least 8 characters!",
+        [
+          {
+            text: "OK",
+          },
+        ],
+        { cancelable: true }
+      );
+      return;
+    }
 
-    // if (name.length > 8) {
-    //   Alert.alert(
-    //     "Incorrect Details!",
-    //     "Please Enter Your Nickname!\n(Less than 10 characters)",
-    //     [
-    //       {
-    //         text: "OK",
-    //       },
-    //     ],
-    //     { cancelable: true }
-    //   );
-    //   return;
-    // }
-    handleAuthorization();
+    if (name.length > 8) {
+      Alert.alert(
+        "Incorrect Details!",
+        "Please Enter Your Nickname!\n(Less than 10 characters)",
+        [
+          {
+            text: "OK",
+          },
+        ],
+        { cancelable: true }
+      );
+      return;
+    }
+    setIsLoading(true);
+    await dispatch(authActions.login(email, password));
+    setIsLoading(false);
     props.onPress(name);
   };
 
@@ -129,6 +192,8 @@ const LoginScreen = (props) => {
               placeholder="Enter your email"
               placeholderTextColor="rgba(255, 255, 255, 0.5)"
               autoCompleteType={"email"}
+              keyboardType="email-address"
+              autoCapitalize="none"
             ></TextInput>
           </View>
           <View style={styles.oneField}>
@@ -143,7 +208,16 @@ const LoginScreen = (props) => {
             ></TextInput>
           </View>
           <View style={styles.logInButton}>
-            <CustomButton onPress={handleLogIn}>Log In</CustomButton>
+            {isLoading ? (
+              <ActivityIndicator size="small" color="white"></ActivityIndicator>
+            ) : (
+              <CustomButton onPress={handleLogIn}>Log In</CustomButton>
+            )}
+            {isLoading ? (
+              <ActivityIndicator size="small" color="white"></ActivityIndicator>
+            ) : (
+              <CustomButton onPress={signupHandler}>Sign In</CustomButton>
+            )}
           </View>
         </View>
       </ScrollView>
@@ -167,7 +241,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   titleContainer: {
-    paddingVertical: 30,
+    paddingVertical: 20,
     marginTop: "40%",
     alignItems: "center",
   },
@@ -211,7 +285,10 @@ const styles = StyleSheet.create({
     marginLeft: 24,
   },
   logInButton: {
+    flexDirection: "row",
     alignItems: "center",
+    paddingHorizontal: 20,
+    justifyContent: "space-around",
     marginTop: 30,
   },
 });

@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import {
   View,
   Text,
   StyleSheet,
-  ScrollView,
+  FlatList,
   ActivityIndicator,
 } from "react-native";
 import Colors from "../constants/Colors";
@@ -12,12 +12,11 @@ import EventCard from "../components/EventCard";
 import Header from "../components/Header";
 import { useSelector, useDispatch } from "react-redux";
 
-import { FlatList, State } from "react-native-gesture-handler";
-
 import * as EventActions from "../store/actions/addPreviousEventAction";
 
 const PreviousEvents = (props) => {
   const [isLoading, setIsLoading] = useState(false);
+  const [isRefreshing, setIsRefreshing] = useState(false);
   const [error, setError] = useState();
   const prevEvents = useSelector(
     (state) => state.addPreviousEvent.previousEvents
@@ -25,18 +24,23 @@ const PreviousEvents = (props) => {
 
   const dispatch = useDispatch();
 
+  const loadedEvents = useCallback(async () => {
+    setError(null);
+    setIsRefreshing(true);
+    try {
+      await dispatch(EventActions.fetchEvents());
+    } catch (error) {
+      setError(error.message);
+    }
+    setIsRefreshing(false);
+  }, [dispatch, setIsRefreshing, setError]);
+
   useEffect(() => {
-    const loadedEvents = async () => {
-      setIsLoading(true);
-      try {
-        await dispatch(EventActions.fetchEvents());
-      } catch (error) {
-        setError(error.message);
-      }
+    setIsLoading(true);
+    loadedEvents().then(() => {
       setIsLoading(false);
-    };
-    loadedEvents();
-  }, [dispatch]);
+    });
+  }, [setIsLoading, loadedEvents]);
 
   if (error) {
     return (
@@ -89,6 +93,8 @@ const PreviousEvents = (props) => {
       <Header title="Previous Events" onBack={props.onBack}></Header>
       <View style={styles.listContainer}>
         <FlatList
+          onRefresh={loadedEvents}
+          refreshing={isRefreshing}
           data={prevEvents}
           renderItem={renderPreviousEventList}
           contentContainerStyle={styles.list}
