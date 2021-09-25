@@ -4,19 +4,27 @@ import LoginScreen from "../screens/LoginScreen";
 import WelcomePage from "../screens/WelcomePage";
 import ActiveEventNavigator from "./ActiveEventStackNavigator/ActiveEventNavigator";
 import PreviousEventStackNavigator from "./PreviousEventStackNavigator/PreviousEventStackNavigator";
+import StartUpScreen from "../screens/StartUpScreen";
 
 const Navigation = (props) => {
+  const [loginScreen, setLoginScreen] = useState(false);
   const [welcomeScreen, setWelcomeScreen] = useState(false);
   const [ActiveEventNav, setActiveEventNav] = useState(false);
   const [PreviousEventStackNav, setPreviousEventStackNav] = useState(false);
 
   const [name, setName] = useState("");
 
+  const handleStartUp = () => {
+    setLoginScreen(true);
+  };
+
   const handleLogIn = (n) => {
     setName(n);
+    setLoginScreen(false);
     setWelcomeScreen(true);
   };
   const hangleLogOut = () => {
+    setLoginScreen(true);
     setWelcomeScreen(false);
   };
 
@@ -67,7 +75,16 @@ const Navigation = (props) => {
     );
   }
 
-  return <LoginScreen onPress={handleLogIn}></LoginScreen>;
+  if (loginScreen) {
+    return <LoginScreen onPress={handleLogIn}></LoginScreen>;
+  }
+
+  return (
+    <StartUpScreen
+      notAuthenticated={handleStartUp}
+      authenticated={handleLogIn}
+    ></StartUpScreen>
+  );
 };
 
 export default Navigation;
