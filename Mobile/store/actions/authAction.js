@@ -13,7 +13,7 @@ export const authenticate = (userId, token) => {
 export const signup = (email, password) => {
   return async (dispatch) => {
     const response = await fetch(
-      "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCidogH5Ccli8MAZ00zJ33cqf7FpzZnWRw",
+      "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyB42TO1oKD-56k0IgYY08nAkVY5xhZaL1g",
       {
         method: "POST",
         headers: {
@@ -53,7 +53,7 @@ export const signup = (email, password) => {
 export const login = (email, password) => {
   return async (dispatch) => {
     const response = await fetch(
-      "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCidogH5Ccli8MAZ00zJ33cqf7FpzZnWRw",
+      "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyB42TO1oKD-56k0IgYY08nAkVY5xhZaL1g",
       {
         method: "POST",
         headers: {

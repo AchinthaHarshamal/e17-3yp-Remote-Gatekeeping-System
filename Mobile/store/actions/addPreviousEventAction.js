@@ -9,7 +9,7 @@ export const fetchEvents = () => {
 
     try {
       const response = await fetch(
-        "https://remote-getekeeping-device-default-rtdb.firebaseio.com/events.json"
+        "https://hardware-node-test-default-rtdb.asia-southeast1.firebasedatabase.app/events/node1.json"
       );
 
       if (!response.ok) {
@@ -53,7 +53,8 @@ export const addNewPrevEvent = (
   return async (dispatch) => {
     //async code
     const response = await fetch(
-      "https://remote-getekeeping-device-default-rtdb.firebaseio.com/events.json",
+      "https://hardware-node-test-default-rtdb.asia-southeast1.firebasedatabase.app/events/node1.json",
+
       {
         method: "POST",
         headers: {
