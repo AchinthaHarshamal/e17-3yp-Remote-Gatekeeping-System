@@ -6,7 +6,8 @@ class Event {
     rating,
     description,
     isMailBoxAccessed,
-    imageURL
+    imageURL,
+    userType
   ) {
     this.id = id;
     this.name = name;
@@ -16,6 +17,7 @@ class Event {
     this.isMailBoxAccessed = isMailBoxAccessed;
     this.voiceMessages = [];
     this.imageURL = imageURL;
+    this.userType = userType;
   }
 }
 

@@ -19,31 +19,18 @@ const PreviousEventDetails = (props) => {
     }
   }
 
-  const imageSources = [
-    require("../assets/images/dummy/e1.jpg"),
-    require("../assets/images/dummy/e2.jpg"),
-    require("../assets/images/dummy/e3.jpg"),
-    require("../assets/images/dummy/e4.jpg"),
-  ];
-
-  let index;
-
-  for (let i = 0; i < prevEvents.length; i++) {
-    if (prevEvents[i].id == props.id) {
-      index = i;
-      break;
-    }
-  }
-
-  if (index == prevEvents.length) index = 0;
-
   return (
     <View style={style.screen}>
       <ScrollView>
-        <Header title={event.name} onBack={props.onBack}></Header>
+        <Header title={event.name.toUpperCase()} onBack={props.onBack}></Header>
         <View style={style.imageConatiner}>
           <View style={style.imageConatiner}>
-            <Image source={imageSources[index]} style={style.image} />
+            <Image
+              source={{
+                uri: event.imageURL,
+              }}
+              style={style.image}
+            />
           </View>
         </View>
 
@@ -52,6 +39,7 @@ const PreviousEventDetails = (props) => {
           description={event.description}
           isMailBoxAccessed={event.isMailBoxAccessed ? "Yes" : "No"}
           rating={event.rating}
+          userType={event.userType}
         ></EventDetailsCard>
       </ScrollView>
     </View>
