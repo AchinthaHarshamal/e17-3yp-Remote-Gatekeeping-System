@@ -24,11 +24,21 @@ const CloseActiveEventScreen = (props) => {
     (state) => state.mailBoxAcess.mailBoxAccess
   );
 
+  const details = useSelector((state) => state.activeEvent.activeEventDetails);
+
   const dispatch = useDispatch();
 
   const addNewEvent = () => {
     dispatch(
-      addNewPrevEvent(name, rating, description, mailBoxAccess, new Date())
+      addNewPrevEvent(
+        name,
+        rating,
+        description,
+        mailBoxAccess,
+        new Date(),
+        details.msgURL,
+        details.userType
+      )
     );
   };
 

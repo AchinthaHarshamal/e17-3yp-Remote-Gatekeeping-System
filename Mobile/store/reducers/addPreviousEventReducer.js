@@ -24,7 +24,8 @@ const addPreviousEventReducer = (state = initalState, action) => {
         action.newEvent.rating,
         action.newEvent.description,
         action.newEvent.mailBoxAccess,
-        null
+        action.newEvent.imageURL,
+        action.newEvent.userType
       );
 
       return { previousEvents: [addEvent, ...state.previousEvents] };

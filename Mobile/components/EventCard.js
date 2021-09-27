@@ -6,27 +6,6 @@ import { useSelector } from "react-redux";
 import RatingStars from "./RatingStars";
 
 const EventCard = (props) => {
-  const prevEvents = useSelector(
-    (state) => state.addPreviousEvent.previousEvents
-  );
-
-  // below to be commented when fetching the image from the source
-  const imageSources = [
-    require("../assets/images/dummy/e1.jpg"),
-    require("../assets/images/dummy/e2.jpg"),
-    require("../assets/images/dummy/e3.jpg"),
-    require("../assets/images/dummy/e4.jpg"),
-  ];
-
-  let index;
-
-  for (let i = 0; i < prevEvents.length; i++) {
-    if (prevEvents[i].id == props.id) {
-      index = i;
-      break;
-    }
-  }
-
   // above to be commented when fetching the image from the source
 
   const handleOnPress = () => {
@@ -37,7 +16,12 @@ const EventCard = (props) => {
     <TouchableOpacity onPress={handleOnPress}>
       <View style={style.cardContainer}>
         <View style={style.imageConatiner}>
-          <Image source={imageSources[index]} style={style.image} />
+          <Image
+            source={{
+              uri: props.image,
+            }}
+            style={style.image}
+          />
         </View>
         <View style={style.detailsContainer}>
           <View style={style.nameContainer}>

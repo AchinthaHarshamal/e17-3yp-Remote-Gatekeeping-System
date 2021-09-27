@@ -31,7 +31,8 @@ export const fetchEvents = () => {
             resData[key].rating,
             resData[key].description,
             resData[key].mailBoxAccess,
-            null
+            resData[key].imageURL,
+            resData[key].userType
           )
         );
       }
@@ -48,7 +49,9 @@ export const addNewPrevEvent = (
   rating,
   description,
   mailBoxAccess,
-  date
+  date,
+  imageURL,
+  userType
 ) => {
   return async (dispatch) => {
     //async code
@@ -67,6 +70,8 @@ export const addNewPrevEvent = (
           description,
           mailBoxAccess,
           date,
+          imageURL,
+          userType,
         }),
       }
     );
@@ -84,6 +89,8 @@ export const addNewPrevEvent = (
         rating: rating,
         description: description,
         mailBoxAccess: mailBoxAccess,
+        imageURL: imageURL,
+        userType: userType,
       },
     });
   };

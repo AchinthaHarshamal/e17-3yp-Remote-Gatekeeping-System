@@ -26,6 +26,13 @@ const EventDetailsCard = (props) => {
         </View>
       </View>
 
+      <View style={style.fieldContainer}>
+        <Text style={style.label}>USER TYPE :</Text>
+        <View style={style.value}>
+          <Text style={style.label}>{props.userType.toUpperCase()}</Text>
+        </View>
+      </View>
+
       <View style={style.ratingsContainer}>
         <Text style={style.label}>RATING :</Text>
         <RatingStars rating={props.rating}></RatingStars>

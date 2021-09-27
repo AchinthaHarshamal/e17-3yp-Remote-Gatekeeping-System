@@ -84,6 +84,7 @@ const PreviousEvents = (props) => {
         id={itemData.item.id}
         rating={itemData.item.rating}
         onPress={props.onPress}
+        // imageURL={itemData.item.imageURL}
       ></EventCard>
     );
   };
