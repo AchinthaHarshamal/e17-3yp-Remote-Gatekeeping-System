@@ -4,7 +4,7 @@
 //   GET_EVENT_DETAILS,
 // } from "../actions/addPreviousEventAction";
 
-import { CHECK_ACTIVE_EVENT } from "../actions/activeEventAction";
+import { CHECK_ACTIVE_EVENT } from "../../screens/ActiveEventScreen";
 
 // import Event from "../../Modal/Event";
 

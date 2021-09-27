@@ -9,9 +9,13 @@ const Header = (props) => {
     <View>
       <View style={styles.headerContainer}>
         <Text style={styles.header}>{props.title}</Text>
-        <View style={styles.backButtonContainer}>
-          <BackButton onPress={props.onBack}>&#8592;</BackButton>
-        </View>
+        {props.noBack == "Yes" ? (
+          <View></View>
+        ) : (
+          <View style={styles.backButtonContainer}>
+            <BackButton onPress={props.onBack}>&#8592;</BackButton>
+          </View>
+        )}
       </View>
     </View>
   );
