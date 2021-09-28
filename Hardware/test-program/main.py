@@ -1,6 +1,5 @@
 from datetime import datetime
 from time import sleep, time
-from pyasn1.type.tag import initTagSet
 import pyrebase
 #  third-party helper library for interacting with the REST API
 
@@ -16,8 +15,8 @@ def getFilename():
 
 def captureImage():
     print("<capturing_the_picture...>", end=' ')
-    filename = getFilename()+'.png'
-    # open('img/'+filename, 'w')
+    filename = getFilename()+'.jpg'
+    open('img/'+filename, 'w')
     print("<done>")
     return filename
 
@@ -59,16 +58,63 @@ def createData(msgType, url):
 
 NODEID = "-MjhnXW1CcA_sTXEssD1"
 PATH = "messages/"+NODEID+"/"
+DELAY = 500
+
+
+def timeout(init_time):
+    return True if time() - init_time < DELAY else False
+
+
+def handleAck(message):
+    global not_updated
+    try:
+        # if message["data"].get("ack") == "true":
+        if message["data"] == "true":
+            not_updated = False
+    except:
+        pass
+
+
+def stream_handler(message):
+    global update, not_updated
+    try:
+        if "msgURL" in message["data"]:
+            update = message["data"].get("msgURL")
+            not_updated = False
+    except:
+        pass
+
+
+def initStream(streamHandler):
+    global init_time, not_updated, my_stream1
+    init_time = time()
+    not_updated = True
+    my_stream1 = db.child(PATH).stream(streamHandler)
+
+
+def waitForResponse():
+    global not_updated, my_stream1
+    waiting = True
+    while not_updated and waiting:
+        print("<waiting_for_response...>")
+        sleep(1)
+        waiting = timeout(init_time)
+    my_stream1.close()
+    not_updated = True
+    print("<responded>")
+    return waiting
 
 
 def sendUserData():
     print("<sending_user_information...>", end=' ')
     storage.child(PATH+image).put("img/"+image)
     url = storage.child(PATH+image).get_url(None)
+
     data = createData("image", url)
     data["ack"] = ""
     data["userType"] = "delivery" if isDelivery else "visitor"
-    # initStream()
+
+    initStream(handleAck)
     db.child("messages").child(NODEID).push(data)
     print("<done>")
 
@@ -86,75 +132,19 @@ def recordVoice():
     return filename
 
 
-def stream_handler1(message):
-    global count1, not_updated
-    if count1 == 1:
-        # if message["data"].get("ack") == "true":
-        if message["data"] == "true":
-            print("acked")
-            not_updated = False
-    count1 += 1
-
-
-def initStream():
-    global not_updated, count1, my_stream1
-    not_updated = True
-    count1 = 0
-    my_stream1 = db.child(PATH).stream(stream_handler1)
-
-
-def waitForAck():
-    global not_updated, count1, my_stream1
-    not_updated = True
-    count1 = 0
-    my_stream1 = db.child(PATH).stream(stream_handler1)
-    while not_updated:
-        print("<waiting_for_ack...>")
-        sleep(1)
-    my_stream1.close()
-    print("<acked>")
-
-
 def sendVoice():
     print("<sending_voice...>", end=' ')
     storage.child(PATH+audio).put("aud/"+audio)
     data = createData("audio", PATH+audio)
-    waitForAck()
+    data["status"] = ""
+    isAcked = waitForResponse()
     db.child("messages").child(NODEID).push(data)
-    print("<done>")
-
-
-def stream_handler(message):
-    # print(message["event"]) -> put
-    # print(message["path"]) -> /-K7yGTTEp7O549EzTYtI
-    global count, update, not_recieved
-    if count == 1:  # first iteration is neglected
-        not_recieved = False
-        update = message["data"].get("msgURL")
-    count += 1
-
-
-DELAY = 500
-
-
-def timeout(init_time):
-    return True if time() - init_time < DELAY else False
+    print("<sent>")
 
 
 def receivedVoice():
-    global not_recieved, count
-    not_recieved = True
-    count = 0
-    init_time = time()
-    my_stream = db.child(PATH).stream(stream_handler)
-    waiting = True
-    while not_recieved and waiting:
-        print("<waiting_for_audio...>")
-        sleep(1)  # to reduce computation
-        waiting = timeout(init_time)
-    my_stream.close()
-    print("<done>")
-    return waiting  # true if received
+    initStream(stream_handler)
+    return waitForResponse()
 
 
 def getVoice(path):
@@ -183,15 +173,14 @@ if __name__ == "__main__":
     """ TODO
     1. <done>
     2. auth
-    3. waitForAck() time
-    4. initAck()
-    5. .png -> .jpg
-    6. generalize stream_handler()
+    3. stream handlers
+    4. sendVoice() -> isAcked
+    5. getVoice() path: img -> aud
 
     ->  noReplyResponse(), openMailbox(), closeMailbox(), 
         openGate(), closeGate(), updateMailboxState()
     """
-    eventNo = 3
+    eventNo = 13
 
     startEvent()
     image = captureImage()
@@ -200,7 +189,7 @@ if __name__ == "__main__":
     sendUserData()
 
     convCount = 0
-    update = 0
+    update = ""
     while conversation():
         audio = recordVoice()
         convCount += 2
