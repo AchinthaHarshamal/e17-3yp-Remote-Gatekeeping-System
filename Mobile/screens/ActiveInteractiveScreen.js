@@ -18,37 +18,41 @@ const ActiveInteractiveScreen = (props) => {
   const [listneningStatus, setListeningStatus] = useState(false);
   const [recordingStatus, setRecordingStatus] = useState(false);
   const [sendingStatus, setSendingStatus] = useState(false);
+  const [mailBoxAccessRequest, setMailBoxAccessRequest] = useState(false);
+  const [mailBoxAccessResponse, setMailBoxAccessResponse] = useState();
+
+  const ref = firebase.database().ref("messages/-MjhnXW1CcA_sTXEssD1/");
 
   const messageListener = async () => {
-    const ref = firebase.database().ref("messages/-MjhnXW1CcA_sTXEssD1/");
     await ref.on("value", (snapshot) => {
       const messages = snapshot.val();
       key = Object.keys(messages).pop();
       const lastMsg = messages[key];
-      // console.log(lastKey);
-      if (lastMsg.msgType == "audio") {
-        // console.log("audio identified");
-        if (lastMsg.status == "none") {
+      if (lastMsg.msgType == "AUDIO") {
+        if (lastMsg.status == "NONE") {
           setNoneStatus(true);
           setListeningStatus(false);
           setRecordingStatus(false);
           setSendingStatus(false);
-        } else if (lastMsg.status == "listening") {
+        } else if (lastMsg.status == "LISTENING") {
           setNoneStatus(false);
           setListeningStatus(true);
           setRecordingStatus(false);
           setSendingStatus(false);
-        } else if (lastMsg.status == "recording") {
+        } else if (lastMsg.status == "RECORDING") {
           setNoneStatus(false);
           setListeningStatus(false);
           setRecordingStatus(true);
           setSendingStatus(false);
-        } else if (lastMsg.status == "sending") {
+        } else if (lastMsg.status == "SENDING") {
           setNoneStatus(false);
           setListeningStatus(false);
           setRecordingStatus(false);
           setSendingStatus(true);
         }
+      }
+      if (lastMsg.msgType == "MAIL_BOX_ACCESS") {
+        setMailBoxAccessRequest(true);
       }
     });
   };
@@ -70,24 +74,36 @@ const ActiveInteractiveScreen = (props) => {
   const listeningHandler = () => {
     if (!noneStatus) return;
     console.log("Listening to the voice");
-    updateStatus("listening");
+    updateStatus("LISTENING");
   };
 
   const recordingHandeler = () => {
     if (!listneningStatus) return;
     console.log("Recording your voice");
-    updateStatus("recording");
+    updateStatus("RECORDING");
   };
 
   const sendingHandler = () => {
     if (!recordingStatus) return;
     console.log("Sending your voice");
-    updateStatus("sending");
+    updateStatus("SENDING");
     updateMsgURL("/dummy/testing");
   };
 
+  const mailBoxAccessHandler = () => {
+    if (!mailBoxAccessRequest) return;
+    console.log("Mail box is opened");
+    updateStatus("ACCESS_GIVEN");
+    setMailBoxAccessResponse(true);
+  };
+
+  const turnOffActiveListener = () => {
+    ref.off("value", messageListener);
+  };
+
   const handleOnClose = () => {
-    props.onPress();
+    props.onPress(mailBoxAccessResponse);
+    turnOffActiveListener();
   };
 
   return (
@@ -153,8 +169,30 @@ const ActiveInteractiveScreen = (props) => {
 
           <View style={styles.fieldContainer}>
             <Text style={styles.label}>Mail Box Access</Text>
+            {mailBoxAccessRequest && !mailBoxAccessResponse ? (
+              <Text style={styles.voiceReceived}>
+                Mail Box Access Requested!
+              </Text>
+            ) : (
+              <View></View>
+            )}
+            {mailBoxAccessRequest && mailBoxAccessResponse ? (
+              <Text style={styles.voiceReceived}>Mail Box Access Given!</Text>
+            ) : (
+              <View></View>
+            )}
             <View style={styles.buttonContainer}>
-              <CustomButton3 onPress={() => {}}>Open</CustomButton3>
+              <CustomButton3
+                activeOpacity={recordingStatus ? 0.5 : 1}
+                onPress={mailBoxAccessHandler}
+                styles={
+                  mailBoxAccessRequest && !mailBoxAccessResponse
+                    ? styles.sendButton
+                    : styles.disable
+                }
+              >
+                Open
+              </CustomButton3>
             </View>
           </View>
 

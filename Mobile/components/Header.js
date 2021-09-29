@@ -13,7 +13,7 @@ const Header = (props) => {
           <View></View>
         ) : (
           <View style={styles.backButtonContainer}>
-            <BackButton onPress={props.onBack}>&#8592;</BackButton>
+            <BackButton onPress={props.onBack}></BackButton>
           </View>
         )}
       </View>
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   backButtonContainer: {
-    marginTop: 40,
+    marginTop: 35,
     marginLeft: 10,
     alignSelf: "flex-start",
   },

@@ -78,8 +78,6 @@ const getMzgDetails = () => {
 };
 
 const ActiveEventScreen = (props) => {
-  // console.log("done");
-
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState();
 
@@ -177,28 +175,6 @@ const ActiveEventScreen = (props) => {
               </CustomButton3>
             </View>
           </View>
-
-          {/* <View style={styles.fieldContainer}>
-            <Text style={styles.label}>Intercom Comminunication</Text>
-            <View style={styles.buttonContainer}>
-              <CustomButton3>Record Voice</CustomButton3>
-              <CustomButton3>Play Voice</CustomButton3>
-            </View>
-          </View>
-
-          <View style={styles.fieldContainer}>
-            <Text style={styles.label}>Mail Box Access</Text>
-            <View style={styles.buttonContainer}>
-              <CustomButton3 onPress={() => {}}>Open</CustomButton3>
-            </View>
-          </View>
-
-          <View style={styles.fieldContainer}>
-            <Text style={styles.label}>Close Event</Text>
-            <View style={styles.buttonContainer}>
-              <CustomButton3 onPress={props.onPress}>Close</CustomButton3>
-            </View>
-          </View> */}
         </View>
       </ScrollView>
     </View>
