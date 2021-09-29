@@ -7,14 +7,16 @@ import CloseActiveEventScreen from "../../screens/CloseActiveEventScreen";
 const ActiveEventNavigator = (props) => {
   const [activeInteractive, setActiveInteractive] = useState(false);
   const [closeEvent, setCloseEvent] = useState(false);
+  const [mailBoxAccess, setMailBoxAccess] = useState(false);
 
   const handleInteractive = () => {
     setActiveInteractive(true);
   };
 
-  const handleCloseEvent = () => {
+  const handleCloseEvent = (mailBoxAccess) => {
     setActiveInteractive(false);
     setCloseEvent(true);
+    setMailBoxAccess(mailBoxAccess);
   };
 
   const handleCloseEventBack = () => {
@@ -35,6 +37,7 @@ const ActiveEventNavigator = (props) => {
       <CloseActiveEventScreen
         onBack={handleCloseEventBack}
         onClose={props.onBack}
+        mailBoxAccess={mailBoxAccess}
       ></CloseActiveEventScreen>
     );
   }

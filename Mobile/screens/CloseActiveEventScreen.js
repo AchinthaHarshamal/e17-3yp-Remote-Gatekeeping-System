@@ -20,10 +20,6 @@ const CloseActiveEventScreen = (props) => {
   const [description, setDescription] = useState("");
   const [rating, setRating] = useState(0);
 
-  const mailBoxAccess = useSelector(
-    (state) => state.mailBoxAcess.mailBoxAccess
-  );
-
   const details = useSelector((state) => state.activeEvent.activeEventDetails);
 
   const dispatch = useDispatch();
@@ -34,7 +30,7 @@ const CloseActiveEventScreen = (props) => {
         name,
         rating,
         description,
-        mailBoxAccess,
+        props.mailBoxAccess,
         new Date(),
         details.msgURL,
         details.userType
