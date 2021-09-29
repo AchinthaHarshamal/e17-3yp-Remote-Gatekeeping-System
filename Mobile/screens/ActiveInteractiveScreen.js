@@ -21,8 +21,9 @@ const ActiveInteractiveScreen = (props) => {
   const [mailBoxAccessRequest, setMailBoxAccessRequest] = useState(false);
   const [mailBoxAccessResponse, setMailBoxAccessResponse] = useState();
 
+  const ref = firebase.database().ref("messages/-MjhnXW1CcA_sTXEssD1/");
+
   const messageListener = async () => {
-    const ref = firebase.database().ref("messages/-MjhnXW1CcA_sTXEssD1/");
     await ref.on("value", (snapshot) => {
       const messages = snapshot.val();
       key = Object.keys(messages).pop();
@@ -96,8 +97,13 @@ const ActiveInteractiveScreen = (props) => {
     setMailBoxAccessResponse(true);
   };
 
+  const turnOffActiveListener = () => {
+    ref.off("value", messageListener);
+  };
+
   const handleOnClose = () => {
     props.onPress(mailBoxAccessResponse);
+    turnOffActiveListener();
   };
 
   return (

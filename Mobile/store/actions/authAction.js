@@ -39,8 +39,6 @@ export const signup = (email, password) => {
 
     const resData = await response.json();
 
-    console.log(resData);
-
     dispatch(authenticate(resData.localId, resData.idToken));
 
     const expirationDate = new Date(
@@ -80,8 +78,6 @@ export const login = (email, password) => {
     }
 
     const resData = await response.json();
-
-    console.log(resData);
 
     dispatch(authenticate(resData.localId, resData.idToken));
 

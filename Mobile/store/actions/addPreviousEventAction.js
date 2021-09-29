@@ -18,8 +18,6 @@ export const fetchEvents = () => {
 
       const resData = await response.json();
 
-      console.log(resData);
-
       const loadedEvents = [];
 
       for (const key in resData) {
@@ -77,8 +75,6 @@ export const addNewPrevEvent = (
     );
 
     const resData = await response.json();
-
-    eventDetails.id = resData.name;
 
     dispatch({
       type: CLOSE_PREVIOUS_EVENT,
