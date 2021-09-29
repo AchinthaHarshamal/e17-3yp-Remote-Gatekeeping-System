@@ -12,11 +12,11 @@ ___
 - Dr. Mahanama Wickramasinghe, [email](mailto:mahanamaw@eng.pdn.ac.lk)
 ## Overview
 In the busy and complicated lifestyle today, keeping interactions with outsiders is, inefficient, impractical and vulnerable.
-The ongoing pandemic has worsen the situatoin. 
+The ongoing pandemic has worsen the situation. 
 
 We have understood that people are having troubles with taking online deliveries to their door steps securely.
-Since people in Sri Lanka are so busy today, they can’t pay much attention about their loved once and the household.
-So, we thought we can come up with a system of interconnected devices (inspired from IoT) to make the life easy for the people.
+Since people in Sri Lanka are so busy today, they can’t pay much attention about their loved ones and the household.
+So, we thought of coming up with a system of interconnected devices (inspired from IoT) to make the life easy for the people.
 
 Our goal is to provide a user-friendly and completely automated solution for the above problems, which will be a success even after the end of the pandemic.
 ## Main Components
