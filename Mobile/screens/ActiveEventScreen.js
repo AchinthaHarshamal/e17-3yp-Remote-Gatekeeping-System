@@ -13,7 +13,7 @@ const startActiveEvent = (msgKey, ackResponse) => {
   return async () => {
     //async code
     await fetch(
-      `https://hardware-node-test-default-rtdb.asia-southeast1.firebasedatabase.app/messages/-MjhnXW1CcA_sTXEssD1/${msgKey}.json`,
+      `https://gate-keeper-6fad9-default-rtdb.asia-southeast1.firebasedatabase.app/messages/-MjhnXW1CcA_sTXEssD1/${msgKey}.json`,
       {
         method: "PATCH",
         headers: {
@@ -35,7 +35,7 @@ const getMzgDetails = () => {
 
     try {
       const response = await fetch(
-        "https://hardware-node-test-default-rtdb.asia-southeast1.firebasedatabase.app/messages/-MjhnXW1CcA_sTXEssD1.json"
+        "https://gate-keeper-6fad9-default-rtdb.asia-southeast1.firebasedatabase.app/messages/-MjhnXW1CcA_sTXEssD1.json"
       );
 
       if (!response.ok) {
@@ -78,6 +78,8 @@ const getMzgDetails = () => {
 };
 
 const ActiveEventScreen = (props) => {
+  // console.log("done");
+
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState();
 
@@ -158,7 +160,7 @@ const ActiveEventScreen = (props) => {
         <View style={{ marginTop: 20 }}>
           <View style={styles.fieldContainer}>
             <Text style={styles.label}>
-              There is an active event!({userType})
+              There is a {userType} at your gate!
             </Text>
             <View style={styles.buttonContainer}>
               <CustomButton3

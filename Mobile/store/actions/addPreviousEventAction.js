@@ -9,7 +9,7 @@ export const fetchEvents = () => {
 
     try {
       const response = await fetch(
-        "https://hardware-node-test-default-rtdb.asia-southeast1.firebasedatabase.app/events/node1.json"
+        "https://gate-keeper-6fad9-default-rtdb.asia-southeast1.firebasedatabase.app/events/node1.json"
       );
 
       if (!response.ok) {
@@ -56,7 +56,7 @@ export const addNewPrevEvent = (
   return async (dispatch) => {
     //async code
     const response = await fetch(
-      "https://hardware-node-test-default-rtdb.asia-southeast1.firebasedatabase.app/events/node1.json",
+      "https://gate-keeper-6fad9-default-rtdb.asia-southeast1.firebasedatabase.app/events/node1.json",
 
       {
         method: "POST",
