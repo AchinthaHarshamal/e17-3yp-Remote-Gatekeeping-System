@@ -11,6 +11,9 @@ import { createStore, applyMiddleware } from "redux";
 import mainReducer from "./store/reducers/mainReducer";
 import ReduxThunk from "redux-thunk";
 
+import firebase from "firebase/app";
+import { firebaseConfig } from "./firebase/firebase";
+
 const fetchFonts = () => {
   return Font.loadAsync({
     "open-sans": require("./assets/fonts/OpenSans-Regular.ttf"),
@@ -35,6 +38,10 @@ export default function App() {
         onError={(err) => console.log(err)}
       />
     );
+  }
+
+  if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
   }
 
   return (

@@ -5,7 +5,11 @@ import Colors from "../constants/Colors";
 
 const CustomButton3 = (props) => {
   return (
-    <TouchableOpacity onPress={props.onPress} activeOpacity={0.4}>
+    <TouchableOpacity
+      disable={true}
+      onPress={props.onPress}
+      activeOpacity={props.activeOpacity}
+    >
       <View style={{ ...styles.button, ...props.styles }}>
         <Text style={styles.buttonText}>{props.children}</Text>
       </View>
