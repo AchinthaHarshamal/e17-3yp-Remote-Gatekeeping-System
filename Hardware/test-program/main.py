@@ -14,10 +14,10 @@ def getFilename():
 
 
 def captureImage():
-    print("<capturing_the_picture...>", end=' ')
+    print("\t<capturing_the_picture...>")
     filename = getFilename()+'.jpg'
     open('img/'+filename, 'w')
-    print("<done>")
+    print("\t<done>")
     return filename
 
 
@@ -59,6 +59,7 @@ def createData(msgType, url):
 NODEID = "-MjhnXW1CcA_sTXEssD1"
 PATH = "messages/"+NODEID+"/"
 DELAY = 500
+AUDIOID = ""
 
 
 def timeout(init_time):
@@ -68,18 +69,40 @@ def timeout(init_time):
 def handleAck(message):
     global not_updated
     try:
-        # if message["data"].get("ack") == "true":
-        if message["data"] == "true":
+        if message["data"].get("ack") == "true":
+        # if message["data"] == "true":
             not_updated = False
     except:
         pass
 
 
-def stream_handler(message):
+def handleVoiceSend(message):
     global update, not_updated
     try:
-        if "msgURL" in message["data"]:
+        if message["data"].get("msgURL")[0] == "m":
+        # if message["data"][0] == "m":
             update = message["data"].get("msgURL")
+            not_updated = False
+    except:
+        pass
+
+
+def handleVoiceListen(message):
+    global not_updated, AUDIOID
+    try:
+        if message["data"].get("status") == "LISTENING":
+        # if message["data"] == "LISTENING":
+            AUDIOID = message["path"].split("/")[1]
+            not_updated = False
+    except:
+        pass
+
+
+def handleVoiceRecord(message):
+    global not_updated
+    try:
+        if message["data"].get("status") == "RECORDING":
+        # if message["data"] == "RECORDING":
             not_updated = False
     except:
         pass
@@ -96,17 +119,17 @@ def waitForResponse():
     global not_updated, my_stream1
     waiting = True
     while not_updated and waiting:
-        print("<waiting_for_response...>")
+        print("\t\t<waiting_for_response...>")
         sleep(1)
         waiting = timeout(init_time)
     my_stream1.close()
     not_updated = True
-    print("<responded>")
+    print("\t\t<responded>")
     return waiting
 
 
 def sendUserData():
-    print("<sending_user_information...>", end=' ')
+    print("\t<sending_user_information...>")
     storage.child(PATH+image).put("img/"+image)
     url = storage.child(PATH+image).get_url(None)
 
@@ -116,7 +139,7 @@ def sendUserData():
 
     initStream(handleAck)
     db.child("messages").child(NODEID).push(data)
-    print("<done>")
+    print("\t<done>")
 
 
 def conversation():
@@ -125,38 +148,65 @@ def conversation():
 
 
 def recordVoice():
-    print("<recording_voice...>", end=' ')
+    print("\t<recording_voice...>")
     filename = getFilename()+'N'+str(convCount)+'.mp3'
     open('aud/'+filename, 'w')
-    print("<done>")
+    print("\t<done>")
     return filename
 
 
 def sendVoice():
-    print("<sending_voice...>", end=' ')
-    storage.child(PATH+audio).put("aud/"+audio)
-    data = createData("audio", PATH+audio)
-    data["status"] = ""
-    isAcked = waitForResponse()
-    db.child("messages").child(NODEID).push(data)
-    print("<sent>")
+    print("\t<sending_voice...>")
+    if convCount == 2:
+        storage.child(PATH+audio).put("aud/"+audio)
+        data = createData("AUDIO", PATH+audio)
+        data["status"] = "NONE"
+        print("\t<waiting_for_ack...>")
+        isAcked = waitForResponse()
+        print("\t<acked>")
+        db.child("messages").child(NODEID).push(data)
+    else:
+        db.child("messages").child(NODEID).child(AUDIOID).update({"status": "NONE"})
+        db.child("messages").child(NODEID).child(AUDIOID).update({"msgURL": PATH+audio})
+    print("\t<sent>")
 
 
-def receivedVoice():
-    initStream(stream_handler)
-    return waitForResponse()
+def voiceDelivered():
+    print("\t<waiting_for_listen...>")
+    initStream(handleVoiceListen)
+    isListening = waitForResponse()
+    print("\t<listening>")
+    print("User is listening!")
+    return isListening
+
+
+def waitForRecording():
+    print("\t<waiting_for_record...>")
+    initStream(handleVoiceRecord)
+    isRecording = waitForResponse()
+    print("\t<recording>")
+    print("User is recording!")
+
+
+def waitForSending():
+    print("\t<waiting_for_send...>")
+    initStream(handleVoiceSend)
+    isSending = waitForResponse()
+    print("\t<sending>")
+    print("User is sending!")
 
 
 def getVoice(path):
-    print("<downloading_voice...>", end=' ')
+    print("\t<downloading_voice...>")
     storage.child(path).download("img/"+path.split("/")[-1])
-    print("<done>")
+    print("\t<done>")
 
 
 def playVoice():
-    print("<playing_voice...>", end=' ')
+    print("Playing user's message")
+    print("\t<playing_voice...>")
     sleep(2)
-    print("<done>")
+    print("\t<done>")
 
 
 def noReplyResponse():
@@ -166,21 +216,21 @@ def noReplyResponse():
 def endEvent():
     global eventNo
     eventNo += 1
+    print("------------------------------")
     print("Exited the system!\n")
 
 
 if __name__ == "__main__":
     """ TODO
-    1. <done>
+    1. MAIL_BOX_ACCESS -> ACCESS_GIVEN
     2. auth
-    3. stream handlers
-    4. sendVoice() -> isAcked
-    5. getVoice() path: img -> aud
+    3. getVoice() path: img -> aud
+    4. getVoice() -> update
 
     ->  noReplyResponse(), openMailbox(), closeMailbox(), 
         openGate(), closeGate(), updateMailboxState()
     """
-    eventNo = 13
+    eventNo = 29
 
     startEvent()
     image = captureImage()
@@ -194,7 +244,9 @@ if __name__ == "__main__":
         audio = recordVoice()
         convCount += 2
         sendVoice()
-        if receivedVoice():
+        if voiceDelivered():
+            waitForRecording()
+            waitForSending()
             getVoice(update)
             playVoice()
         else:
