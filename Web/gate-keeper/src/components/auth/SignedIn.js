@@ -4,15 +4,11 @@ import { AuthContext } from '../../contexts/AuthContext'
 import { DataContext } from '../../contexts/DataContext'
 
 
-
-
-
-
 function SignedIn() {
 
     const initValues = { email : '' , password: ''} 
     const {signin ,user} = useContext(AuthContext)
-    const {storeData} = useContext(DataContext)
+    const {setDataLoaded ,dataLoaded} = useContext(DataContext)
     const [values, setValues] = useState(initValues)
     const [errorMsg, setErrorMsg] = useState(null)
 
@@ -29,17 +25,16 @@ function SignedIn() {
         e.preventDefault();
         try{
             const credential = await signin(values)
-           
             setErrorMsg(null)
+            setDataLoaded(true)
         }catch(err){
-            //console.log('Error' , err.message)
             setErrorMsg("Wrong Password or Email ! Try again")
         }
     }
 
 
     
-    if(user != null)  {
+    if(user != null && dataLoaded)  {
         return <Redirect to='/dashboard'/>
     }
     return (  

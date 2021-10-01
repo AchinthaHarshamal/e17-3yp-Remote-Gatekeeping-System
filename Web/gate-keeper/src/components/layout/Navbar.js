@@ -7,19 +7,21 @@ import SignedInLinks from './SignedInLinks';
 import SignedOutLinks from './SignedOutLinks';
 import SideNavbar from './SideNavbar';
 import SideNavDashboard from '../dashbord/SideNavDashboard';
+import { DataContext } from '../../contexts/DataContext';
 
 
 const Navbar =(props)=> {
 
 
     const {user} = useContext(AuthContext)
+    const {dataLoaded} = useContext(DataContext)
     const profile = {}
 
     const links = () =>{
     
-        const navLink = user ? <SignedInLinks profile={profile} /> : <SignedOutLinks /> 
-        const sideBar = user ? <SideNavDashboard /> : <SideNavbar/>
-        const target = user ?  'dashboardNav' : 'signedInNav' 
+        const navLink =  user && dataLoaded ? <SignedInLinks profile={profile} /> : <SignedOutLinks /> 
+        const sideBar = user && dataLoaded ? <SideNavDashboard /> : <SideNavbar/>
+        const target = user && dataLoaded ?  'dashboardNav' : 'signedInNav' 
        
         return(
             <div className ="navContainer">

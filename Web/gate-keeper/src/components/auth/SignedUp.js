@@ -12,7 +12,7 @@ const  SignedUp = () => {
 
     const {user, signup} = useContext(AuthContext)
     const {serialNumber,nodeInit} = useContext(InitContext)
-    const {storeData} = useContext(DataContext)
+    const {dataLoaded ,setDataLoaded} = useContext(DataContext)
     const [userInfo, setUserInfo] = useState({
         firstName :'',
         lastName : '',
@@ -40,7 +40,7 @@ const  SignedUp = () => {
             await nodeInit(userCredential.user.uid,userInfo.firstName, userInfo.lastName ,  userInfo.email, image)
             
             alert("Node is successfully initialized!")
-           
+            setDataLoaded(true)
         }catch(err){
             alert("Signup Error  : " , err.message )
             
@@ -50,7 +50,8 @@ const  SignedUp = () => {
 
    
     
-    if(user !=null)  {
+    if(user !=null && dataLoaded)  {
+        
         return <Redirect to='/dashboard'/>
     } 
     

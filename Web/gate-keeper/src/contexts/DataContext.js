@@ -9,18 +9,17 @@ const DataContextProvider = (props) => {
   
     const [messages, setMessages] = useState({})
     const [userInfo, setUserInfo] = useState({}) 
-    const userI = useRef({})
+    const [dataLoaded, setDataLoaded] = useState(Boolean(localStorage.getItem('dataLoaded')))
 
 
     const getUserInfo = async (userId) =>{
         const userRef = db.ref().child('users/'+userId)
+
         try{
             const info = await userRef.get()
             if( info.exists()){
                 const values = info.val()
                 setUserInfo(values)
-                userI.current = values
-                //console.log("oo " ,userI.current)
                 return(values)
             }
         }catch(err){
@@ -49,41 +48,39 @@ const DataContextProvider = (props) => {
     }
 
     const storeData = async (userId) => {
-        //console.log(Object.keys(userInfo).length === 0)
-        //console.log(userId)
         if(Object.keys(userInfo).length === 0 || Object.keys(messages).length===0){
-
             try{
                 const info = await getUserInfo(userId)
-                //console.log('ii :' , info)
                 await getMessages(info.nodeId)
-                //console.log(messages)
             }catch(err){
                 console.log(err.message)
             }
-            
-
         }
     }
 
     useEffect(  () => {
-        auth.onAuthStateChanged( user => {
+        dataLoaded && auth.onAuthStateChanged( user => {
             if(user){
-                //console.log('user id from data' , user.uid)
-                storeData(user.uid)
-                
+                storeData(user.uid) 
+            }else{
+                setDataLoaded(false)
+                setUserInfo({})
+                setMessages({})
             }
            
         })
+        localStorage.setItem('dataLoaded' , Boolean(dataLoaded))
     })
+
     const values = {
        
         getMessages,
         getUserInfo,
         storeData,
+        setDataLoaded,
         userInfo,
         messages,
-        userI
+        dataLoaded
     }
 
 
