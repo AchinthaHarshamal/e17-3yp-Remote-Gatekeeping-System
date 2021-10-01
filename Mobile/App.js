@@ -1,13 +1,18 @@
 import { StatusBar } from "expo-status-bar";
 import { enableExpoCliLogging } from "expo/build/logs/Logs";
-import React, { useState } from "react";
-import { StyleSheet, Text, View, Image, TextInput } from "react-native";
+import React, { useState, useContext } from "react";
 import * as Font from "expo-font";
 import AppLoading from "expo-app-loading";
+import { Provider } from "react-redux";
 
 import Navigation from "./navigation/Navigation";
-import WelcomePage from "./screens/WelcomePage";
-import LoginScreen from "./screens/LoginScreen";
+
+import { createStore, applyMiddleware } from "redux";
+import mainReducer from "./store/reducers/mainReducer";
+import ReduxThunk from "redux-thunk";
+
+import firebase from "firebase/app";
+import { firebaseConfig } from "./firebase/firebase";
 
 const fetchFonts = () => {
   return Font.loadAsync({
@@ -16,9 +21,14 @@ const fetchFonts = () => {
   });
 };
 
+const store = createStore(
+  mainReducer,
+  applyMiddleware(ReduxThunk)
+  // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
+
 export default function App() {
   const [fontLoaded, setFontLoaded] = useState(false);
-  const [authorized, setAuthorized] = useState(false);
 
   if (!fontLoaded) {
     return (
@@ -30,17 +40,15 @@ export default function App() {
     );
   }
 
-  const handleLogIn = () => {
-    setAuthorized(true);
-  };
-
-  const hangleLogOut = () => {
-    setAuthorized(false);
-  };
-
-  if (authorized) {
-    return <WelcomePage onPress={hangleLogOut}></WelcomePage>;
+  if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
   }
 
-  return <LoginScreen onPress={handleLogIn}></LoginScreen>;
+  return (
+    <Provider store={store}>
+      <Navigation></Navigation>
+    </Provider>
+  );
+  // return <WelcomePage></WelcomePage>;
+  // return <CloseActiveEventScreen></CloseActiveEventScreen>;
 }

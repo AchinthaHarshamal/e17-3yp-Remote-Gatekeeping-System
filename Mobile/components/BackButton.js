@@ -1,13 +1,12 @@
 import React from "react";
 import { View, StyleSheet, TouchableOpacity, Text } from "react-native";
+import { AntDesign } from "@expo/vector-icons";
 
-import Colors from "../constants/Colors";
-
-const CustomButton2 = (props) => {
+const BackButton = (props) => {
   return (
     <TouchableOpacity onPress={props.onPress} activeOpacity={0.4}>
       <View style={styles.button}>
-        <Text style={styles.buttonText}>{props.children}</Text>
+        <AntDesign name="leftcircleo" size={24} color="black" />
       </View>
     </TouchableOpacity>
   );
@@ -15,19 +14,16 @@ const CustomButton2 = (props) => {
 
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: Colors.primaryColor,
-    paddingVertical: 15,
-    paddingHorizontal: 30,
-    borderRadius: 40,
-    width: 200,
+    backgroundColor: "white",
+    borderRadius: 25,
+    width: 40,
     alignItems: "center",
-    marginTop: 20,
+    padding: 5,
   },
   buttonText: {
-    color: "white",
+    color: "black",
     fontSize: 18,
-    textAlign: "center",
   },
 });
 
-export default CustomButton2;
+export default BackButton;

@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { View, Text, StyleSheet, Image, ImageBackground } from "react-native";
 
 import CustomButton2 from "../components/CustomButton2";
 import LogOutButton from "../components/LogOutButton";
+import CloseEventContext from "../contextAPI/CloseEventContext";
 
 const WelcomePage = (props) => {
+  const ctx = useContext(CloseEventContext);
+
   return (
     <View style={styles.screen}>
       <View style={styles.imageContainer}>
@@ -21,11 +24,11 @@ const WelcomePage = (props) => {
         </ImageBackground>
       </View>
       <View style={styles.greetingContainer}>
-        <Text style={styles.greeting}>Welcome User!</Text>
+        <Text style={styles.greeting}>Welcome {props.name}!</Text>
       </View>
       <View style={styles.buttonContainer}>
-        <CustomButton2>Active Event</CustomButton2>
-        <CustomButton2>Previous Events</CustomButton2>
+        <CustomButton2 onPress={props.clickActive}>Active Event</CustomButton2>
+        <CustomButton2 onPress={props.clickPrev}>Previous Events</CustomButton2>
       </View>
       <View style={styles.LogOutButtonContainer}>
         <LogOutButton onPress={props.onPress}>Log Out</LogOutButton>
@@ -50,12 +53,11 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
     tintColor: "green",
-    opacity: 1,
   },
   dpImageContainer: {
     height: 120,
     width: 120,
-    marginTop: "40%",
+    marginTop: "35%",
     borderColor: "white",
     borderWidth: 4,
     borderRadius: 60,
@@ -78,13 +80,14 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flexDirection: "column",
-    flex: 0.6,
+
     alignItems: "center",
   },
   LogOutButtonContainer: {
-    alignItems: "flex-end",
-    marginTop: 230,
-    paddingRight: 20,
+    alignSelf: "flex-end",
+    flex: 1,
+    paddingRight: 15,
+    paddingTop: "35%",
   },
 });
 

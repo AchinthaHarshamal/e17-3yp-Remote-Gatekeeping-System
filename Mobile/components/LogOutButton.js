@@ -1,11 +1,21 @@
 import React from "react";
 import { View, StyleSheet, TouchableOpacity, Text } from "react-native";
 
+import * as autActions from "../store/actions/authAction";
 import Colors from "../constants/Colors";
 
+import { useDispatch } from "react-redux";
+
 const LogOutButton = (props) => {
+  const dispatch = useDispatch();
+
+  const handleLogOut = () => {
+    dispatch(autActions.logout());
+    props.onPress();
+  };
+
   return (
-    <TouchableOpacity onPress={props.onPress} activeOpacity={0.4}>
+    <TouchableOpacity onPress={handleLogOut} activeOpacity={0.4}>
       <View style={styles.button}>
         <Text style={styles.buttonText}>{props.children}</Text>
       </View>
