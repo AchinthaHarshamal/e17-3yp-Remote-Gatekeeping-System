@@ -34,6 +34,7 @@ const AuthContextProvider = (props) => {
     useEffect(() => {
         auth.onAuthStateChanged( user => {
             setUser(user)
+            if(user) console.log('user id from auth' , user.uid)
             setLoading(false)
         })
     })

@@ -1,4 +1,4 @@
-import React  , {useContext , useState , createContext,useEffect}from 'react'
+import React  , {useRef, useState , createContext,useEffect}from 'react'
 import {db } from '../config/fbConfig';
 import { auth } from '../config/fbConfig';
 
@@ -9,7 +9,7 @@ const DataContextProvider = (props) => {
   
     const [messages, setMessages] = useState({})
     const [userInfo, setUserInfo] = useState({}) 
-    
+    const userI = useRef({})
 
 
     const getUserInfo = async (userId) =>{
@@ -19,12 +19,13 @@ const DataContextProvider = (props) => {
             if( info.exists()){
                 const values = info.val()
                 setUserInfo(values)
-                //console.log("oo " ,values)
+                userI.current = values
+                //console.log("oo " ,userI.current)
                 return(values)
             }
         }catch(err){
                 console.log('Error on authentication')
-                throw err
+                //throw err
         }
     }
     const getMessages = async (nodeId) => {
@@ -42,8 +43,8 @@ const DataContextProvider = (props) => {
                 
             }
         }catch(err){
-            throw err
-            //console.log('Some error')
+            //throw err
+            console.log('Some error')
         }
     }
 
@@ -51,17 +52,26 @@ const DataContextProvider = (props) => {
         //console.log(Object.keys(userInfo).length === 0)
         //console.log(userId)
         if(Object.keys(userInfo).length === 0 || Object.keys(messages).length===0){
-            const info =  await getUserInfo(userId)
-            //console.log('ii :' , info)
-            const messages =  await getMessages(info.nodeId)
-            //console.log(messages)
+
+            try{
+                const info = await getUserInfo(userId)
+                //console.log('ii :' , info)
+                await getMessages(info.nodeId)
+                //console.log(messages)
+            }catch(err){
+                console.log(err.message)
+            }
+            
+
         }
     }
 
-    useEffect( async () => {
+    useEffect(  () => {
         auth.onAuthStateChanged( user => {
             if(user){
+                //console.log('user id from data' , user.uid)
                 storeData(user.uid)
+                
             }
            
         })
@@ -72,7 +82,8 @@ const DataContextProvider = (props) => {
         getUserInfo,
         storeData,
         userInfo,
-        messages
+        messages,
+        userI
     }
 
 

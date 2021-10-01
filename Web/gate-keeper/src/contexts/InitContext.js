@@ -1,6 +1,5 @@
 import React  , {useContext , useState , createContext,useEffect}from 'react'
-import {db } from '../config/fbConfig';
-
+import {db , storage} from '../config/fbConfig';
 
 export const InitContext = createContext();
 
@@ -8,20 +7,25 @@ export const InitContext = createContext();
 const InitContextProvider =(props)=>{
     const [node, setNode] = useState(null)
     const [serialNumber, setSerialNumber] = useState(null)
+    
 
     const getNode =(serialNumber) =>{
         const dbRef = db.ref();
         return dbRef.child("nodes/"+serialNumber).get()
     }
 
-    const nodeInit = (userId,fname , lname , imgUrl, email) => {
+    const nodeInit = (userId,fname , lname ,  email , imageFile) => {
         const nodeID = db.ref().child('initNode').push().key;
         const msgID = db.ref().child('messages/'+nodeID).push().key;
         //console.log('node ID : ' , nodeID)
-        
+        const imageRef = storage.ref().child('messages/'+nodeID)
+        console.log('path' , imageRef.fullPath)
+        storage.ref()
+        const imgUrl = ''
         const userDate = {
             'admin' : true ,
             'email' : email,
+            
             'fName' :fname, 
             'lName' :lname,
             'imgUrl' :imgUrl,
@@ -55,7 +59,7 @@ const InitContextProvider =(props)=>{
         setData['/initNodes/'+nodeID] = nodeData
         setData['/messages/'+nodeID+'/'+msgID] = botMessage
         //console.log('user id : ', userId)
-        return db.ref().update(setData);
+        return  db.ref().update(setData);
     }
 
     const values = {

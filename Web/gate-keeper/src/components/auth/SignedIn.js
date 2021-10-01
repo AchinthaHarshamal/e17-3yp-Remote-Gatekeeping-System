@@ -1,6 +1,7 @@
-import React, { useState,useContext } from 'react'
+import React, { useState,useContext , useEffect} from 'react'
 import { Redirect } from 'react-router-dom'
 import { AuthContext } from '../../contexts/AuthContext'
+import { DataContext } from '../../contexts/DataContext'
 
 
 
@@ -11,6 +12,7 @@ function SignedIn() {
 
     const initValues = { email : '' , password: ''} 
     const {signin ,user} = useContext(AuthContext)
+    const {storeData} = useContext(DataContext)
     const [values, setValues] = useState(initValues)
     const [errorMsg, setErrorMsg] = useState(null)
 
@@ -26,14 +28,17 @@ function SignedIn() {
         
         e.preventDefault();
         try{
-            await signin(values)
-            //console.log("user id: " ,auth.user.uid);
+            const credential = await signin(values)
+           
             setErrorMsg(null)
         }catch(err){
             //console.log('Error' , err.message)
             setErrorMsg("Wrong Password or Email ! Try again")
         }
     }
+
+
+    
     if(user != null)  {
         return <Redirect to='/dashboard'/>
     }

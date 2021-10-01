@@ -5,6 +5,7 @@ html{
 
 
 body {
+    
     margin: 0;
     padding: 0;
     font-family: sans-serif;
@@ -13,7 +14,7 @@ body {
     background-position: bottom;
     
     background-image: linear-gradient(to bottom, rgb(154, 154, 155) , rgb(173, 173, 173)); 
-
+    
 }
 
 form{
@@ -26,11 +27,8 @@ form{
 form button , form h5{
     margin: 20px 0px ;
     
-}
+} 
 
-form button {
-    margin-left: 86%;
-}
 
 .signUp-container > form{
     padding: 10px 20px;

@@ -9,6 +9,7 @@ import AuthNode from "./components/auth/AuthNode";
 import HomePage from "./components/home/HomePage";
 
 import Insert from "./components/dashbord/Insert";
+import Welcome from "./components/dashbord/Welcome";
 import UploadImg from "./components/dashbord/UploadImg";
 
 import AuthContextProvider from "./contexts/AuthContext";
@@ -32,6 +33,7 @@ function App() {
             <Route path='/dashboard' component={Dashbord}></Route>
             <Route path='/insert' component={Insert}></Route>
             <Route path='/upload' component={UploadImg}></Route>
+            <Route path='/welcome' component={Welcome}></Route>
             
         </Switch>
         </InitContextProvider>

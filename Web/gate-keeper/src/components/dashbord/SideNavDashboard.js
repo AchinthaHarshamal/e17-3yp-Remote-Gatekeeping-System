@@ -10,12 +10,11 @@ import { Link } from 'react-router-dom';
 const  SideNavDashboard = () => {
     
     const {signout} = useContext(AuthContext)
-    const {userInfo} = useContext(DataContext)
+    const {userInfo  } = useContext(DataContext)
     
     useEffect(() => {
         const elems = document.querySelectorAll('.sidenav');
         M.Sidenav.init(elems,{});
-        console.log("Userinfo : " ,userInfo)
     })
 
     return (
@@ -30,7 +29,6 @@ const  SideNavDashboard = () => {
                             </a>
                             <a href="#name"><span className="white-text name">{userInfo.fName + " " +  userInfo.lName}</span></a>
                             <a href="#email"><span className="white-text email">{userInfo.email}</span></a>
-                        
                     </div>
                 </li>
             

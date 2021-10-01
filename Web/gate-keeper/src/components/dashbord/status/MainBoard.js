@@ -24,17 +24,17 @@ const MainBoard = () => {
     //offset-m4
     return (
         <div className="container">
-            <div class="row">
-                <div class="col s12 m4">
+            <div className="row">
+                <div className="col s12 m4">
                     <NodeStatus />
                 </div>
-                <div class="col s12 m4 ">
+                <div className="col s12 m4 ">
                     <Users />
                 </div>
-                <div class="col s12 m4 ">
+                <div className="col s12 m4 ">
                     <MailBoxStatus />
                 </div>
-                <div class="col s12">
+                <div className="col s12">
                     
                     <MsgTable />
                 </div>

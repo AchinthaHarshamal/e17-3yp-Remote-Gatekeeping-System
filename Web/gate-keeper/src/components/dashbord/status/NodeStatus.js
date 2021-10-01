@@ -6,7 +6,7 @@ export const NodeStatus = () => {
         return(
             <div className='mainCard grey darken-2'>
                 <a href="#" className="white-text">
-                    <i class="material-icons">power</i>
+                    <i className="material-icons">power</i>
                     <span>Power : On</span>
                 </a>
             </div>
@@ -15,7 +15,7 @@ export const NodeStatus = () => {
         return (
             <div className='mainCard grey darken-2'>
                 <a href="#" className="white-text">
-                    <i class="material-icons ">power_off</i>
+                    <i className="material-icons ">power_off</i>
                     <span>Power : Off</span>
                 </a>
             </div>
