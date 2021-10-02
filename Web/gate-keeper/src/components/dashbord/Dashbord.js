@@ -16,12 +16,12 @@ const  Dashbord = ()=> {
 
     return (
         <div className="offsetC">
-            <BrowserRouter>
+          
                 <Switch>
-                    <Route path='/dashboard' component={MainBoard} />
-                    <Route exact path= '/manage' component={UserManagement}/>
+                    <Route  path= '/dashboard/manage'> <UserManagement /></Route>
+                    <Route  path='/dashboard' > <MainBoard /></Route>
                 </Switch>
-            </BrowserRouter>
+            
         </div>
         
     )
