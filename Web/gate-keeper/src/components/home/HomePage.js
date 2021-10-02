@@ -12,18 +12,21 @@ const  HomePage = () => {
     if(user != null) { return <Redirect to='/dashboard'/> }
  
     return (
-        <div className="home">
-            <div className="row">
-                <div className="col  s12 m7 offset-m1 grey lighten-2">
-                    Hello How are your Sam
+        <div className="container">
+            <div className="home grey darken-3">
+                <div className="row">
+                    <div className="col  s12 m8  grey lighten-2">
+                        <Banner />
+                    </div>
+                    
+                    <div className="col  s12 m4 grey lighten-3 ">
+                        <Dowonload />
+                    </div>
                 </div>
-                
-                <div className="col  s12 m3 grey lighten-3 ">
-                    Sampath
-                </div>
-            </div>
             
+            </div>
         </div>
+        
     )
 }
 

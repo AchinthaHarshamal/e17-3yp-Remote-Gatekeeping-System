@@ -2,10 +2,10 @@ import React from 'react'
 
 const  Banner = () => {
     return (
-        <div className="section">
-            <div className="card z-depth-3 deep-purple darken-4 white-text">
+        <div className="section banner">
+            <div className="card z-depth-3 grey darken-4 white-text">
                 <div className="card-content">  
-                    <span className="card-title"><h3>Welcome to the!</h3></span>
+                    <span className="card-title"><h3>Gate Keeper</h3></span>
                     <p>    
                     This website lets you initialize the hardware node and keeps all your previous records of the system.
                     </p>
@@ -17,11 +17,10 @@ const  Banner = () => {
                     </ul>
                     <p>    
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                        Molestiae, iusto. Vel suscipit in molestias quis officiis a sed odit tenetur perferendis.
-                        Necessitatibus saepe illum itaque quisquam ab aut quas impedit.
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                        Molestiae, iusto. Vel suscipit in molestias quis officiis a sed odit tenetur perferendis.
-                        Necessitatibus saepe illum itaque quisquam ab aut quas impedit.
+                        Molestiae, iusto. Vel sus cipit in molestias quis officiis a sed odit tenetur perferendis.
+                        Necessitatibus sa e illu m itaque quisq uam ab aut quas impedit. suscipit in molestias quis officiis a sed odit tenetur perferendis.
+                        Necessitatibus sa ep e i 
+                        
                     </p>
                     
                 </div>

@@ -85,3 +85,23 @@ form button , form h5{
 .mainTable h5 {
     padding: 1rem;
 }
+
+
+/* home */
+.home{
+    margin: 3vh;
+    height: 85vh;
+    border-top: 1vh;
+    /* background-image: url("https://thumbs.dreamstime.com/b/delivery-man-parcel-box-ringing-door-bell-home-service-mail-people-shipment-concept-customers-98428939.jpg");
+    background-repeat : repeat;
+    background-position: center; */
+}
+
+.banner{
+    margin: 3vh;
+    
+}
+
+.download{
+    margin-top: 3vh;
+}

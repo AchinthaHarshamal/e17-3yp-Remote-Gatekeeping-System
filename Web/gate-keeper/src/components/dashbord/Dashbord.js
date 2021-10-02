@@ -4,6 +4,7 @@ import {BrowserRouter ,Switch, Route} from 'react-router-dom';
 
 import { AuthContext } from '../../contexts/AuthContext'
 import MainBoard from './status/MainBoard';
+import UserManagement from './UserManagement';
 
 const  Dashbord = ()=> {
 
@@ -18,6 +19,7 @@ const  Dashbord = ()=> {
             <BrowserRouter>
                 <Switch>
                     <Route path='/dashboard' component={MainBoard} />
+                    <Route exact path= '/manage' component={UserManagement}/>
                 </Switch>
             </BrowserRouter>
         </div>
