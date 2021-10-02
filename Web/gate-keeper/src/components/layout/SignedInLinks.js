@@ -8,7 +8,6 @@ import M from 'materialize-css'
 const SignedInLinks = (props) => {
     
     const {signout} = useContext(AuthContext)
-    const [instances, setInstances] = useState(null)
     useEffect(()=>{
         var elems = document.querySelectorAll('.tooltipped');
         var instances = M.Tooltip.init(elems, {})

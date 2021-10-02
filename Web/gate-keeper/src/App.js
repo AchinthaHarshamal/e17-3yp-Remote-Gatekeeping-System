@@ -1,4 +1,4 @@
-import React , {Component} from "react";
+import React  from "react";
 import {BrowserRouter ,Switch, Route} from 'react-router-dom';
 
 import Navbar from "./components/layout/Navbar";
@@ -6,12 +6,17 @@ import SignedUp from "./components/auth/SignedUp";
 import SignedIn from "./components/auth/SignedIn";
 import Dashbord  from "./components/dashbord/Dashbord";
 import AuthNode from "./components/auth/AuthNode";
-import Insert from "./components/dashbord/Insert";
 import HomePage from "./components/home/HomePage";
+
+
+import Insert from "./components/dashbord/Insert";
+
+import UploadImg from "./components/dashbord/UploadImg";
 
 import AuthContextProvider from "./contexts/AuthContext";
 import DataContextProvider from "./contexts/DataContext";
 import InitContextProvider from "./contexts/InitContext";
+
 
 
 function App() {
@@ -27,8 +32,9 @@ function App() {
             <Route path='/signup' component={SignedUp}></Route>
             <Route path='/authnode' component={AuthNode}></Route>
             <Route path='/dashboard' component={Dashbord}></Route>
-            <Route pat='/insert' component={Insert}></Route>
-            {/* <Home /> */}
+            <Route path='/insert' component={Insert}></Route>
+            <Route path='/upload' component={UploadImg}></Route>
+            
         </Switch>
         </InitContextProvider>
       </DataContextProvider>

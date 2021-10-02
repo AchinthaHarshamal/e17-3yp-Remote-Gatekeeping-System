@@ -1,6 +1,7 @@
-import React  , {useContext , useState , createContext,useEffect}from 'react'
+import React  , {useRef, useState , createContext,useEffect}from 'react'
 import {db } from '../config/fbConfig';
-import { AuthContext } from './AuthContext';
+import { auth } from '../config/fbConfig';
+
 
 export const DataContext = createContext();
 
@@ -8,22 +9,22 @@ const DataContextProvider = (props) => {
   
     const [messages, setMessages] = useState({})
     const [userInfo, setUserInfo] = useState({}) 
-    const {user} = useContext(AuthContext) 
+    const [dataLoaded, setDataLoaded] = useState(Boolean(localStorage.getItem('dataLoaded')))
 
 
     const getUserInfo = async (userId) =>{
-        const userRef = db.ref().child('users/QlM4lUrjswcTMCoZccdtKzR1eJk1')
+        const userRef = db.ref().child('users/'+userId)
+
         try{
             const info = await userRef.get()
             if( info.exists()){
                 const values = info.val()
                 setUserInfo(values)
-                //console.log("oo " ,values)
                 return(values)
             }
         }catch(err){
                 console.log('Error on authentication')
-                throw err
+                //throw err
         }
     }
     const getMessages = async (nodeId) => {
@@ -41,17 +42,45 @@ const DataContextProvider = (props) => {
                 
             }
         }catch(err){
-            throw err
-            //console.log('Some error')
+            //throw err
+            console.log('Some error')
         }
     }
 
-    
+    const storeData = async (userId) => {
+        if(Object.keys(userInfo).length === 0 || Object.keys(messages).length===0){
+            try{
+                const info = await getUserInfo(userId)
+                await getMessages(info.nodeId)
+            }catch(err){
+                console.log(err.message)
+            }
+        }
+    }
+
+    useEffect(  () => {
+        dataLoaded && auth.onAuthStateChanged( user => {
+            if(user){
+                storeData(user.uid) 
+            }else{
+                setDataLoaded(false)
+                setUserInfo({})
+                setMessages({})
+            }
+           
+        })
+        localStorage.setItem('dataLoaded' , Boolean(dataLoaded))
+    })
+
     const values = {
        
         getMessages,
         getUserInfo,
-        userInfo
+        storeData,
+        setDataLoaded,
+        userInfo,
+        messages,
+        dataLoaded
     }
 
 

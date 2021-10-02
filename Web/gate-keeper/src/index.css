@@ -1,3 +1,6 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Display&display=swap');
+/* font-family: 'Noto Sans Display', sans-serif; */
 html{
     min-height: 100%;
 
@@ -5,15 +8,16 @@ html{
 
 
 body {
+    
     margin: 0;
     padding: 0;
-    font-family: sans-serif;
+    font-family: 'Noto Sans Display', sans-serif;
     
     background-size: 100%;
     background-position: bottom;
     
-    background-image: linear-gradient(to bottom, rgb(154, 154, 155) , rgb(173, 173, 173)); 
-
+    background-image: linear-gradient(to bottom, rgb(208, 208, 211) , rgb(230, 228, 228)); 
+    
 }
 
 form{
@@ -26,11 +30,8 @@ form{
 form button , form h5{
     margin: 20px 0px ;
     
-}
+} 
 
-form button {
-    margin-left: 86%;
-}
 
 .signUp-container > form{
     padding: 10px 20px;
@@ -41,9 +42,6 @@ form button {
 }
 
 
-.sidenav   li > a{
-    color: rgb(241, 241, 241) ;
-}
 
 
 
@@ -52,6 +50,11 @@ form button {
     padding-left: 300px;
     /* margin-left: 300px; */
 }
+
+.container2{
+    padding-left: 10%;
+    width: 80%;
+}
 @media only screen and (max-width : 992px) {
     .offsetC {
       padding-left: 0;
@@ -59,11 +62,90 @@ form button {
 }
 
 
-.navIcon >li{
+.navIcon li{
     padding: 0 10px;
 }
 .navContainer{
     padding: 0 10px;
+}
+
+
+
+
+/* Mainboard */
+
+.mainBoard .topic{
+    margin: 2rem 0rem 0 0;  
+}
+.topic h5{
+    color: rgb(0, 0, 0);
+}
+.topic p{
+    color: rgb(186, 185, 189);
+    font-size: 1.1rem;
+    padding: 0% 0.%;
+    margin: 0;
+}
+.mainCard {
+    padding: 2rem;
+    margin-top: 3rem;
+    font-size:  1.2rem;
+    text-align:  center;
+    border-radius: 0.2rem;
+}
+.mainCard i {
+    vertical-align: text-bottom;
+}
+.mainCard span {
+    margin: 0 5%;
+    font-size: 0.9rem;
+
+}
+
+.mainTable {
+    margin-top: 5%  ;
+    border-radius: 0.2rem;
+   
+}
+.mainTable h5 {
+    padding: 1rem 1rem 1rem 0;
+    
+}
+
+
+.mainChart {
+    margin-top: 5%  ;
+    border-radius: 0.2rem;
+   
+}
+.mainChart h5 {
+    padding: 1rem 1rem 1rem 0;
+    
+}
+
+/* home */
+.home{
+    margin: 3vh;
+    height: 85vh;
+    border-top: 1vh;
+    /* background-image: url("https://thumbs.dreamstime.com/b/delivery-man-parcel-box-ringing-door-bell-home-service-mail-people-shipment-concept-customers-98428939.jpg");
+    background-repeat : repeat;
+    background-position: center; */
+}
+
+.banner{
+    margin: 3vh;
+    
+}
+
+.download{
+    margin-top: 3vh;
+}
+
+.font1{
+    font-family: 'Noto Sans Display', sans-serif;
+    font-size: 2rem !important;
+
 }
 
 

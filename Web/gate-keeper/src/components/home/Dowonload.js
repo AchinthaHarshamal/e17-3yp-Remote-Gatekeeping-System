@@ -3,8 +3,8 @@ import downloadImage from '../../img/download.jpg'
 
 const  Dowonload = () => {
     return (
-        <div className="section">
-            <div className="card  z-depth-3 deep-purple darken-4">
+        <div className="section download">
+            <div className="card  z-depth-3 grey darken-4">
                 <div className="card-image">
                     <img src={downloadImage} alt="sah hello" />
                     
@@ -15,9 +15,7 @@ const  Dowonload = () => {
                 <div className="card-content white-text ">  
                     <span className="card-title">Download the app</span>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae, 
-                        iusto. Vel suscipit in molestias quis officiis a sed odit tenetur perferendis.
-                        Necessitatibus saepe illum itaque quisquam ab aut quas impedit.
-
+                        iuin molestias quis olor sit amet consectetur onsec tetur amet 
                     </p>
                 </div>
             </div>

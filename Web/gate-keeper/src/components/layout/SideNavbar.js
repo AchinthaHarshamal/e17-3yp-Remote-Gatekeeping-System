@@ -11,7 +11,7 @@ const  SideNavbar = () => {
 
     return (
         <div>
-            <ul id="signedInNav" className="sidenav   z-depth-0 grey darken-2">
+            <ul id="signedInNav" className="sidenav   z-depth-0  indigo lighten-2 font1">
                 <li ><NavLink to='signin'><i className="material-icons white-text">login</i>Sign In</NavLink></li>
                 <li><NavLink to='authNode'><i className="material-icons  white-text">cable</i>Connect Device</NavLink></li>
                 <li><a href="#!"><i className="material-icons  white-text">get_app</i>Download app</a></li>

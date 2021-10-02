@@ -1,6 +1,6 @@
 import React, { useState , useContext} from 'react'
 import {Redirect} from 'react-router-dom'
-import { DataContext } from '../../contexts/DataContext';
+
 import {InitContext} from '../../contexts/InitContext';
 
 

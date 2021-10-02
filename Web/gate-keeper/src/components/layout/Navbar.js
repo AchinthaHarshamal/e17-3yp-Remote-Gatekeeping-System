@@ -7,19 +7,21 @@ import SignedInLinks from './SignedInLinks';
 import SignedOutLinks from './SignedOutLinks';
 import SideNavbar from './SideNavbar';
 import SideNavDashboard from '../dashbord/SideNavDashboard';
+import { DataContext } from '../../contexts/DataContext';
 
 
 const Navbar =(props)=> {
 
 
     const {user} = useContext(AuthContext)
-    const profile = {}
+    const {dataLoaded} = useContext(DataContext)
+   
 
     const links = () =>{
     
-        const navLink = user ? <SignedInLinks profile={profile} /> : <SignedOutLinks /> 
-        const sideBar = user ? <SideNavDashboard /> : <SideNavbar/>
-        const target = user ?  'dashboardNav' : 'signedInNav' 
+        const navLink =  user && dataLoaded ? <SignedInLinks /> : <SignedOutLinks /> 
+        const sideBar = user && dataLoaded ? <SideNavDashboard /> : <SideNavbar/>
+        const target = user && dataLoaded ?  'dashboardNav' : 'signedInNav' 
        
         return(
             <div className ="navContainer">
@@ -37,9 +39,9 @@ const Navbar =(props)=> {
     //console.log(user)
     return (
         <div>
-            <nav className="nav-wraper grey darken-4 z-depth-0">
+            <nav className="nav-wraper indigo lighten-1 z-depth-2">
                 <div>
-                    <Link to='/' className="brand-logo center white-text offsetC">Smart Keeper</Link>
+                    <Link to='/' className="brand-logo center white-text offsetC ">Smart Keeper</Link>
                     {links()}
                 </div>
             </nav>

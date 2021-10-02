@@ -6,11 +6,11 @@ const Insert = () => {
 
     const [msg, setMsg] = useState({
         'event' : '0',
-        'from' : 'Bot' ,
-        'to' : 'All',
+        'from' : 'Gate' ,
+        'to' : 'Achintha',
         'msgUrl' : 'testUrl',
-        'msgType' : 'text',
-        'time': (new Date()).toJSON()
+        'msgType' : 'Image',
+        'time': (new Date())
     })
     const {getMessages,getUserInfo } = useContext(DataContext)
 
@@ -33,9 +33,9 @@ const Insert = () => {
             'time': (new Date()).toJSON()
         })
         try {
-            const newMsgId = db.ref().child('messages/-MjhnXW1CcA_sTXEssD1').push().key
+            const newMsgId = db.ref().child('messages/-Mkvc1UjFMXz5AjgLEIx').push().key
             const update = {}
-            update['/messages/-MjhnXW1CcA_sTXEssD1/'+newMsgId] = msg 
+            update['/messages/-Mkvc1UjFMXz5AjgLEIx/'+newMsgId] = msg 
             await db.ref().update(update)
             //console.log('Success')
             alert("Success")
