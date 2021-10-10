@@ -1,4 +1,4 @@
-import React ,{useContext , useEffect} from 'react';
+import React ,{useContext } from 'react';
 import {Link} from 'react-router-dom';
 
 import { AuthContext } from '../../contexts/AuthContext'
@@ -10,7 +10,7 @@ import SideNavDashboard from '../dashbord/SideNavDashboard';
 import { DataContext } from '../../contexts/DataContext';
 
 
-const Navbar =(props)=> {
+const Navbar =()=> {
 
 
     const {user} = useContext(AuthContext)
@@ -26,7 +26,7 @@ const Navbar =(props)=> {
         return(
             <div className ="navContainer">
                 {navLink}
-                <a href="#" data-target={target} className="sidenav-trigger"><i className="material-icons">menu</i></a>
+                <a href="#menu" data-target={target} className="sidenav-trigger"><i id='menu' className="material-icons">menu</i></a>
                 {sideBar}
                 
             </div>
@@ -41,7 +41,7 @@ const Navbar =(props)=> {
         <div>
             <nav className="nav-wraper indigo lighten-1 z-depth-2">
                 <div>
-                    <Link to='/' className="brand-logo center white-text offsetC ">Smart Keeper</Link>
+                    <Link to='/' id='title'className="brand-logo center white-text offsetC ">Smart Keeper</Link>
                     {links()}
                 </div>
             </nav>

@@ -59,7 +59,7 @@ const  AuthNode = () => {
                 </div>
 
                 <div className="input-field">
-                    <button className="btn grey darken-2 z-depth-0">Next</button>
+                    <button id = 'serial-submit'className="btn grey darken-2 z-depth-0">Next</button>
                 </div>
                 <div className="red-text center">
                         {errorMsg ? <p>{errorMsg} Please Try Again! </p>  :null } 

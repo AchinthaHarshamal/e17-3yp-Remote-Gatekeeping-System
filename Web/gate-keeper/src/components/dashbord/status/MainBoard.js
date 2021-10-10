@@ -1,5 +1,5 @@
-import React , {useState , useEffect, useContext} from "react"
-import { DataContext } from "../../../contexts/DataContext"
+import React  from "react"
+
 
 import NodeStatus from "./NodeStatus"
 import Users from "./Users"
@@ -13,15 +13,7 @@ import Chart from "./Chart"
 
 const MainBoard = () => {
 
-    const [msg, setMsg] = useState({
-        'event' : '0',
-        'from' : 'Bot' ,
-        'to' : 'All',
-        'msgUrl' : 'testUrl',
-        'msgType' : 'text',
-        'time': (new Date()).toJSON()
-    })
-    const {getMessages,getUserInfo } = useContext(DataContext)
+    
     
     //offset-m4
     return (

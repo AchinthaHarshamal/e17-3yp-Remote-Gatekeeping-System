@@ -1,4 +1,4 @@
-import React  , {useRef, useState , createContext,useEffect}from 'react'
+import React  , { useState , createContext,useEffect}from 'react'
 import {db } from '../config/fbConfig';
 import { auth } from '../config/fbConfig';
 
@@ -23,8 +23,8 @@ const DataContextProvider = (props) => {
                 return(values)
             }
         }catch(err){
-                console.log('Error on authentication')
-                //throw err
+                console.error('Error on authentication')
+                throw err
         }
     }
     const getMessages = async (nodeId) => {

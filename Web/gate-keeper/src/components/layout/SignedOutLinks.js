@@ -6,7 +6,7 @@ const SignedOutLinks = ()=> {
 
     useEffect(()=>{
         var elems = document.querySelectorAll('.tooltipped');
-        var instances = M.Tooltip.init(elems, {});
+        M.Tooltip.init(elems, {});
     })
 
     return (
@@ -14,16 +14,16 @@ const SignedOutLinks = ()=> {
             {/* <li><NavLink to="/signin">Sign In</NavLink></li> */}
            
             <li> <NavLink to="/signin">
-                <i className="material-icons tooltipped" data-position="bottom" data-tooltip="Sign In">login</i>
+                <i id='nav-signin' className="material-icons tooltipped" data-position="bottom" data-tooltip="Sign In">login</i>
             </NavLink></li>
            
-            <li><NavLink to="/authnode">
-                <i className="material-icons  white-text tooltipped" data-position="bottom" data-tooltip="Connect Device">cable</i>
+            <li><NavLink  to="/authnode">
+                <i id="nav-init" className="material-icons  white-text tooltipped" data-position="bottom" data-tooltip="Connect Device">cable</i>
             </NavLink></li>
 
-            <li><a href="#!">
-                <i className="material-icons  white-text tooltipped" data-position="bottom" data-tooltip="FAQ">contact_support</i>
-            </a></li>
+            <li><NavLink  to="/">
+                <i id="nav-faq" className="material-icons  white-text tooltipped" data-position="bottom" data-tooltip="FAQ">contact_support</i>
+                </NavLink></li>
    
         </ul>
     )
