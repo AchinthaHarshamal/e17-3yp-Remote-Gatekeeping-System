@@ -1,6 +1,6 @@
 import React , {useContext } from 'react'
 import {Redirect} from 'react-router-dom'
-import {BrowserRouter ,Switch, Route} from 'react-router-dom';
+import {Switch, Route} from 'react-router-dom';
 
 import { AuthContext } from '../../contexts/AuthContext'
 import MainBoard from './status/MainBoard';

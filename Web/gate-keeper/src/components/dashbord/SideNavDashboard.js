@@ -26,7 +26,7 @@ const  SideNavDashboard = () => {
                         <div className="background ">
                         </div>
                             <a href="#user">
-                                <img className="circle" src={userInfo.imgUrl} />
+                                <img alt='Profile-Pic' className="circle" src={userInfo.imgUrl} />
                             </a>
                             <a href="#name"><span className="black-text name ">{userInfo.fName + " " +  userInfo.lName}</span></a>
                             <a href="#email"><span className="black-text email">{userInfo.email}</span></a>
@@ -34,11 +34,11 @@ const  SideNavDashboard = () => {
                 </li>
             
                 <div className="font1">
-                    <li > <Link to = '/dashboard'><i className="material-icons white-text">dashboard</i>Dashboard</Link></li>
-                    <li ><Link to = '/dashboard/account-setting'><i className="material-icons  white-text">perm_identity</i>Accounte Setting</Link></li>
-                    <li ><Link to = '/dashboard/manage'><i className="material-icons  white-text">supervisor_account</i>Manage Users</Link></li>
-                    <li ><Link to = '/' onClick={signout}><i className="material-icons  white-text">home</i>Home</Link></li>
-                    <li ><a href="#!" onClick={signout}><i className="material-icons  white-text">logout</i>SignOut</a></li>
+                    <li > <Link to = '/dashboard'><i id='dashboard'className="material-icons white-text">dashboard</i>Dashboard</Link></li>
+                    <li ><Link to = '/dashboard/account-setting'><i id='account-setting' className="material-icons  white-text">perm_identity</i>Accounte Setting</Link></li>
+                    <li ><Link to = '/dashboard/manage'><i id='manage' className="material-icons  white-text">supervisor_account</i>Manage Users</Link></li>
+                    <li ><Link to = '/' onClick={signout}><i id='home' className="material-icons  white-text">home</i>Home</Link></li>
+                    <li ><a onClick={signout}><i id='side-signout' className="material-icons  white-text">logout</i>SignOut</a></li>
                 </div>
                 
             </ul>

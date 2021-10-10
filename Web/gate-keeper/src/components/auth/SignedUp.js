@@ -1,9 +1,9 @@
-import React, { useState , useContext , useEffect} from 'react'
+import React, { useState , useContext } from 'react'
 import { Redirect } from 'react-router-dom'
 import { AuthContext } from '../../contexts/AuthContext'
 import {InitContext} from '../../contexts/InitContext'
 import { DataContext } from '../../contexts/DataContext'
-import { auth } from '../../config/fbConfig'
+
 
 import UploadImg from '../dashbord/UploadImg'
 
@@ -18,7 +18,7 @@ const  SignedUp = () => {
         lastName : '',
         email:'',
         password:'',
-        Confirmpassword:''
+        confirmpassword:''
     })
     const [image, setImage] = useState()
     
@@ -42,7 +42,7 @@ const  SignedUp = () => {
             alert("Node is successfully initialized!")
             setDataLoaded(true)
         }catch(err){
-            alert("Signup Error  : " , err.message )
+            alert("Signup Error " , err.message )
             
         }
        
@@ -103,7 +103,7 @@ const  SignedUp = () => {
                      {/* confirm password */}
                     <div className="input-field col s12 m6">
                         <label htmlFor="Confirmpassword">Confirm Password</label>
-                        <input type="password" id="Confirmpassword" onChange={handleChange}/>
+                        <input type="password" id="confirmpassword" onChange={handleChange}/>
                     </div>
 
 

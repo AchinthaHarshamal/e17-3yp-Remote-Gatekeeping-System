@@ -1,4 +1,4 @@
-import React, { useState,useContext , useEffect} from 'react'
+import React, { useState,useContext} from 'react'
 import { Redirect } from 'react-router-dom'
 import { AuthContext } from '../../contexts/AuthContext'
 import { DataContext } from '../../contexts/DataContext'
@@ -13,7 +13,6 @@ function SignedIn() {
     const [errorMsg, setErrorMsg] = useState(null)
 
     const handleChange = (e) => {
-        //console.log(e);
         const {id , value} = e.target
         setValues({
            ...values,
@@ -21,19 +20,15 @@ function SignedIn() {
         })
     }
     const handleSubmit = async (e)=>{
-        
         e.preventDefault();
         try{
-            const credential = await signin(values)
+            await signin(values)
             setErrorMsg(null)
             setDataLoaded(true)
         }catch(err){
             setErrorMsg("Wrong Password or Email ! Try again")
         }
     }
-
-
-    
     if(user != null && dataLoaded)  {
         return <Redirect to='/dashboard'/>
     }
@@ -52,7 +47,7 @@ function SignedIn() {
                 </div>
 
                 <div className="input-field">
-                    <button className="btn grey darken-2 z-depth-0">Sign In</button>
+                    <button id = 'signin-submit'className="btn grey darken-2 z-depth-0">Sign In</button>
                     <div className="red-text center">
                               
                     {errorMsg ? <p>{errorMsg}</p> : null}

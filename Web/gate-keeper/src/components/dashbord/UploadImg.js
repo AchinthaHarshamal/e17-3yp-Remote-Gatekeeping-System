@@ -21,9 +21,9 @@ const UploadImg = (props) => {
  
 
 const thumb =  (
-    <div  style={thumbSty} >
-      <div style={thumbInner}>
-        {files[0] ? <img src={files[0].preview} style={img}/> : <p>Click to select a Profile Picture</p>}
+    <div   style={thumbSty} >
+      <div id = 'upload-img' style={thumbInner}>
+        {files[0] ? <img alt='Profile Pic' src={files[0].preview} style={img}/> : <p>Click to select a Profile Picture</p>}
       </div>
     </div>
   )
@@ -33,7 +33,7 @@ const thumb =  (
   }, [files]);
 
   return (
-    <section className="container">
+    <section  className="container">
       <div {...getRootProps({className: 'dropzone grey lighten-2' ,style:thumbsContainer})}>
         <input {...getInputProps()} />
         {thumb}
