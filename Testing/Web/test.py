@@ -1,14 +1,15 @@
 from selenium import webdriver
+import time
 
-PATH = './chromedriver.exe'
+PATH = './geckodriver.exe' #'./chromedriver.exe'
 URL = 'https://gate-keeper.systems'
 
-driver  = webdriver.Chrome(PATH)
+driver  = webdriver.Firefox(executable_path=PATH)
 
 driver.get(URL)
 
 print('Title of Website : ',driver.title)
-driver.close()
-# driver.quit
+# time.sleep(10)
+# driver.close()
+# driver.quit()
 
-driver.get
