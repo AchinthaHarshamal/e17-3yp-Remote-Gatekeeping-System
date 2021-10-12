@@ -1,5 +1,5 @@
 import React, {useState , useContext} from "react"
-import { db } from "../../config/fbConfig"
+import { db , storage} from "../../config/fbConfig"
 import { DataContext } from '../../contexts/DataContext'
 
 const Insert = () => {
@@ -33,9 +33,9 @@ const Insert = () => {
             'time': (new Date()).toJSON()
         })
         try {
-            const newMsgId = db.ref().child('messages/-Mkvc1UjFMXz5AjgLEIx').push().key
+            const newMsgId = db.ref().child('messages/-MlnzDJ-CHZZmT3250tN').push().key
             const update = {}
-            update['/messages/-Mkvc1UjFMXz5AjgLEIx/'+newMsgId] = msg 
+            update['/messages/-MlnzDJ-CHZZmT3250tN/'+newMsgId] = msg 
             await db.ref().update(update)
             //console.log('Success')
             alert("Success")
@@ -45,13 +45,16 @@ const Insert = () => {
         }
     }
 
-    const click = async (e)=>{
+    const click =  (e)=>{
         e.preventDefault();
-        const info =  await getUserInfo('something')
-        console.log('ii :' , info)
-        const messages = await getMessages(info.nodeId)
-        console.log(messages)
-
+        // storage.ref().child('/users/HmFPfyd0uxU6JzsoKEAWQfL58TQ2/Screenshot (362).png').getDownloadURL()
+        // .then((url)=> {
+        //     console.log('url',url);
+        // })
+        // const info =  await getUserInfo('something')
+        // console.log('ii :' , info)
+        // const messages = await getMessages(info.nodeId)
+        // console.log(messages)
     }
     return (
         <div className="container">
