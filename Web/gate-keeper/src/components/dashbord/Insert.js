@@ -45,16 +45,16 @@ const Insert = () => {
         }
     }
 
-    const click =  (e)=>{
+    const click =  async (e)=>{
         e.preventDefault();
         // storage.ref().child('/users/HmFPfyd0uxU6JzsoKEAWQfL58TQ2/Screenshot (362).png').getDownloadURL()
         // .then((url)=> {
         //     console.log('url',url);
         // })
-        // const info =  await getUserInfo('something')
-        // console.log('ii :' , info)
-        // const messages = await getMessages(info.nodeId)
-        // console.log(messages)
+        const info =  await getUserInfo('something')
+        console.log('ii :' , info)
+        const messages = await getMessages(info.nodeId)
+        console.log(messages)
     }
     return (
         <div className="container">
