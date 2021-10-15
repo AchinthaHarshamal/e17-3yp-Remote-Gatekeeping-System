@@ -21,9 +21,9 @@ const SignedOutLinks = ()=> {
                 <i id="nav-init" className="material-icons  white-text tooltipped" data-position="bottom" data-tooltip="Connect Device">cable</i>
             </NavLink></li>
 
-            <li><NavLink  to="/">
+            <li><NavLink  to="/faq">
                 <i id="nav-faq" className="material-icons  white-text tooltipped" data-position="bottom" data-tooltip="FAQ">contact_support</i>
-                </NavLink></li>
+            </NavLink></li>
    
         </ul>
     )

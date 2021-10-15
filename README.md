@@ -81,3 +81,8 @@ Web services provide another interface for the users to interact with the system
 1. Initializing the system and registration of the user
 2. Establishing the connection between the user account and the IoT device
 3. To download the mobile application
+
+
+## Testing Results
+  - for *Administrative Web Service* Testing results **click [here](./Testing/TESTING.md)**
+  

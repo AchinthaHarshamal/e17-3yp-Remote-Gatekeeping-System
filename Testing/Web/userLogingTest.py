@@ -13,8 +13,10 @@ class UserLoginTest(unittest.TestCase):
 
 
 	def test_loging_with_correct_user_name_and_password(self):
-		user_email = 'achi@gmail.com'
+		user_email = 'tom@gmail.com'
 		user_password = '123456'
+		dashboard_name = 'Tom Cruise'
+		dashboard_email = 'tom@gmail.com'
 
 		driver = self.driver
 		URL = 'https://gate-keeper.systems'
@@ -51,8 +53,9 @@ class UserLoginTest(unittest.TestCase):
 		name = driver.find_element_by_class_name('name')
 		email = driver.find_element_by_class_name('email')
 
-		assert  'Achintha Harshamal' in name.text
-		assert 'achi@gmail.com' in email.text 
+
+		assert  dashboard_name in name.text
+		assert dashboard_email in email.text 
 
 		print('User name : ' , name.text)
 		print('Email : ' , email.text)
@@ -62,7 +65,7 @@ class UserLoginTest(unittest.TestCase):
 
 	def test_loging_with_wrong_user_name_or_wrong_password(self):
 		user_email = 'achi@gmail.com'
-		user_password = 'wron_password'
+		user_password = 'wrong_password'
 
 		driver = self.driver
 		URL = 'https://gate-keeper.systems'
@@ -99,7 +102,7 @@ class UserLoginTest(unittest.TestCase):
 		print('Error message : ' , error.text)
 
 
-		time.sleep(10)
+		time.sleep(5)
 
 
 	def tearDown(self):

@@ -16,7 +16,7 @@ body {
     background-size: 100%;
     background-position: bottom;
     
-    background-image: linear-gradient(to bottom, rgb(208, 208, 211) , rgb(230, 228, 228)); 
+    background-image: linear-gradient(to bottom, rgb(251, 251, 255) , rgb(145, 153, 226)); 
     
 }
 
@@ -24,8 +24,16 @@ form{
     padding: 20px 30px;
     margin : 10% 20% 10% 20%; 
     border-radius: 0.5em;
-    box-shadow: 1em;
-  }
+    
+}
+@media only screen and (max-width : 992px) {
+    form {
+        padding: 5px 20px;
+        margin :15% 8% ;
+        border-radius: 0.5em;
+       
+    }
+}
 
 form button , form h5{
     margin: 20px 0px ;
@@ -123,18 +131,68 @@ form button , form h5{
     
 }
 
+
 /* home */
 .home{
     margin: 3vh;
     height: 85vh;
     border-top: 1vh;
-    /* background-image: url("https://thumbs.dreamstime.com/b/delivery-man-parcel-box-ringing-door-bell-home-service-mail-people-shipment-concept-customers-98428939.jpg");
-    background-repeat : repeat;
-    background-position: center; */
+    background-image: url("https://thumbs.dreamstime.com/b/delivery-man-parcel-box-ringing-door-bell-home-service-mail-people-shipment-concept-customers-98428939.jpg");
+    
+    background-position: center; 
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+.heroText{
+    text-align: left;
+    position: absolute;
+    top:5%;
+    left: 10%;
+    color: white;
+}
+.heroText p {
+    color:rgb(0, 0, 0);
+    max-width: 50%;
 }
 
-.banner{
-    margin: 3vh;
+.heroButtons {
+   
+    width: 60%;  
+    margin: 5% 0 ;
+}
+
+
+.heroButtons span{
+    margin-left: 5%;
+   
+    padding:2%;
+    font-size: 1.5rem;
+   
+}
+.heroButtons a{
+    margin: 2% 0% 2% 2%;
+    
+}
+
+@media only screen and (max-width : 992px) {
+    .heroButtons {
+   
+        width: 100%;  
+        margin: 5% 0 ;
+    }
+
+    .heroButtons span{
+        margin-left: 5%;
+       
+        padding:2%;
+        font-size: 1rem;
+       
+    }
+    .heroText p {
+        color:rgb(0, 0, 0);
+        max-width: 80%;
+    }
     
 }
 
@@ -148,4 +206,7 @@ form button , form h5{
 
 }
 
+.faq{
+    margin-top: 3vh;
+}
 

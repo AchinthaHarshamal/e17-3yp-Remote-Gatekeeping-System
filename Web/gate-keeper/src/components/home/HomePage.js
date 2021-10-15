@@ -12,18 +12,41 @@ const  HomePage = () => {
     if(user != null) { return <Redirect to='/dashboard'/> }
  
     return (
-        <div className="container">
+        <div >
             <div className="home grey darken-3">
-                <div className="row">
-                    <div className="col  s12 m8  grey lighten-2">
-                        <Banner />
-                    </div>
+                <div className='heroText '>
+                    <h2 >Secure Your Delevery, Child & Home</h2>
+                    <p>
                     
-                    <div className="col  s12 m4 grey lighten-3 ">
-                        <Dowonload />
+                        <b> When you are not being at home, and delevery come to the door. </b>
+                         What will happen to the delevery.<br/><br/>
+                        <b> In this pandamic situation, Interact with your outsiders specialy taking a delevery. 
+                            </b> Is that okay<br/><br/>
+                        
+                        <b> When your are not at home is it safe to interact your child with your out siders </b>
+
+                    </p>
+                    <h5>We weill give your the best soution</h5>
+
+                    <div class='heroButtons z-depth-5'>
+
+                        <span >
+                            Contact 
+                            <a href="#" class="btn-floating cyan accent-4 pulse">
+                                <i class="material-icons">contact_page</i>
+                            </a>
+                        </span>
+
+                        <span >
+                            Download App
+                            <a href="#" class="btn-floating  light-blue darken-4 pulse">
+                                <i class="material-icons">get_app</i>
+                            </a>
+                        </span>
+                    
                     </div>
                 </div>
-            
+                
             </div>
         </div>
         
