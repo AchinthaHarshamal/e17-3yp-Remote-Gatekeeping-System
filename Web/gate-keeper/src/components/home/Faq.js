@@ -45,6 +45,7 @@ const Faq = () => {
     return (
     <div className='faq'>
         <div className='container'>
+            <h2>FAQ</h2>
             <ul className="collapsible popout">
                 {lists}
             </ul>

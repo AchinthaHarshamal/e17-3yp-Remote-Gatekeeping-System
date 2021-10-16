@@ -196,9 +196,7 @@ form button , form h5{
     
 }
 
-.download{
-    margin-top: 3vh;
-}
+
 
 .font1{
     font-family: 'Noto Sans Display', sans-serif;
@@ -210,3 +208,35 @@ form button , form h5{
     margin-top: 3vh;
 }
 
+
+.contact{
+    margin: 5vh 0;
+    padding: 5% 0%;
+    
+}
+.contact ul{
+    margin:  10vh 0;
+}
+.contact  li{
+    margin-top : 2vh;
+}
+
+
+.download{
+    margin: 5vh 0;
+    padding: 5% 0%;
+}
+
+.download ul{
+    margin:  13vh 0;
+    /* background-image: url('https://images.picxy.com/cache/2020/11/12/561c8732f529e5b8071d532ce828ee31.jpg'); */
+   
+}
+.download  li{
+    margin : 2vh 5vh;
+   
+}
+
+.download span{
+    font-size: 1.5rem;
+}
