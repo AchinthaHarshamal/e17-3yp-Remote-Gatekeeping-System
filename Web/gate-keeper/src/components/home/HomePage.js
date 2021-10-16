@@ -1,8 +1,8 @@
 import React , {useContext} from 'react'
 import { Redirect } from 'react-router-dom'
 import { AuthContext } from '../../contexts/AuthContext'
+import { Link } from 'react-router-dom'
 import Dowonload from './Dowonload'
-import Banner from './Banner'
 
 
 const  HomePage = () => {
@@ -32,16 +32,16 @@ const  HomePage = () => {
 
                         <span >
                             Contact 
-                            <a href="#" class="btn-floating cyan accent-4 pulse">
+                            <Link to='/contactus' class="btn-floating cyan accent-4 pulse">
                                 <i class="material-icons">contact_page</i>
-                            </a>
+                            </Link>
                         </span>
 
                         <span >
                             Download App
-                            <a href="#" class="btn-floating  light-blue darken-4 pulse">
+                            <Link to='/download' class="btn-floating  light-blue darken-4 pulse">
                                 <i class="material-icons">get_app</i>
-                            </a>
+                            </Link>
                         </span>
                     
                     </div>

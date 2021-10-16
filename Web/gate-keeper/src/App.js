@@ -8,6 +8,9 @@ import Dashbord  from "./components/dashbord/Dashbord";
 import AuthNode from "./components/auth/AuthNode";
 import HomePage from "./components/home/HomePage";
 import Faq from "./components/home/Faq";
+import Dowonload from "./components/home/Dowonload";
+import ContactUs from "./components/home/ContactUs";
+
 
 import Insert from "./components/dashbord/Insert";
 import UploadImg from "./components/dashbord/UploadImg";
@@ -15,6 +18,7 @@ import UploadImg from "./components/dashbord/UploadImg";
 import AuthContextProvider from "./contexts/AuthContext";
 import DataContextProvider from "./contexts/DataContext";
 import InitContextProvider from "./contexts/InitContext";
+
 
 
 
@@ -34,6 +38,8 @@ function App() {
             <Route path='/insert' component={Insert}></Route>
             <Route path='/upload' component={UploadImg}></Route>
             <Route path='/faq' component={Faq}></Route>
+            <Route path='/download' component={Dowonload}></Route>
+            <Route path='/contactus' component={ContactUs}></Route>
         </Switch>
         </InitContextProvider>
       </DataContextProvider>

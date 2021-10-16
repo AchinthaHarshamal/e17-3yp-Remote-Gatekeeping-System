@@ -2,21 +2,40 @@ import React from 'react'
 import downloadImage from '../../img/download.jpg'
 
 const  Dowonload = () => {
+
+    const downloadApp = ()=> {
+
+    }
     return (
-        <div className="section download">
-            <div className="card  z-depth-3 grey darken-4">
-                <div className="card-image">
-                    <img src={downloadImage} alt="sah hello" />
+        <div className='download'>
+            <div className='container indigo accent-1'>    
+                <div className="row">
+                    <div className="col l6 s12">
+                        <h3 className="white-text">Take your App</h3>
+                        <p className="white-text text-lighten-4">
+                        We are proud to offer the one and only <b>Smart GateKeeper </b>, trusted. 
+                        It has unmatched strength and quality, and it is built to last, so we support it with a 1-year warranty.
+                        <br/>
+                        Mobile App facilitate your to control you GateKeeper remotely. 
                     
-                    <button className="btn-floating halfway-fab waves-effect waves-light teal accent-3">
-                        <i id='home-download' className="material-icons">download</i>
-                    </button>
-                </div>
-                <div className="card-content white-text ">  
-                    <span className="card-title">Download the app</span>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae, 
-                        iuin molestias quis olor sit amet consectetur onsec tetur amet 
-                    </p>
+                        </p>
+                        
+                    </div>
+                    <div className="col l4 offset-l2 s12   grey  accent-2">
+                        <ul>
+                            <li> 
+                                <a href="#" className="waves-effect waves-light">
+                                    <span className='white-text'>Download Here</span>
+                                </a>
+                                <div onClick={()=>console.log('hello')} className="btn-floating light-blue pulse ">
+                                   <i className="material-icons">download</i>
+                                 </div>
+                            </li>
+                            
+                        </ul> 
+                    </div>
+
+                    
                 </div>
             </div>
         </div>
