@@ -11,6 +11,7 @@ const InitContextProvider =(props)=>{
 
     const getNode =(serialNumber) =>{
         const dbRef = db.ref();
+        //setSerialNumber(serialNumber)
         return dbRef.child("nodes/"+serialNumber).get()
     }
 
