@@ -22,21 +22,21 @@ const ContactUs = () => {
                     <div className="col l4 offset-l2 s12 white">
                         <ul>
                             <li > 
-                                <a href="#" className="waves-effect waves-light">
+                                <a href="mailto:gatekeeper.remote@gmail.com" className="waves-effect waves-light">
                                     <span className='black-text'>gatekeeper.remote@gmail.com</span>
                                     <i className="material-icons left black-text">email</i>
 
                                 </a>
                             </li>
                             <li> 
-                                <a href="#" className="waves-effect waves-light">
+                                <a href="https://wa.me/94802020202" className="waves-effect waves-light">
                                     <span className='black-text'>+94 80 2020 202</span>
                                     <i className="material-icons left black-text">call</i>
 
                                 </a>
                             </li>
                             <li> 
-                                <a href="#" className="waves-effect waves-light">
+                                <a href="https://goo.gl/maps/3gwe3Zux42crsvBZ6" className="waves-effect waves-light">
                                     <span className='black-text'>Faculty of Engineering UoP</span>
                                     <i className="material-icons left black-text">place</i>
 

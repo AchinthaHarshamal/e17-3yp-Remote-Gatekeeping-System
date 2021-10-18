@@ -12,7 +12,7 @@ class UserSignInTest(unittest.TestCase):
 
 
 
-	def test_signin_with_valid_serialNumber(self):
+	def test_signup_with_valid_serialNumber(self):
 		serialNumber =  'testId'
 
 		fname = 'Tom'
@@ -35,11 +35,13 @@ class UserSignInTest(unittest.TestCase):
 
 		time.sleep(5)
 
+		# click on the connect devi
 		driver.implicitly_wait(10)
-		login = driver.find_element_by_id('nav-init')
-		login.click();
+		signup = driver.find_element_by_id('nav-init')
+		signup.click();
 
 
+		# input serial number and click the sumit button
 		driver.implicitly_wait(10)
 		input_serial = driver.find_element_by_id('nodeId')
 		input_serial.click()
@@ -48,6 +50,7 @@ class UserSignInTest(unittest.TestCase):
 		submit_serial  = driver.find_element_by_id('serial-submit')
 		submit_serial.click()
 
+		# Fill the form 
 		driver.implicitly_wait(15)
 		fnameI = driver.find_element_by_id('firstName')
 		lnameI = driver.find_element_by_id('lastName')
@@ -67,6 +70,7 @@ class UserSignInTest(unittest.TestCase):
 		cPasswordI.click()
 		cPasswordI.send_keys(cPassword) 
 
+		# wait to input image file
 		input('After mannually inputting the Image press Enter')
 		submit_signup.click()
 
@@ -78,7 +82,7 @@ class UserSignInTest(unittest.TestCase):
 		name = driver.find_element_by_class_name('name')
 		email = driver.find_element_by_class_name('email')
 
-
+		# check whther given name is and email appears in the dashboard
 		assert  dashboard_name in name.text
 		assert dashboard_email in email.text 
 

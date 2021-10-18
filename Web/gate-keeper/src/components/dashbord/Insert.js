@@ -1,5 +1,5 @@
 import React, {useState , useContext} from "react"
-import { db , storage} from "../../config/fbConfig"
+import { db } from "../../config/fbConfig"
 import { DataContext } from '../../contexts/DataContext'
 
 const Insert = () => {

@@ -38,7 +38,7 @@ const  SideNavDashboard = () => {
                     <li ><Link to = '/dashboard/account-setting'><i id='account-setting' className="material-icons  white-text">perm_identity</i>Accounte Setting</Link></li>
                     <li ><Link to = '/dashboard/manage'><i id='manage' className="material-icons  white-text">supervisor_account</i>Manage Users</Link></li>
                     <li ><Link to = '/' onClick={signout}><i id='home' className="material-icons  white-text">home</i>Home</Link></li>
-                    <li ><a onClick={signout}><i id='side-signout' className="material-icons  white-text">logout</i>SignOut</a></li>
+                    <li ><Link to='' onClick={signout}><i id='side-signout' className="material-icons  white-text">logout</i>SignOut</Link></li>
                 </div>
                 
             </ul>
