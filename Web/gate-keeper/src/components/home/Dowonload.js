@@ -1,10 +1,10 @@
 import React from 'react'
-import downloadImage from '../../img/download.jpg'
+// import downloadImage from '../../img/download.jpg'
 
 const  Dowonload = () => {
 
     const downloadApp = ()=> {
-
+        console.log('hello')
     }
     return (
         <div className='download'>
@@ -24,10 +24,10 @@ const  Dowonload = () => {
                     <div className="col l4 offset-l2 s12   grey  accent-2">
                         <ul>
                             <li> 
-                                <a href="#" className="waves-effect waves-light">
+                                <a href="/download" className="waves-effect waves-light">
                                     <span className='white-text'>Download Here</span>
                                 </a>
-                                <div onClick={()=>console.log('hello')} className="btn-floating light-blue pulse ">
+                                <div onClick={downloadApp} className="btn-floating light-blue pulse ">
                                    <i className="material-icons">download</i>
                                  </div>
                             </li>

@@ -42,8 +42,9 @@ const DataContextProvider = (props) => {
                 
             }
         }catch(err){
-            //throw err
-            console.log('Some error')
+            console.log(err.message)
+            throw err
+            
         }
     }
 
@@ -53,7 +54,9 @@ const DataContextProvider = (props) => {
                 const info = await getUserInfo(userId)
                 await getMessages(info.nodeId)
             }catch(err){
+                
                 console.log(err.message)
+
             }
         }
     }

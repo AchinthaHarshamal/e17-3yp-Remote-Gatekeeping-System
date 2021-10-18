@@ -27,6 +27,9 @@ function SignedIn() {
             setDataLoaded(true)
         }catch(err){
             setErrorMsg("Wrong Password or Email ! Try again")
+            if(err.code === "auth/too-many-requests"){
+                alert('Access to this account has been temporarily disabled due to many failed login attempts.')
+            }
         }
     }
     if(user != null && dataLoaded)  {

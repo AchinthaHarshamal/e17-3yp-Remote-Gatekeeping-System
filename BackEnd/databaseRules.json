@@ -1,0 +1,60 @@
+{
+  "rules": {
+    "users" :{
+      ".write":"auth !==null",
+      "$uid" :{
+        ".read":"$uid === auth.uid",
+        ".validate" : "newData.hasChildren(['fName', 'lName' , 'admin','email','nodeId'])",
+        "admin":{
+          ".validate":"newData.isBoolean()"
+        	},
+        "fName" :{
+          ".validate":"newData.isString()"
+        },
+        "lName" :{
+          ".validate":"newData.isString()"
+        },
+        "email":{
+          ".validate":"newData.val().contains('@')"
+        }
+        
+          
+        }
+      },
+    
+    "nodes":{
+      ".read" : true ,
+      "$nodeId" :{
+        ".write" : "auth !==null && data.child('init').val()===false"
+      }
+    },
+    "initNodes" : {
+      ".read" : false,
+    	"$initNodes" :{
+        ".write" : "auth !==null ",
+        ".validate" : "newData.hasChildren(['adminID' , 'users'])",
+        "users":{
+          ".validate" : "newData.hasChildren(['user_0','user_1'])",
+           "user_0" : {".validate" :"newData.isString()"},
+           "user_1" : {".validate" : "newData.isString()"}
+                    
+
+        }
+  
+      }
+      
+    } ,
+    "events" : {
+      ".read" : false,
+      ".write" : true
+    },
+    "messages" :{
+      ".read" : true,
+      ".write" : true
+    },
+    "pendingUsers":{
+      ".read" : false,
+      ".write" : true
+    }
+  }
+}

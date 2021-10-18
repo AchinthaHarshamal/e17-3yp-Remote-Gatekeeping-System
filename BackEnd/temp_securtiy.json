@@ -1,0 +1,73 @@
+{
+  "rules": {
+    
+    ".read": true,
+    ".write": true
+  }
+}
+
+
+
+{
+  "rules": {
+    "users" :{
+      ".write":"auth !==null",
+      "$uid" :{
+        ".read":"$uid === auth.uid"
+      }
+    } 
+  }
+}
+
+
+
+{
+  "rules": {
+    "users" :{
+      ".write":"auth !==null",
+      "$uid" :{
+        ".read":"$uid === auth.uid"
+      }
+    } ,
+    "nodes":{
+      ".read" : true ,
+      "$nodeId" :{
+        ".write" : "auth !==null && data.child('init').val()===false"
+      }
+    }
+  }
+}
+
+{
+  "rules": {
+    "users" :{
+      ".write":"auth !==null",
+      "$uid" :{
+        ".read":"$uid === auth.uid",
+        ".validate" : "newData.hasChildren(['fName', 'lName' , 'admin','email','nodeId'])"
+      }
+    } ,
+    "nodes":{
+      ".read" : true ,
+      "$nodeId" :{
+        ".write" : "auth !==null && data.child('init').val()===false"
+      }
+    },
+    "initNodes" : {
+      ".read" : false,
+      ".write" : true
+    } ,
+    "events" : {
+      ".read" : false,
+      ".write" : true
+    },
+    "messages" :{
+      ".read" : false,
+      ".write" : true
+    },
+    "pendingUsers":{
+      ".read" : false,
+      ".write" : true
+    }
+  }
+}

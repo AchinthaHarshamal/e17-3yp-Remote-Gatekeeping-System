@@ -2,7 +2,7 @@ import React , {useContext} from 'react'
 import { Redirect } from 'react-router-dom'
 import { AuthContext } from '../../contexts/AuthContext'
 import { Link } from 'react-router-dom'
-import Dowonload from './Dowonload'
+
 
 
 const  HomePage = () => {
@@ -28,19 +28,19 @@ const  HomePage = () => {
                     </p>
                     <h5>We weill give your the best soution</h5>
 
-                    <div class='heroButtons z-depth-5'>
+                    <div className='heroButtons z-depth-5'>
 
                         <span >
                             Contact 
-                            <Link to='/contactus' class="btn-floating cyan accent-4 pulse">
-                                <i class="material-icons">contact_page</i>
+                            <Link to='/contactus' className="btn-floating cyan accent-4 pulse">
+                                <i className="material-icons">contact_page</i>
                             </Link>
                         </span>
 
                         <span >
                             Download App
-                            <Link to='/download' class="btn-floating  light-blue darken-4 pulse">
-                                <i class="material-icons">get_app</i>
+                            <Link to='/download' className="btn-floating  light-blue darken-4 pulse">
+                                <i className="material-icons">get_app</i>
                             </Link>
                         </span>
                     

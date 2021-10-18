@@ -1,0 +1,305 @@
+{
+  "events" : {
+    "node1" : {
+      "-MkceW0jxgUT3jC0UHab" : {
+        "date" : "2021-09-27T19:10:04.724Z",
+        "description" : "testing",
+        "imageURL" : "https://firebasestorage.googleapis.com/v0/b/gate-keeper-6fad9.appspot.com/o/messages%2F-MjhnXW1CcA_sTXEssD1%2F2021-09-27E2.png?alt=media",
+        "mailBoxAccess" : false,
+        "name" : "test1",
+        "rating" : 4,
+        "userType" : "visitor"
+      },
+      "-MkcemPYxnIM4C3PEMkz" : {
+        "date" : "2021-09-27T19:11:15.947Z",
+        "description" : "testing",
+        "imageURL" : "https://firebasestorage.googleapis.com/v0/b/gate-keeper-6fad9.appspot.com/o/messages%2F-MjhnXW1CcA_sTXEssD1%2F2021-09-27E3.png?alt=media",
+        "mailBoxAccess" : false,
+        "name" : "testing2",
+        "rating" : 4,
+        "userType" : "visitor"
+      },
+      "-Mkcf6i-2DegP5uFzvQ7" : {
+        "date" : "2021-09-27T19:12:43.211Z",
+        "description" : "this is for testing",
+        "imageURL" : "https://firebasestorage.googleapis.com/v0/b/gate-keeper-6fad9.appspot.com/o/messages%2F-MjhnXW1CcA_sTXEssD1%2F2021-09-27E4.png?alt=media",
+        "mailBoxAccess" : false,
+        "name" : "testing3",
+        "rating" : 5,
+        "userType" : "visitooo"
+      },
+      "-MkhP0KxAJbmWI_PhWNl" : {
+        "date" : "2021-09-28T17:16:06.914Z",
+        "description" : "This is for testing,",
+        "imageURL" : "messages/-MjhnXW1CcA_sTXEssD1/2021-09-28E13N0.mp3",
+        "mailBoxAccess" : false,
+        "name" : "hellow",
+        "rating" : 4
+      },
+      "-MkhRIFwUX5Sz-sO1RJb" : {
+        "date" : "2021-09-28T17:26:04.596Z",
+        "description" : "test",
+        "imageURL" : "messages/-MjhnXW1CcA_sTXEssD1/2021-09-28E13N0.mp3",
+        "mailBoxAccess" : true,
+        "name" : "event",
+        "rating" : 4
+      },
+      "-MkkEyn3qGauKViF4BOX" : {
+        "date" : "2021-09-29T06:31:07.173Z",
+        "description" : "Testing successful😀",
+        "imageURL" : "https://www.justalittlebitofbacon.com/wp-content/uploads/2017/06/mixed-berry-pie-crumb-topping-2.jpg",
+        "mailBoxAccess" : false,
+        "name" : "This is just for testing",
+        "rating" : 4,
+        "userType" : "visitor"
+      },
+      "-MkkQBIPlU6orucbvjU0" : {
+        "date" : "2021-09-29T07:20:06.476Z",
+        "description" : "this is for testing",
+        "imageURL" : "/dummy/testing",
+        "mailBoxAccess" : true,
+        "name" : "testing",
+        "rating" : 3,
+        "userType" : "visitor"
+      },
+      "-MkkRC8OocMtvLEXbNlr" : {
+        "date" : "2021-09-29T07:24:32.079Z",
+        "description" : "jjdkdj",
+        "imageURL" : "/dummy/testing",
+        "name" : "hello",
+        "rating" : 4,
+        "userType" : "visitor"
+      },
+      "-MkkS7inY1_4DKQA1l1g" : {
+        "date" : "2021-09-29T07:28:36.145Z",
+        "description" : "hello",
+        "imageURL" : "/dummy/testing",
+        "name" : "This is for empty",
+        "rating" : 4,
+        "userType" : "visitor"
+      },
+      "-MkkSuUu50lHOBRUvEC3" : {
+        "date" : "2021-09-29T07:32:00.005Z",
+        "description" : "dkjf",
+        "imageURL" : "/dummy/testing",
+        "name" : "hello",
+        "rating" : 4,
+        "userType" : "visitor"
+      },
+      "-MkkSzDP-f_I3kUzH1_i" : {
+        "date" : "2021-09-29T07:32:19.359Z",
+        "description" : "dd",
+        "imageURL" : "/dummy/testing",
+        "name" : "dffdf",
+        "rating" : 3,
+        "userType" : "visitor"
+      },
+      "-MkkU8Ot6r_PIbZ0mJrD" : {
+        "date" : "2021-09-29T07:37:23.216Z",
+        "description" : "dddddz",
+        "imageURL" : "/dummy/testing",
+        "name" : "ddd",
+        "rating" : 3,
+        "userType" : "visitor"
+      },
+      "-MkkUY4z1-T6eomCLypR" : {
+        "date" : "2021-09-29T07:39:08.433Z",
+        "description" : "dddd",
+        "imageURL" : "/dummy/testing",
+        "name" : "ddd",
+        "rating" : 3,
+        "userType" : "visitor"
+      },
+      "-MkkUmorgi0sGL5L8e6J" : {
+        "date" : "2021-09-29T07:40:12.869Z",
+        "description" : "MailBoxAccess",
+        "imageURL" : "/dummy/testing",
+        "name" : "mailboxAccessNo",
+        "rating" : 3,
+        "userType" : "visitor"
+      },
+      "-MkkWfQ4aEcbNMHmPeqw" : {
+        "date" : "2021-09-29T07:48:26.856Z",
+        "description" : "THIS IS FOR ANOTHER TEST",
+        "imageURL" : "/dummy/testing",
+        "mailBoxAccess" : true,
+        "name" : "ANOTHER TEST",
+        "rating" : 4,
+        "userType" : "visitor"
+      },
+      "-MkkXXHUNruDdVXFXreR" : {
+        "date" : "2021-09-29T07:52:11.601Z",
+        "description" : "HELLO",
+        "imageURL" : "/dummy/testing",
+        "name" : "DONE",
+        "rating" : 3,
+        "userType" : "visitor"
+      },
+      "-Mkl9QKznd2Qk5F2K7_b" : {
+        "date" : "2021-09-29T10:46:27.307Z",
+        "description" : "SUCCESS",
+        "imageURL" : "https://firebasestorage.googleapis.com/v0/b/gate-keeper-6fad9.appspot.com/o/messages%2F-MjhnXW1CcA_sTXEssD1%2F2021-09-29E3.jpg?alt=media",
+        "mailBoxAccess" : true,
+        "name" : "TESTING",
+        "rating" : 4,
+        "userType" : "visitor"
+      },
+      "-MklDtz6VhXRchLQQmuT" : {
+        "date" : "2021-09-29T11:06:01.432Z",
+        "description" : "Testing session",
+        "imageURL" : "https://firebasestorage.googleapis.com/v0/b/gate-keeper-6fad9.appspot.com/o/messages%2F-MjhnXW1CcA_sTXEssD1%2F2021-09-29E11.jpg?alt=media",
+        "name" : "testing session",
+        "rating" : 4,
+        "userType" : "delivery"
+      },
+      "-MklSiVCzqq0Cw6L5CHs" : {
+        "date" : "2021-09-29T12:10:46.452Z",
+        "description" : "this is for testing",
+        "imageURL" : "https://firebasestorage.googleapis.com/v0/b/gate-keeper-6fad9.appspot.com/o/messages%2F-MjhnXW1CcA_sTXEssD1%2F2021-09-29E27.jpg?alt=media",
+        "name" : "Testing",
+        "rating" : 4,
+        "userType" : "visitor"
+      },
+      "-Mkwp9kTuu59to68WhWQ" : {
+        "date" : "2021-10-01T17:09:01.915Z",
+        "description" : "this is for testing",
+        "imageURL" : "https://firebasestorage.googleapis.com/v0/b/gate-keeper-6fad9.appspot.com/o/messages%2F-MjhnXW1CcA_sTXEssD1%2F2021-10-01E2.jpg?alt=media",
+        "name" : "demo",
+        "rating" : 4,
+        "userType" : "delivery"
+      },
+      "-MkwrJdVQq1uMaXW6zdJ" : {
+        "date" : "2021-10-01T17:18:26.744Z",
+        "description" : "this is for testing",
+        "imageURL" : "https://firebasestorage.googleapis.com/v0/b/gate-keeper-6fad9.appspot.com/o/messages%2F-MjhnXW1CcA_sTXEssD1%2F2021-10-01E2.jpg?alt=media",
+        "name" : "demo",
+        "rating" : 4,
+        "userType" : "delivery"
+      },
+      "-MkwtJsc3iBBgKxmJFX3" : {
+        "date" : "2021-10-01T17:27:12.004Z",
+        "description" : "this is for testing",
+        "imageURL" : "https://firebasestorage.googleapis.com/v0/b/gate-keeper-6fad9.appspot.com/o/messages%2F-MjhnXW1CcA_sTXEssD1%2F2021-10-01E2.jpg?alt=media",
+        "name" : "demo",
+        "rating" : 4,
+        "userType" : "delivery"
+      },
+      "-MkwuHP4dP6jn1dgvxyf" : {
+        "date" : "2021-10-01T17:31:24.013Z",
+        "description" : "this is for testing",
+        "imageURL" : "https://firebasestorage.googleapis.com/v0/b/gate-keeper-6fad9.appspot.com/o/messages%2F-MjhnXW1CcA_sTXEssD1%2F2021-10-01E2.jpg?alt=media",
+        "name" : "demo",
+        "rating" : 4,
+        "userType" : "delivery"
+      }
+    }
+  },
+  "initNodes" : {
+    "-Mm2ml-nuA-UO6F5XdQP" : {
+      "adminID" : "L7YhxjAoMwTb9tb5siP31nSm0qi1",
+      "users" : {
+        "user_0" : "L7YhxjAoMwTb9tb5siP31nSm0qi1",
+        "user_1" : ""
+      }
+    }
+  },
+  "messages" : {
+    "-MjhnXW1CcA_sTXEssD1" : {
+      "-MkwNp_RjVlDK3nUqKl1" : {
+        "ack" : "true",
+        "event" : 0,
+        "from" : "device",
+        "msgType" : "image",
+        "msgURL" : "https://firebasestorage.googleapis.com/v0/b/gate-keeper-6fad9.appspot.com/o/messages%2F-MjhnXW1CcA_sTXEssD1%2F2021-10-01E0.jpg?alt=media",
+        "time" : "2021-10-01T15:04:45.426Z",
+        "to" : "all",
+        "userType" : "visitor"
+      },
+      "-MkwNu46cHb9D3SOMwYC" : {
+        "event" : 0,
+        "from" : "device",
+        "msgType" : "AUDIO",
+        "msgURL" : "messages/-MjhnXW1CcA_sTXEssD1/2021-09-29E10N0.mp3",
+        "status" : "RECORDING",
+        "time" : "2021-10-01T15:04:51.811Z",
+        "to" : "all"
+      },
+      "-MkwOF-Vd0LKxpS2_RAT" : {
+        "ack" : "false",
+        "event" : 1,
+        "from" : "device",
+        "msgType" : "image",
+        "msgURL" : "https://firebasestorage.googleapis.com/v0/b/gate-keeper-6fad9.appspot.com/o/messages%2F-MjhnXW1CcA_sTXEssD1%2F2021-10-01E1.jpg?alt=media",
+        "time" : "2021-10-01T15:06:33.668Z",
+        "to" : "all",
+        "userType" : "delivery"
+      },
+      "-MkwOkPKiJbpkuqAmf1N" : {
+        "ack" : "false",
+        "event" : 2,
+        "from" : "device",
+        "msgType" : "image",
+        "msgURL" : "https://firebasestorage.googleapis.com/v0/b/gate-keeper-6fad9.appspot.com/o/messages%2F-MjhnXW1CcA_sTXEssD1%2F2021-10-01E2.jpg?alt=media",
+        "time" : "2021-10-01T15:08:44.484Z",
+        "to" : "all",
+        "userType" : "delivery"
+      }
+    },
+    "-Mm2ml-nuA-UO6F5XdQP" : {
+      "-Mm2ml-oLYuHSY-Bl9j6" : {
+        "event" : "0",
+        "from" : "Bot",
+        "msgType" : "text",
+        "msgUrl" : "testUrl",
+        "time" : "2021-10-15T11:51:39.626Z",
+        "to" : "All"
+      }
+    }
+  },
+  "nodes" : {
+    "serial" : {
+      "init" : false,
+      "nodeId" : "autoGenID",
+      "users" : {
+        "admin" : "authgen",
+        "user1" : "authgen"
+      }
+    },
+    "testId" : {
+      "init" : false,
+      "nodeId" : "",
+      "users" : {
+        "admin" : "",
+        "user1" : ""
+      }
+    }
+  },
+  "pendingUsers" : {
+    "tempPasswork" : {
+      "nodeId" : "testNodeId",
+      "usedId" : false
+    }
+  },
+  "product" : {
+    "item1" : 20,
+    "item2" : 30
+  },
+  "users" : {
+    "L7YhxjAoMwTb9tb5siP31nSm0qi1" : {
+      "admin" : true,
+      "email" : "tom@gmail.com",
+      "fName" : "Tom",
+      "imgUrl" : "https://firebasestorage.googleapis.com/v0/b/gate-keeper-6fad9.appspot.com/o/users%2FL7YhxjAoMwTb9tb5siP31nSm0qi1%2Ftom.jpg?alt=media&token=0c442620-5305-4596-a311-ce3390e51bb7",
+      "lName" : "Cruise",
+      "nodeId" : "-Mm2ml-nuA-UO6F5XdQP"
+    },
+    "wdd2zwdNXVPV8ZhA9VaW4ISaVph1" : {
+      "admin" : true,
+      "email" : "tom@gmail.com",
+      "fName" : "Tom",
+      "imgUrl" : "",
+      "lName" : "Cruise",
+      "nodeId" : "-Mlzx5pmPgZPaCJG2yoQ"
+    }
+  }
+}
