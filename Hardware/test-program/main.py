@@ -59,7 +59,7 @@ def createData(msgType, url):
 NODEID = "-MjhnXW1CcA_sTXEssD1"
 PATH = "messages/"+NODEID+"/"
 DELAY = 500
-AUDIOID = ""
+audioID = ""
 
 
 def timeout(init_time):
@@ -69,30 +69,22 @@ def timeout(init_time):
 def handleAck(message):
     global not_updated
     try:
-        if message["data"].get("ack") == "true":
-        # if message["data"] == "true":
-            not_updated = False
-    except:
-        pass
-
-
-def handleVoiceSend(message):
-    global update, not_updated
-    try:
-        if message["data"].get("msgURL")[0] == "m":
-        # if message["data"][0] == "m":
-            update = message["data"].get("msgURL")
+        # print(message["data"])
+        # if message["data"].get("ack") == "true":
+        if message["data"] == "true":
             not_updated = False
     except:
         pass
 
 
 def handleVoiceListen(message):
-    global not_updated, AUDIOID
+    global not_updated, audioID
     try:
-        if message["data"].get("status") == "LISTENING":
-        # if message["data"] == "LISTENING":
-            AUDIOID = message["path"].split("/")[1]
+        # print(message["data"])
+        # if message["data"].get("status") == "LISTENING":
+        if message["data"] == "LISTENING":
+            if audioID == "":
+                audioID = message["path"].split("/")[1]
             not_updated = False
     except:
         pass
@@ -101,28 +93,61 @@ def handleVoiceListen(message):
 def handleVoiceRecord(message):
     global not_updated
     try:
-        if message["data"].get("status") == "RECORDING":
-        # if message["data"] == "RECORDING":
+        # print(message["data"])
+        # if message["data"].get("status") == "RECORDING":
+        if message["data"] == "RECORDING":
+            not_updated = False
+    except:
+        pass
+
+
+def handleVoiceSend(message):
+    global update, not_updated
+    try:
+        # print(message["data"])
+        # if message["data"].get("msgURL")[0] == "m":
+        if message["data"][0] == "m":
+            # update = message["data"].get("msgURL")
+            update = message["data"]
+            not_updated = False
+    except:
+        pass
+
+
+def handleMailboxAccess(message):
+    global permitted, not_updated
+    try:
+        print(message["data"])
+        # if message["data"].get("msgType") == "ACCESS_GIVEN":
+        if message["data"] == "ACCESS_GIVEN":
+            not_updated = False
+            permitted = True
+        # if message["data"].get("msgType") == "ACCESS_DENIED":
+        elif message["data"] == "ACCESS_DENIED":
             not_updated = False
     except:
         pass
 
 
 def initStream(streamHandler):
-    global init_time, not_updated, my_stream1
+    global init_time, not_updated, stream
     init_time = time()
     not_updated = True
-    my_stream1 = db.child(PATH).stream(streamHandler)
+    if audioID == "":
+        messagePath = PATH
+    else:
+        messagePath = PATH+audioID
+    stream = db.child(messagePath).stream(streamHandler)
 
 
 def waitForResponse():
-    global not_updated, my_stream1
+    global not_updated, stream
     waiting = True
     while not_updated and waiting:
         print("\t\t<waiting_for_response...>")
         sleep(1)
         waiting = timeout(init_time)
-    my_stream1.close()
+    stream.close()
     not_updated = True
     print("\t\t<responded>")
     return waiting
@@ -166,8 +191,8 @@ def sendVoice():
         print("\t<acked>")
         db.child("messages").child(NODEID).push(data)
     else:
-        db.child("messages").child(NODEID).child(AUDIOID).update({"status": "NONE"})
-        db.child("messages").child(NODEID).child(AUDIOID).update({"msgURL": PATH+audio})
+        db.child("messages").child(NODEID).child(audioID).update({"status": "NONE"})
+        db.child("messages").child(NODEID).child(audioID).update({"msgURL": PATH+audio})
     print("\t<sent>")
 
 
@@ -196,9 +221,16 @@ def waitForSending():
     print("User is sending!")
 
 
-def getVoice(path):
+def waitForPermission() -> bool:
+    print("\t<waiting_for_permission...>")
+    initStream(handleMailboxAccess)
+    permitted = waitForResponse()
+    print("\t<replied>")
+
+
+def getVoice():
     print("\t<downloading_voice...>")
-    storage.child(path).download("img/"+path.split("/")[-1])
+    storage.child(update).download("img/"+update.split("/")[-1])
     print("\t<done>")
 
 
@@ -213,29 +245,41 @@ def noReplyResponse():
     print("No reply!")
 
 
+def askMailboxAccess():
+    db.child("messages").child(NODEID).child(audioID).update({"msgType": "MAIL_BOX_ACCESS"})
+    waitForPermission()
+    print("User permitted access!" if permitted else "User denied access!")
+
+
+def openMailbox():
+    print("Mailbox lock is open, place the delivery")
+
+
+def waitForMailboxClosed():
+    print("Close the mailbox!")
+    sleep(2)
+
+
 def endEvent():
     global eventNo
     eventNo += 1
     print("------------------------------")
-    print("Exited the system!\n")
+    print("Thank you, Have a nice day!\n")
 
 
 if __name__ == "__main__":
     """ TODO
-    1. MAIL_BOX_ACCESS -> ACCESS_GIVEN
+    1. getVoice() path: img -> aud
     2. auth
-    3. getVoice() path: img -> aud
-    4. getVoice() -> update
 
-    ->  noReplyResponse(), openMailbox(), closeMailbox(), 
-        openGate(), closeGate(), updateMailboxState()
+    ->  noReplyResponse(), closeMailbox(), updateMailboxState()
     """
-    eventNo = 29
+    storage, db = firebaseAuth()
+    eventNo = 0
 
     startEvent()
     image = captureImage()
     isDelivery = identifyUser()
-    storage, db = firebaseAuth()
     sendUserData()
 
     convCount = 0
@@ -247,10 +291,22 @@ if __name__ == "__main__":
         if voiceDelivered():
             waitForRecording()
             waitForSending()
-            getVoice(update)
+            getVoice()
             playVoice()
         else:
             noReplyResponse()
             break
 
+    if isDelivery and audioID != "":
+        permitted = False
+        askMailboxAccess()
+        if permitted:
+            openMailbox()
+            waitForMailboxClosed()
+        else:
+            pass
+    else:
+        pass
+
+    audioID = ""
     endEvent()
