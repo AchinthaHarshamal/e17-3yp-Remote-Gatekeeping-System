@@ -4,6 +4,13 @@ import pyrebase
 #  third-party helper library for interacting with the REST API
 
 
+def getNodeID():
+    with open("serial.txt", "r") as file:
+        serialNo = file.read()
+    nodeid = db.child("nodes").child(serialNo).get().val()["nodeId"]
+    return nodeid
+
+
 def startEvent():
     input("Press Enter to INIT the system ")
     print("------------------------------")
@@ -271,10 +278,12 @@ if __name__ == "__main__":
     """ TODO
     1. getVoice() path: img -> aud
     2. auth
+    3. change testId
 
     ->  noReplyResponse(), closeMailbox(), updateMailboxState()
     """
     storage, db = firebaseAuth()
+    # NODEID = getNodeID()
     eventNo = 0
 
     startEvent()
