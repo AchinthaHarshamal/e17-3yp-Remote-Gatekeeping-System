@@ -14,7 +14,7 @@
 |User Loging (ii)   | User loging with wrong email or password    | Try to log in with the wrong credential| Blocking the invalid users  |Pass    |
 |Device initialize (i) | The device initializes with the correct serial number & Valid use information. | Checking whether the initialization work correctly or not |Successful signup to valid-user | Pass|
 |Device initialize (ii) | Device initialize with incorrect serial number | Checking whether the initialization work with incorrect serial or not|Unable to sign up an invalid user| Pass|
-|||||
+||||||
 
 <br/>
 <br/>
@@ -25,8 +25,9 @@
 
 | Test        | Description    | Pupose|Expected Result| Result |
 |-------------|----------------|-------|-|-------|
-|Malicious user logig|Brute Forcing password|Checking the security againsts the malicious access| security against the malicious access	Blocking the selected email after a few unsuccessful attempts for a time period|Pass (Number of attempts xx) |
-|Datebase Access (i)|CRUD operation on the *Users , Messages , InitNodes , Evernts , Nodes* collections|To fine-grain tuning the outside access to the database|Users  - read and write access, authenticated users only for their collection.<br/><br/>Nodes - Read access to any outside users,<br/> write access only to authenticate users for their collection<br/><br/>|Pass|
-|--|||||
+|Malicious user loging|Brute Forcing password & Checking number of attempts|To test the security against malicious intrusion| security against the malicious access	Blocking the selected email after a few unsuccessful attempts for a time period|Pass (Number of attempts = 05) |
+|Datebase Access (i)|CRUD operations on the *Users , Messages , InitNodes , Events , Nodes* collections for authenticated and unauthenticated users |To fine-grain tuning the outside access to the database|Users  - read and write access, authenticated users only for their collection.<br/><br/>Messages- Authenticated users for their own collection <br/><br/>InitNode - write access for authenticated users, read access only for system admin <br/><br/>Events - Authentcated users for there own collection<br/><br/>Nodes - Read access to any outside users , write access only to authenticate users for their collection<br/><br/>|Pass|
+| Database Access (ii)|Data validatons|To check if authenticated users can edit databases with malicious content. |Stop unwanted data updates in the database & ensure the type safty|pass|
+||||||
 
 

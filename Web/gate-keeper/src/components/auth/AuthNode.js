@@ -35,7 +35,7 @@ const  AuthNode = () => {
 
             }else{
                
-                setErrorMsg('Wrong Serial number Or Device Is Already Initialized')
+                setErrorMsg('Wrong Serial number or, Device Is Already Initialized')
             }
             
         }catch(err){

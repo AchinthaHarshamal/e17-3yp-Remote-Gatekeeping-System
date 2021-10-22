@@ -14,9 +14,13 @@ const  Dowonload = () => {
                         <h3 className="white-text">Take your App</h3>
                         <p className="white-text text-lighten-4">
                         We are proud to offer the one and only <b>Smart GateKeeper </b>, trusted. 
-                        It has unmatched strength and quality, and it is built to last, so we support it with a 1-year warranty.
+                        
                         <br/>
-                        Mobile App facilitate your to control you GateKeeper remotely. 
+      
+                         Step 1: Download the our app and install it in device.<br/>
+                         Step 2: Use email and password to loging to the app.
+                             
+                        <br/><b>Enjoy your security!</b>
                     
                         </p>
                         

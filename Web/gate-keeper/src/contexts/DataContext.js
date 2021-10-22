@@ -10,6 +10,7 @@ const DataContextProvider = (props) => {
     const [messages, setMessages] = useState({})
     const [userInfo, setUserInfo] = useState({}) 
     const [dataLoaded, setDataLoaded] = useState(Boolean(localStorage.getItem('dataLoaded')))
+    
 
 
     const getUserInfo = async (userId) =>{

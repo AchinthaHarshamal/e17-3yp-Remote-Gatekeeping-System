@@ -13,7 +13,7 @@ class Brute_Frocing_Password_Test(unittest.TestCase):
 
 
 	def test_brute_frocing_password_attempt(self):
-		user_email = 'tom@gmail.com'
+		user_email = 'test@gmail.com'
 		user_password = 'wrong_password'
 
 		driver = self.driver
@@ -42,9 +42,10 @@ class Brute_Frocing_Password_Test(unittest.TestCase):
 		# filll the login form with password
 		input_password = driver.find_element_by_id('password')
 
+		## Try to Brute-Forcing password and count the number of times
 		aleart_exist = False
 		attempts = 0 
-		while(not aleart_exist and  attempts < 2):
+		while(not aleart_exist ):
 			user_password= str(random. randint(1000000,1000000000))
 			input_password.click()
 			input_password.clear()
@@ -54,6 +55,7 @@ class Brute_Frocing_Password_Test(unittest.TestCase):
 			time.sleep(1)
 			try:
 				alert = driver.switch_to.alert
+				assert 'Access to this account has been temporarily disabled due to many failed login attempts.' in alert.text
 				alert.accept()
 				aleart_exist = True
 			except :
@@ -62,13 +64,10 @@ class Brute_Frocing_Password_Test(unittest.TestCase):
 
 		print('Number of Attempts : ' , attempts)
 
-
-
 		time.sleep(5)
 
 
 	def tearDown(self):
-		
 		self.driver.quit()
 
 
