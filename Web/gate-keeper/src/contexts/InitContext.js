@@ -6,11 +6,13 @@ export const InitContext = createContext();
 
 const InitContextProvider =(props)=>{
     const [node, setNode] = useState(null)
-    const [serialNumber, setSerialNumber] = useState(null)
+    const [serialNumber, setSerialNumber] = useState(String(localStorage.getItem('serialNumber')))
     
 
     const getNode =(serialNumber) =>{
         const dbRef = db.ref();
+        
+        localStorage.setItem('serialNumber' , String(serialNumber))
         //setSerialNumber(serialNumber)
         return dbRef.child("nodes/"+serialNumber).get()
     }
@@ -63,6 +65,7 @@ const InitContextProvider =(props)=>{
         }
 
         const setData = {};
+        setData['/nodes/'+serialNumber+'/nodeId'] = nodeID
         setData['/users/'+userId] = userDate
         setData['/initNodes/'+nodeID] = nodeData
         setData['/messages/'+nodeID+'/'+msgID] = botMessage

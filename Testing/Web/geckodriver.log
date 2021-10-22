@@ -443,3 +443,19 @@ JavaScript error: resource:///modules/Interactions.jsm, line 201: NS_ERROR_FAILU
 
 ###!!! [Child][MessageChannel] Error: (msgtype=0xA70006,name=PWebSocket::Msg_DeleteSelf) Channel closing: too late to send/recv, messages will be lost
 
+1634887147642	geckodriver	INFO	Listening on 127.0.0.1:58102
+1634887150689	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-no-remote" "-profile" "C:\\Users\\ACHINT~1\\AppData\\Local\\Temp\\rust_mozprofileQwghC8"
+1634887152337	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\AchinthaHarshamal\\AppData\\Local\\Temp\\rust_mozprofileQwghC8\\search.json.mozlz4", (void 0)))
+1634887158990	Marionette	INFO	Listening on port 58110
+1634887159736	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1634887184297	Marionette	INFO	Stopped listening on port 58110
+JavaScript error: resource:///modules/Interactions.jsm, line 201: NS_ERROR_FAILURE: Component returned failure code: 0x80004005 (NS_ERROR_FAILURE) [nsIUserIdleService.removeIdleObserver]
+1634887185774	geckodriver	INFO	Listening on 127.0.0.1:58165
+1634887188805	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-no-remote" "-profile" "C:\\Users\\ACHINT~1\\AppData\\Local\\Temp\\rust_mozprofileGbOp2t"
+1634887190080	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\AchinthaHarshamal\\AppData\\Local\\Temp\\rust_mozprofileGbOp2t\\search.json.mozlz4", (void 0)))
+1634887195841	Marionette	INFO	Listening on port 58173
+1634887196287	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1634887210386	Marionette	INFO	Stopped listening on port 58173
+JavaScript error: resource:///modules/Interactions.jsm, line 201: NS_ERROR_FAILURE: Component returned failure code: 0x80004005 (NS_ERROR_FAILURE) [nsIUserIdleService.removeIdleObserver]

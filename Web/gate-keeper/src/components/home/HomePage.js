@@ -29,14 +29,12 @@ const  HomePage = () => {
                     <h5>We weill give your the best soution</h5>
 
                     <div className='heroButtons z-depth-5'>
-
                         <span >
                             Contact 
                             <Link to='/contactus' className="btn-floating cyan accent-4 pulse">
                                 <i className="material-icons">contact_page</i>
                             </Link>
                         </span>
-
                         <span >
                             Download App
                             <Link to='/download' className="btn-floating  light-blue darken-4 pulse">
