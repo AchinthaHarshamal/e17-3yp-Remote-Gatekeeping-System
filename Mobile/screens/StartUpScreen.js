@@ -28,7 +28,7 @@ const StartUpScreen = (props) => {
         return;
       }
 
-      props.authenticated("Ishara");
+      props.authenticated("Hellow");
       dispatch(authActions.authenticate(userId, token));
     };
 

@@ -18,7 +18,6 @@ import { loginStateAction } from "../store/actions/loginStateAction";
 import * as authActions from "../store/actions/authAction";
 
 const LoginScreen = (props) => {
-  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -26,75 +25,8 @@ const LoginScreen = (props) => {
 
   const dispatch = useDispatch();
 
-  const signupHandler = async () => {
-    if (name.length == 0 || email.length == 0 || password.length == 0) {
-      Alert.alert(
-        "Incorrect Details!",
-        "Please fill all the fields",
-        [
-          {
-            text: "OK",
-          },
-        ],
-        { cancelable: true }
-      );
-      return;
-    }
-
-    if (!email.includes("@")) {
-      Alert.alert(
-        "Incorrect Details!",
-        "Please enter a valid Email",
-        [
-          {
-            text: "OK",
-          },
-        ],
-        { cancelable: true }
-      );
-      return;
-    }
-
-    if (password.length < 8) {
-      Alert.alert(
-        "Incorrect Details!",
-        "Password should be at least 8 characters!",
-        [
-          {
-            text: "OK",
-          },
-        ],
-        { cancelable: true }
-      );
-      return;
-    }
-
-    if (name.length > 8) {
-      Alert.alert(
-        "Incorrect Details!",
-        "Please Enter Your Nickname!\n(Less than 10 characters)",
-        [
-          {
-            text: "OK",
-          },
-        ],
-        { cancelable: true }
-      );
-      return;
-    }
-    setIsLoading(true);
-    setError(null);
-    try {
-      await dispatch(authActions.signup(email, password));
-      props.onPress(name);
-    } catch (err) {
-      setError(err.message);
-      setIsLoading(false);
-    }
-  };
-
   const handleLogIn = async () => {
-    if (name.length == 0 || email.length == 0 || password.length == 0) {
+    if ( email.length == 0 || password.length == 0) {
       Alert.alert(
         "Incorrect Details!",
         "Please fill all the fields",
@@ -126,20 +58,6 @@ const LoginScreen = (props) => {
       Alert.alert(
         "Incorrect Details!",
         "Password should be at least 8 characters!",
-        [
-          {
-            text: "OK",
-          },
-        ],
-        { cancelable: true }
-      );
-      return;
-    }
-
-    if (name.length > 8) {
-      Alert.alert(
-        "Incorrect Details!",
-        "Please Enter Your Nickname!\n(Less than 10 characters)",
         [
           {
             text: "OK",
@@ -154,7 +72,7 @@ const LoginScreen = (props) => {
     setError(null);
     try {
       await dispatch(authActions.login(email, password));
-      props.onPress(name);
+      props.onPress();
     } catch (err) {
       setError(err.message);
       setIsLoading(false);
@@ -166,10 +84,6 @@ const LoginScreen = (props) => {
       Alert.alert("An Error Occurred!", error, [{ text: "Okay" }]);
     }
   }, [error]);
-
-  const handleNameOnChanage = (input) => {
-    setName(input);
-  };
 
   const handleEmailOnChange = (input) => {
     setEmail(input);
@@ -192,16 +106,6 @@ const LoginScreen = (props) => {
           />
         </View>
         <View style={styles.allInputFields}>
-          <View style={styles.oneField}>
-            <Text style={styles.label1}>Name : </Text>
-            <TextInput
-              blurOnSubmit
-              onChangeText={handleNameOnChanage}
-              style={styles.input1}
-              placeholder="Enter your name"
-              placeholderTextColor="rgba(255, 255, 255, 0.5)"
-            ></TextInput>
-          </View>
           <View style={styles.oneField}>
             <Text style={styles.label2}>Email : </Text>
             <TextInput
@@ -230,11 +134,6 @@ const LoginScreen = (props) => {
               <ActivityIndicator size="small" color="white"></ActivityIndicator>
             ) : (
               <CustomButton onPress={handleLogIn}>Log In</CustomButton>
-            )}
-            {isLoading ? (
-              <ActivityIndicator size="small" color="white"></ActivityIndicator>
-            ) : (
-              <CustomButton onPress={signupHandler}>Sign In</CustomButton>
             )}
           </View>
         </View>

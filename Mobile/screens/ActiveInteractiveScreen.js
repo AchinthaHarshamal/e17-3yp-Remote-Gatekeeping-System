@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { View, StyleSheet, Text, Image } from "react-native";
+import { Audio } from "expo-av";
 
 import Header from "../components/Header";
 import CustomButton3 from "../components/CustomButton3";
 import { ScrollView, State } from "react-native-gesture-handler";
 import Colors from "../constants/Colors";
 import { useSelector } from "react-redux";
+
+import AudioPlayButton from "../components/AudioPlayButton";
 
 import firebase from "firebase/app";
 import "firebase/database";
@@ -20,6 +23,7 @@ const ActiveInteractiveScreen = (props) => {
   const [sendingStatus, setSendingStatus] = useState(false);
   const [mailBoxAccessRequest, setMailBoxAccessRequest] = useState(false);
   const [mailBoxAccessResponse, setMailBoxAccessResponse] = useState();
+  const [audioURL, setAudioURL] = useState();
 
   const ref = firebase.database().ref("messages/-MjhnXW1CcA_sTXEssD1/");
 
@@ -34,6 +38,7 @@ const ActiveInteractiveScreen = (props) => {
           setListeningStatus(false);
           setRecordingStatus(false);
           setSendingStatus(false);
+          setAudioURL(lastMsg.msgURL);
         } else if (lastMsg.status == "LISTENING") {
           setNoneStatus(false);
           setListeningStatus(true);
@@ -86,8 +91,8 @@ const ActiveInteractiveScreen = (props) => {
   const sendingHandler = () => {
     if (!recordingStatus) return;
     console.log("Sending your voice");
+    updateMsgURL("messages/-MjhnXW1CcA_sTXEssD1/2021-09-29E2N0.mp3");
     updateStatus("SENDING");
-    updateMsgURL("/dummy/testing");
   };
 
   const mailBoxAccessHandler = () => {
@@ -141,13 +146,14 @@ const ActiveInteractiveScreen = (props) => {
               <View></View>
             )}
             <View style={styles.buttonContainer}>
-              <CustomButton3
+              <AudioPlayButton
                 activeOpacity={noneStatus ? 0.3 : 1}
                 onPress={listeningHandler}
                 styles={noneStatus ? styles.sendButton : styles.disable}
+                uri={audioURL}
               >
                 Listen
-              </CustomButton3>
+              </AudioPlayButton>
               <CustomButton3
                 activeOpacity={listneningStatus ? 0.5 : 1}
                 onPress={recordingHandeler}
