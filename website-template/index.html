@@ -921,6 +921,96 @@
         <!-- Testing End -->
 
 
+        <!-- Cotrol flow Start -->
+        <br><br><br>
+        <div class="about wow fadeInUp" data-wow-delay="0.4s" id="about">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <div class="col-lg-8">
+                        <div class="about-content">
+                            <div class="section-header text-left">
+                                <p>bakcend services</p>
+                                <h2>Scalability</h2>
+                            </div>
+                            <div class="about-text" >
+                                <p>
+                                    For now, we are using the free tier of the Firestore.
+                                    Cloud Firestore offers free quota that allows you to get started at no cost.
+                                    The free quota amounts are listed here.
+                                </p>
+                                <p>
+                                    Firebase offers upto 50,000 document writes per day.
+                                    We have observed about 25 database reads will take for a single event.
+                                    If we assume a normal user may encounter 10 events per day, we can handle about 200 nodes per day in the free tier.
+                                </p>
+                                <p>
+                                    Firebase Realtime Database provides 100 simultaneous connections for the free tier.
+                                    Since we are not expecting that much of events at the same time, it won't be a bottleneck.
+                                    If it was, we can easily boost it to 200k by upgrading the system to paid tier.
+                                </p>
+                                <p>
+                                    Firebase Realtime Database offers upto 5GB of data storage per day for the free tier.
+                                    We have analysed for several test cases and found out average event may contains files upto 3MB.
+                                    Since we are hoping to provide 1 month of backup data, it will be enough for 5 nodes.
+                                    We can reduce the backup size to accommodate more users, or we can switch to paid tier.
+                                    Additional 40GBs costs $1 and for that we can provide backup for 40 users.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="about-img">
+                            <img src="img/firebase-quota.png" alt="Image">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="price" id="price">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4 wow fadeInUp" data-wow-delay="0.5s">
+                        <div class="price-item">
+                            <div class="price-header">
+                                <div class="price-title">
+                                    <h2>simultaneous<br>connections</h2>
+                                </div>
+                                <div class="price-prices">
+                                    <h2><span>upto </span>100</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 wow fadeInUp" data-wow-delay="0.0s">
+                        <div class="price-item featured-item">
+                            <div class="price-header">
+                                <div class="price-title">
+                                    <h2>initialized<br>devices</h2>
+                                </div>
+                                <div class="price-prices">
+                                    <h2><span>upto </span>200+</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 wow fadeInUp" data-wow-delay="0.5s">
+                        <div class="price-item">
+                            <div class="price-header">
+                                <div class="price-title">
+                                    <h2>additional<br>backup storage</h2>
+                                </div>
+                                <div class="price-prices">
+                                    <h2><small>$</small>1<span>/ 40 users</span></h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Control Flow End -->
+
+
         <!-- Team Start -->
         <div class="team" id="team">
             <div class="container">
