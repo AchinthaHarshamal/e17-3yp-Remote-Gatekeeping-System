@@ -5,6 +5,8 @@ import * as Font from "expo-font";
 import AppLoading from "expo-app-loading";
 import { Provider } from "react-redux";
 
+import { LogBox } from "react-native";
+
 import Navigation from "./navigation/Navigation";
 
 import { createStore, applyMiddleware } from "redux";
@@ -13,6 +15,8 @@ import ReduxThunk from "redux-thunk";
 
 import firebase from "firebase/app";
 import { firebaseConfig } from "./firebase/firebase";
+
+import AudioRecordingScreen from "./screens/AudioRecordingScreen";
 
 const fetchFonts = () => {
   return Font.loadAsync({
@@ -28,6 +32,8 @@ const store = createStore(
 );
 
 export default function App() {
+  LogBox.ignoreLogs(["Warning: ..."]); //do not show un imported warnings
+
   const [fontLoaded, setFontLoaded] = useState(false);
 
   if (!fontLoaded) {
@@ -51,4 +57,6 @@ export default function App() {
   );
   // return <WelcomePage></WelcomePage>;
   // return <CloseActiveEventScreen></CloseActiveEventScreen>;
+
+  // return <AudioRecordingScreen></AudioRecordingScreen>;
 }
