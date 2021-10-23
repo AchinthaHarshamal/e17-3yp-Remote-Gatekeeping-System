@@ -28,7 +28,7 @@ const StartUpScreen = (props) => {
         return;
       }
 
-      const userDetails= await AsyncStorage.getItem("userDetails");
+      const userDetails = await AsyncStorage.getItem("userDetails");
 
       const transformedDetails = JSON.parse(userDetails);
 
@@ -36,7 +36,6 @@ const StartUpScreen = (props) => {
 
       props.authenticated(fName);
       dispatch(authActions.authenticate(userId, token));
-      // dispatch(authActions.getUserInfo("fdfd","dfdf","dfdfd"));
     };
 
     tryLogin();
