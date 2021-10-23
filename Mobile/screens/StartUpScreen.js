@@ -28,14 +28,23 @@ const StartUpScreen = (props) => {
         return;
       }
 
-      const userDetails = await AsyncStorage.getItem("userDetails");
+      try {
+        const userDetails = await AsyncStorage.getItem("userDetails");
 
-      const transformedDetails = JSON.parse(userDetails);
+        if (!userDetails) {
+          props.notAuthenticated();
+          return;
+        }
+        const transformedDetails = JSON.parse(userDetails);
 
-      const fName = transformedDetails.firstName;
+        const fName = transformedDetails.firstName;
 
-      props.authenticated(fName);
-      dispatch(authActions.authenticate(userId, token));
+        props.authenticated(fName);
+        dispatch(authActions.authenticate(userId, token));
+      } catch {
+        console.log("error!");
+        return;
+      }
     };
 
     tryLogin();

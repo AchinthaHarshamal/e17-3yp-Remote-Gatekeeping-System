@@ -25,7 +25,7 @@ const ActiveInteractiveScreen = (props) => {
   const [mailBoxAccessResponse, setMailBoxAccessResponse] = useState();
   const [audioURL, setAudioURL] = useState();
 
-  const ref = firebase.database().ref("messages/-MjhnXW1CcA_sTXEssD1/");
+  const ref = firebase.database().ref(`messages/${props.nodeId}/`);
 
   const messageListener = async () => {
     await ref.on("value", (snapshot) => {
@@ -63,12 +63,12 @@ const ActiveInteractiveScreen = (props) => {
   };
 
   const updateStatus = (status) => {
-    const ref = firebase.database().ref("messages/-MjhnXW1CcA_sTXEssD1/" + key);
+    const ref = firebase.database().ref(`messages/${props.nodeId}/` + key);
     ref.update({ status: status });
   };
 
   const updateMsgURL = (msgURL) => {
-    const ref = firebase.database().ref("messages/-MjhnXW1CcA_sTXEssD1/" + key);
+    const ref = firebase.database().ref(`messages/${props.nodeId}/` + key);
     ref.update({ msgURL: msgURL });
   };
 
@@ -91,7 +91,7 @@ const ActiveInteractiveScreen = (props) => {
   const sendingHandler = () => {
     if (!recordingStatus) return;
     console.log("Sending your voice");
-    updateMsgURL("messages/-MjhnXW1CcA_sTXEssD1/2021-09-29E2N0.mp3");
+    updateMsgURL(`messages/${props.nodeId}/2021-09-29E2N0.mp3`);
     updateStatus("SENDING");
   };
 

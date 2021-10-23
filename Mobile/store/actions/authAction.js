@@ -20,45 +20,8 @@ export const getUserInfo = (nodeId, firstName, dpURL) => {
   };
 };
 
-// export const signup = (email, password) => {
-//   return async (dispatch) => {
-//     const response = await fetch(
-//       "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyA2lgAuXNJGVoeg_QVf7wXb4oRVH3lXyic",
-//       {
-//         method: "POST",
-//         headers: {
-//           "Content-type": "application/json",
-//         },
-//         body: JSON.stringify({
-//           email: email,
-//           password: password,
-//           returnSecureToken: true,
-//         }),
-//       }
-//     );
-
-//     if (!response.ok) {
-//       const errorResData = await response.json();
-//       const errorId = errorResData.error.message;
-//       let message = "Something went wrong!";
-//       if (errorId === "EMAIL_EXISTS") {
-//         message = "This email exists already!";
-//       }
-//       throw new Error(message);
-//     }
-
-//     const resData = await response.json();
-
-//     dispatch(authenticate(resData.localId, resData.idToken));
-
-//     const expirationDate = new Date(
-//       new Date().getTime() + parseInt(resData.expiresIn) * 1000
-//     );
-//     saveDataToStorage(resData.idToken, resData.localId, expirationDate);
-//   };
-// };
-
 let userId;
+let idToken;
 
 export const login = (email, password) => {
   return async (dispatch) => {
@@ -98,6 +61,7 @@ export const login = (email, password) => {
     saveAuthDataToStorage(resData.idToken, resData.localId, expirationDate);
 
     userId = resData.localId;
+    idToken = resData.idToken;
 
     console.log(userId);
 
@@ -111,7 +75,9 @@ export const fetchUserInfo = () => {
     const url =
       "https://gate-keeper-6fad9-default-rtdb.asia-southeast1.firebasedatabase.app/users/"
         .concat(userId)
-        .concat(".json");
+        .concat(".json?")
+        .concat("auth=")
+        .concat(idToken);
     console.log(url);
     const response = await fetch(url);
 

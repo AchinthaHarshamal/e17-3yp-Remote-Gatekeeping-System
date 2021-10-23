@@ -7,19 +7,21 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export const fetchEvents = () => {
   return async (dispatch) => {
-    //async code
-
     try {
       const userDetails = await AsyncStorage.getItem("userDetails");
-
       const transformedDetails = JSON.parse(userDetails);
-
       const nodeId = transformedDetails.nodeId;
+
+      const userData = await AsyncStorage.getItem("userData");
+      const transformedData = JSON.parse(userData);
+      const token = transformedData.token;
 
       const url =
         "https://gate-keeper-6fad9-default-rtdb.asia-southeast1.firebasedatabase.app/events/"
           .concat(nodeId)
-          .concat(".json");
+          .concat(".json?")
+          .concat("auth=")
+          .concat(token);
 
       const response = await fetch(url);
 
@@ -30,6 +32,7 @@ export const fetchEvents = () => {
       const resData = await response.json();
 
       const loadedEvents = [];
+      console.log(resData);
 
       for (const key in resData) {
         loadedEvents.push(
@@ -71,10 +74,16 @@ export const addNewPrevEvent = (
 
     const nodeId = transformedDetails.nodeId;
 
+    const userData = await AsyncStorage.getItem("userData");
+    const transformedData = JSON.parse(userData);
+    const token = transformedData.token;
+
     const url =
       "https://gate-keeper-6fad9-default-rtdb.asia-southeast1.firebasedatabase.app/events/"
         .concat(nodeId)
-        .concat(".json");
+        .concat(".json?")
+        .concat("auth=")
+        .concat(token);
 
     const response = await fetch(
       url,

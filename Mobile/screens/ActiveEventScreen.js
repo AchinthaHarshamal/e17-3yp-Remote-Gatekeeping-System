@@ -8,12 +8,17 @@ import CustomButton3 from "../components/CustomButton3";
 import { ScrollView } from "react-native-gesture-handler";
 import { useDispatch } from "react-redux";
 import Colors from "../constants/Colors";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const startActiveEvent = (msgKey, ackResponse) => {
   return async () => {
+    const userDetails = await AsyncStorage.getItem("userDetails");
+    const transformedDetails = JSON.parse(userDetails);
+    const nodeId = transformedDetails.nodeId;
+
     //async code
     await fetch(
-      `https://gate-keeper-6fad9-default-rtdb.asia-southeast1.firebasedatabase.app/messages/-MjhnXW1CcA_sTXEssD1/${msgKey}.json`,
+      `https://gate-keeper-6fad9-default-rtdb.asia-southeast1.firebasedatabase.app/messages/${nodeId}/${msgKey}.json`,
       {
         method: "PATCH",
         headers: {
@@ -34,8 +39,12 @@ const getMzgDetails = () => {
     //async code
 
     try {
+      const userDetails = await AsyncStorage.getItem("userDetails");
+      const transformedDetails = JSON.parse(userDetails);
+      const nodeId = transformedDetails.nodeId;
+
       const response = await fetch(
-        "https://gate-keeper-6fad9-default-rtdb.asia-southeast1.firebasedatabase.app/messages/-MjhnXW1CcA_sTXEssD1.json"
+        `https://gate-keeper-6fad9-default-rtdb.asia-southeast1.firebasedatabase.app/messages/${nodeId}.json`
       );
 
       if (!response.ok) {
