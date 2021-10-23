@@ -17,6 +17,11 @@ const  SideNavDashboard = () => {
         M.Sidenav.init(elems,{});
     })
 
+    const logout =() => {
+        alert('Confirm to sign out !')
+        signout()
+    }
+
    
     return (
         <div>
@@ -35,10 +40,19 @@ const  SideNavDashboard = () => {
             
                 <div className="font1">
                     <li > <Link to = '/dashboard'><i id='dashboard'className="material-icons white-text">dashboard</i>Dashboard</Link></li>
-                    <li ><Link to = '/dashboard/account-setting'><i id='account-setting' className="material-icons  white-text">perm_identity</i>Accounte Setting</Link></li>
-                    <li ><Link to = '/dashboard/manage'><i id='manage' className="material-icons  white-text">supervisor_account</i>Manage Users</Link></li>
-                    <li ><Link to = '/' onClick={signout}><i id='home' className="material-icons  white-text">home</i>Home</Link></li>
-                    <li ><Link to='' onClick={signout}><i id='side-signout' className="material-icons  white-text">logout</i>SignOut</Link></li>
+                    <li ><Link to = '/dashboard/account-setting'><i id='account-setting' className="material-icons  white-text">perm_identity</i>Account Setting</Link></li>
+                    <li ><a href = 'https://www.google.com/maps/place/Department+of+Computer+Engineering/@7.2546422,80.5913459,15z/data=!4m2!3m1!1s0x0:0xc4bb2a3c76b588ac?sa=X&ved=2ahUKEwivzPH1_uDzAhXXfn0KHYDoA9gQ_BJ6BAhdEAU'>
+                        <i id='account-setting' className="material-icons  white-text">location_on</i>
+                        Service Center
+                    </a></li>
+
+                    <li ><a href = 'https://wa.me/0810000000'>
+                        <i id='account-setting' className="material-icons  white-text">help_center</i>
+                        Instant help
+                    </a></li>
+                   
+                    
+                    <li ><Link to='' onClick={logout}><i id='side-signout' className="material-icons  white-text">logout</i>Sign Out</Link></li>
                 </div>
                 
             </ul>
