@@ -11,15 +11,14 @@ export const authenticate = (userId, token) => {
   };
 };
 
-export const getUserInfo=(nodeId,firstName,dpURL)=>{
+export const getUserInfo = (nodeId, firstName, dpURL) => {
   return {
-    type:GET_USER_INFO,
-    nodeId:nodeId,
-    firstName:firstName,
-    dpURL:dpURL
+    type: GET_USER_INFO,
+    nodeId: nodeId,
+    firstName: firstName,
+    dpURL: dpURL,
   };
-}
-
+};
 
 // export const signup = (email, password) => {
 //   return async (dispatch) => {
@@ -92,32 +91,29 @@ export const login = (email, password) => {
 
     const resData = await response.json();
 
-
     const expirationDate = new Date(
       new Date().getTime() + parseInt(resData.expiresIn) * 1000
     );
 
-
     saveAuthDataToStorage(resData.idToken, resData.localId, expirationDate);
 
-    userId=resData.localId;
+    userId = resData.localId;
 
     console.log(userId);
-    
-    dispatch(authenticate(resData.localId, resData.idToken));
 
+    dispatch(authenticate(resData.localId, resData.idToken));
   };
 };
 
-export const fetchUserInfo=()=>{
+export const fetchUserInfo = () => {
   return async (dispatch) => {
-    
-    console.log("inside fetch",userId);
-    const url = "https://gate-keeper-6fad9-default-rtdb.asia-southeast1.firebasedatabase.app/users/".concat(userId).concat(".json")
+    console.log("inside fetch", userId);
+    const url =
+      "https://gate-keeper-6fad9-default-rtdb.asia-southeast1.firebasedatabase.app/users/"
+        .concat(userId)
+        .concat(".json");
     console.log(url);
-    const response = await fetch(
-      url
-    );
+    const response = await fetch(url);
 
     if (!response.ok) {
       throw new Error("Something went wrong!");
@@ -130,13 +126,11 @@ export const fetchUserInfo=()=>{
 
     console.log(resData.imgUrl);
 
-
     saveUserDataToStorage(resData.nodeId, resData.fName, resData.imgUrl);
 
     dispatch(getUserInfo(resData.nodeId, resData.fName, resData.imgUrl));
-
-}};
-
+  };
+};
 
 export const logout = () => {
   AsyncStorage.removeItem("userData");
@@ -157,13 +151,13 @@ const saveAuthDataToStorage = (token, userId, expirationDate) => {
   );
 };
 
-const saveUserDataToStorage=(nodeId,firstName,dpURL)=>{
+const saveUserDataToStorage = (nodeId, firstName, dpURL) => {
   AsyncStorage.setItem(
     "userDetails",
     JSON.stringify({
-    nodeId:nodeId,
-    firstName:firstName,
-    dpURL:dpURL
+      nodeId: nodeId,
+      firstName: firstName,
+      dpURL: dpURL,
     })
   );
-}
+};

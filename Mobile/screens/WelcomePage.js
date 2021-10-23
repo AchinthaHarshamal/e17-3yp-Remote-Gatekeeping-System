@@ -1,12 +1,25 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { View, Text, StyleSheet, Image, ImageBackground } from "react-native";
 
 import CustomButton2 from "../components/CustomButton2";
 import LogOutButton from "../components/LogOutButton";
 import CloseEventContext from "../contextAPI/CloseEventContext";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const WelcomePage = (props) => {
   const ctx = useContext(CloseEventContext);
+  const [dpURL, setdpURL] = useState();
+
+  useEffect(() => {
+    const fetchImage = async () => {
+      const userDetails = await AsyncStorage.getItem("userDetails");
+
+      const transformedDetails = JSON.parse(userDetails);
+
+      setdpURL(transformedDetails.dpURL);
+    };
+    fetchImage();
+  }, [dpURL]);
 
   return (
     <View style={styles.screen}>
@@ -17,7 +30,9 @@ const WelcomePage = (props) => {
         >
           <View style={styles.dpImageContainer}>
             <Image
-              source={require("../assets/images/dp.png")}
+              source={{
+                uri: dpURL,
+              }}
               style={styles.dpImage}
             />
           </View>

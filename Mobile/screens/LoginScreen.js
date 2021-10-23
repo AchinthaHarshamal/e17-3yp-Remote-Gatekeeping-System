@@ -26,7 +26,7 @@ const LoginScreen = (props) => {
   const dispatch = useDispatch();
 
   const handleLogIn = async () => {
-    if ( email.length == 0 || password.length == 0) {
+    if (email.length == 0 || password.length == 0) {
       Alert.alert(
         "Incorrect Details!",
         "Please fill all the fields",

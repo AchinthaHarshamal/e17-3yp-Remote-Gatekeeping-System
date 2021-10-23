@@ -3,14 +3,25 @@ import Event from "../../Modal/Event";
 export const CLOSE_PREVIOUS_EVENT = "CLOSE_PREVIOUS_EVENT";
 export const GET_EVENT_DETAILS = "GET_EVENT_DETAILS";
 
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 export const fetchEvents = () => {
   return async (dispatch) => {
     //async code
 
     try {
-      const response = await fetch(
-        "https://gate-keeper-6fad9-default-rtdb.asia-southeast1.firebasedatabase.app/events/node1.json"
-      );
+      const userDetails = await AsyncStorage.getItem("userDetails");
+
+      const transformedDetails = JSON.parse(userDetails);
+
+      const nodeId = transformedDetails.nodeId;
+
+      const url =
+        "https://gate-keeper-6fad9-default-rtdb.asia-southeast1.firebasedatabase.app/events/"
+          .concat(nodeId)
+          .concat(".json");
+
+      const response = await fetch(url);
 
       if (!response.ok) {
         throw new Error("Something went wrong!");
@@ -53,8 +64,20 @@ export const addNewPrevEvent = (
 ) => {
   return async (dispatch) => {
     //async code
+
+    const userDetails = await AsyncStorage.getItem("userDetails");
+
+    const transformedDetails = JSON.parse(userDetails);
+
+    const nodeId = transformedDetails.nodeId;
+
+    const url =
+      "https://gate-keeper-6fad9-default-rtdb.asia-southeast1.firebasedatabase.app/events/"
+        .concat(nodeId)
+        .concat(".json");
+
     const response = await fetch(
-      "https://gate-keeper-6fad9-default-rtdb.asia-southeast1.firebasedatabase.app/events/node1.json",
+      url,
 
       {
         method: "POST",
