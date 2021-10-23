@@ -15,7 +15,7 @@ const  HomePage = () => {
         <div >
             <div className="home grey darken-3">
                 <div className='heroText '>
-                    <h2 >Secure Your Delevery, Child & Home</h2>
+                    <h2 className="grey-text ">Secure Your Delevery, Child & Home</h2>
                     <p>
                     
                         <b> When you are not being at home, and delevery come to the door. </b>

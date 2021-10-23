@@ -41,7 +41,7 @@ const Navbar =()=> {
         <div>
             <nav className="nav-wraper indigo lighten-1 z-depth-2">
                 <div>
-                    <Link to='/' id='title' className="brand-logo center white-text offsetC ">Smart Keeper</Link>
+                    <Link to='/' id='title' className="brand-logo center white-text offsetC ">Gate Keeper</Link>
                     {links()}
                 </div>
             </nav>

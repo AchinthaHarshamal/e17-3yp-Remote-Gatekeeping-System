@@ -1,11 +1,18 @@
-import React from 'react'
+import React , {useState} from 'react'
+import { storage } from '../../config/fbConfig'
 // import downloadImage from '../../img/download.jpg'
 
 const  Dowonload = () => {
 
-    const downloadApp = ()=> {
-        console.log('hello')
-    }
+    const [downloadUrl, setDownloadUrl] = useState();
+    
+    storage.ref().child('App/smart_gatekeeper.apk').getDownloadURL()
+    .then((url)=>{
+        setDownloadUrl(url)
+    })
+
+
+    
     return (
         <div className='download'>
             <div className='container indigo accent-1'>    
@@ -28,12 +35,12 @@ const  Dowonload = () => {
                     <div className="col l4 offset-l2 s12   grey  accent-2">
                         <ul>
                             <li> 
-                                <a href="/download" className="waves-effect waves-light">
+                                <span className="waves-effect waves-light">
                                     <span className='white-text'>Download Here</span>
-                                </a>
-                                <div onClick={downloadApp} className="btn-floating light-blue pulse ">
+                                </span>
+                                <a href={downloadUrl} className="btn-floating light-blue pulse ">
                                    <i className="material-icons">download</i>
-                                 </div>
+                                 </a>
                             </li>
                             
                         </ul> 

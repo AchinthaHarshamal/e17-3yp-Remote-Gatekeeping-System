@@ -8,6 +8,7 @@ const InitContextProvider =(props)=>{
     const [node, setNode] = useState(null)
     const [serialNumber, setSerialNumber] = useState(String(localStorage.getItem('serialNumber')))
     
+    
 
     const getNode =(serialNumber) =>{
         const dbRef = db.ref();
@@ -21,6 +22,7 @@ const InitContextProvider =(props)=>{
         const nodeID = db.ref().child('initNode').push().key;
         const msgID = db.ref().child('messages/'+nodeID).push().key;
         const imageRef = storage.ref().child('users/'+userId+'/'+imageFile.name)
+        
         
        let imgUrl = null;
        try {

@@ -31,6 +31,7 @@ const DataContextProvider = (props) => {
     const getMessages = async (nodeId) => {
         
         const msgRef = db.ref().child('messages/'+nodeId)
+        localStorage.setItem('messageId' , String(nodeId))
 
         try{
             const msgsObj = await msgRef.get()
