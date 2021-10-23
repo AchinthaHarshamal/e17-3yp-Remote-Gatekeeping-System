@@ -72,6 +72,7 @@ const LoginScreen = (props) => {
     setError(null);
     try {
       await dispatch(authActions.login(email, password));
+      await dispatch(authActions.fetchUserInfo());
       props.onPress();
     } catch (err) {
       setError(err.message);

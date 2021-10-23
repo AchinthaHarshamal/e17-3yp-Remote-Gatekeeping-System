@@ -1,6 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 export const AUTHENTICATE = "AUTHENTICATE";
 export const LOGOUT = "LOGOUT";
+export const GET_USER_INFO = "GET_USER_INFO";
 
 export const authenticate = (userId, token) => {
   return {
@@ -9,6 +10,16 @@ export const authenticate = (userId, token) => {
     token: token,
   };
 };
+
+export const getUserInfo=(nodeId,firstName,dpURL)=>{
+  return {
+    type:GET_USER_INFO,
+    nodeId:nodeId,
+    firstName:firstName,
+    dpURL:dpURL
+  };
+}
+
 
 // export const signup = (email, password) => {
 //   return async (dispatch) => {
@@ -48,6 +59,8 @@ export const authenticate = (userId, token) => {
 //   };
 // };
 
+let userId;
+
 export const login = (email, password) => {
   return async (dispatch) => {
     const response = await fetch(
@@ -79,68 +92,61 @@ export const login = (email, password) => {
 
     const resData = await response.json();
 
-    dispatch(authenticate(resData.localId, resData.idToken));
 
     const expirationDate = new Date(
       new Date().getTime() + parseInt(resData.expiresIn) * 1000
     );
 
-    // const fetchUserData =
 
-    saveDataToStorage(resData.idToken, resData.localId, expirationDate);
+    saveAuthDataToStorage(resData.idToken, resData.localId, expirationDate);
 
+    userId=resData.localId;
+
+    console.log(userId);
     
+    dispatch(authenticate(resData.localId, resData.idToken));
+
   };
 };
 
- const fetchUserData = (userId) => {
+export const fetchUserInfo=()=>{
   return async (dispatch) => {
-    //async code
+    
+    console.log("inside fetch",userId);
+    const url = "https://gate-keeper-6fad9-default-rtdb.asia-southeast1.firebasedatabase.app/users/".concat(userId).concat(".json")
+    console.log(url);
+    const response = await fetch(
+      url
+    );
 
-    try {
-      const response = await fetch(
-        `https://gate-keeper-6fad9-default-rtdb.asia-southeast1.firebasedatabase.app/users/{userId}`
-      );
-
-      if (!response.ok) {
-        throw new Error("Something went wrong!");
-      }
-
-      const resData = await response.json();
-
-      const loadedEvents = [];
-
-      for (const key in resData) {
-        loadedEvents.push(
-          new Event(
-            key,
-            resData[key].name,
-            new Date(resData[key].date),
-            resData[key].rating,
-            resData[key].description,
-            resData[key].mailBoxAccess,
-            resData[key].imageURL,
-            resData[key].userType
-          )
-        );
-      }
-
-      dispatch({ type: GET_EVENT_DETAILS, events: loadedEvents.reverse() });
-    } catch (error) {
-      throw error;
+    if (!response.ok) {
+      throw new Error("Something went wrong!");
     }
-  };
-};
+
+    const resData = await response.json();
+    console.log(userId);
+    console.log(resData.nodeId);
+    console.log(resData.fName);
+
+    console.log(resData.imgUrl);
+
+
+    saveUserDataToStorage(resData.nodeId, resData.fName, resData.imgUrl);
+
+    dispatch(getUserInfo(resData.nodeId, resData.fName, resData.imgUrl));
+
+}};
+
 
 export const logout = () => {
   AsyncStorage.removeItem("userData");
+  AsyncStorage.removeItem("userDetails");
   return {
     type: LOGOUT,
   };
 };
 
-const saveDataToStorage = (token, userId, expirationDate) => {
-  console.log(userId);
+const saveAuthDataToStorage = (token, userId, expirationDate) => {
   AsyncStorage.setItem(
     "userData",
     JSON.stringify({
@@ -150,3 +156,14 @@ const saveDataToStorage = (token, userId, expirationDate) => {
     })
   );
 };
+
+const saveUserDataToStorage=(nodeId,firstName,dpURL)=>{
+  AsyncStorage.setItem(
+    "userDetails",
+    JSON.stringify({
+    nodeId:nodeId,
+    firstName:firstName,
+    dpURL:dpURL
+    })
+  );
+}

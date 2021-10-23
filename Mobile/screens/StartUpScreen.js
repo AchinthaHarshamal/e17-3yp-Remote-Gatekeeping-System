@@ -28,8 +28,15 @@ const StartUpScreen = (props) => {
         return;
       }
 
-      props.authenticated("Hellow");
+      const userDetails= await AsyncStorage.getItem("userDetails");
+
+      const transformedDetails = JSON.parse(userDetails);
+
+      const fName = transformedDetails.firstName;
+
+      props.authenticated(fName);
       dispatch(authActions.authenticate(userId, token));
+      // dispatch(authActions.getUserInfo("fdfd","dfdf","dfdfd"));
     };
 
     tryLogin();
