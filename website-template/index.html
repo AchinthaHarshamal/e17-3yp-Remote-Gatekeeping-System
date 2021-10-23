@@ -460,7 +460,7 @@
                     </div>
                 </div>
             </div>
-        </div> -->
+        </div>
         <!-- Mobile UI End -->
 
         <!-- Algorithms Start -->
@@ -468,13 +468,13 @@
             <div class="container">
                 <header class="section-header text-center wow zoomIn" data-wow-delay="0.1s">
                     <h2>Algorithms of the System</h2><br>
-                    <p>Algorithm runs on the hardware module</p>
+                    <p style="font-size: 24px;">Algorithm runs on the hardware module</p>
                 </header>
             </div>
             <img src="img/hardware-flow-v2.png"  style="display: block; margin-left: auto; margin-right: auto; width: 60%; " class="section-header text-center wow zoomIn" alt="Image" data-wow-delay="0.1s">
             <div class="container">
                 <header class="section-header text-center wow zoomIn" data-wow-delay="0.1s">
-                    <br><br><br><p>Algorithm runs on the Mobile Application</p>
+                    <br><p style="font-size: 24px;">Algorithm runs on the Mobile Application</p>
                 </header>
             </div>
             <img src="img/mobile-app-flow-diagram-v2.png"  style="display: block; margin-left: auto; margin-right: auto; width: 50%;" class="section-header text-center wow zoomIn" alt="Image">
@@ -916,7 +916,7 @@
         <!-- Testing End -->
 
 
-        <!-- Cotrol flow Start -->
+        <!-- Scalability Start -->
         <br><br><br>
         <div class="about wow fadeInUp" data-wow-delay="0.4s" id="about">
             <div class="container-fluid">
@@ -949,6 +949,10 @@
                                     Since we are hoping to provide 1 month of backup data, it will be enough for 5 nodes.
                                     We can reduce the backup size to accommodate more users, or we can switch to paid tier.
                                     Additional 40GBs costs $1 and for that we can provide backup for 40 users.
+                                </p>
+                                <p>
+                                    As a future Implementation, we are going to scale the system to have the ability of
+                                    connecting several users for a single hardware node.
                                 </p>
                             </div>
                         </div>
@@ -1003,7 +1007,67 @@
                 </div>
             </div>
         </div>
-        <!-- Control Flow End -->
+        <!-- Scalability End -->
+
+
+        <!-- Security Start -->
+        <div class="banner wow zoomIn" data-wow-delay="0.1s">
+            <div class="container" style="max-width: 1000px;">
+                <div class="section-header text-center">
+                    <h2>Security Aspects</h2>
+                    <br>
+                    <p style="font-size: 24px;">authentication</p>
+                </div>
+                <div class="container banner-text" style="max-width: 1000px;">
+                    <p>
+                        To authenticate users with their email addresses and passwords,
+                        we are using <b>Firebase Auth</b>,
+                        <br>which provides methods to create and manage users.
+                    </p>
+                    <p>
+                        At an event of Brute-force Attacks, we are temporarilty disabling the account
+                        <br>which is being compromized to protect the system from the attackers.
+                        <br>Firebase's <b>Managed email-password authentication service</b>
+                        tightens the default quota of the endpoints to prevent these attacks.
+                    </p>
+                    <p>
+                        To connect the backend to the hardware node and to communicate with,
+                        <br>we are using a token-based authentication system, which uses <b>JSON Web Tokens - JWT</b>.
+                    </p>
+                </div>
+                <div class="section-header text-center">
+                    <p style="font-size: 24px;">authorization</p>
+                </div>
+                <div class="container banner-text" style="max-width: 1000px;">
+                    <p>
+                        <b>Firebase Security Rules</b> secures the database and the storage, by fine-graining the user access.
+                        We have implemented our own rules which restricts the users
+                        from accessing unauthorized collections of the database.
+                    </p>
+                </div>
+                <div class="section-header text-center">
+                    <p style="font-size: 24px;">hosting</p>
+                </div>
+                <div class="container banner-text" style="max-width: 1000px;">
+                    <p>
+                        We have deployed our web application using the Firebase service, <b>Firebase Hosting</b>.
+                        <br>Since <b>Zero-configuration SSL</b> is built into Firebase Hosting, the content is always delivered securely,
+                        <br>so we don't have to take care of it.
+                    </p>
+                </div>
+                <div class="section-header text-center">
+                    <p style="font-size: 24px;">web & mobile app</p>
+                </div>
+                <div class="container banner-text" style="max-width: 1000px;">
+                    <p>
+                        We have implemented user input validation for both interfaces, at the client-end as well as at the server-end.
+                        <b>Firebase Security Rules</b> provide the validation at the server-end where as
+                        at the user interfaces we have implemented validation manully.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <!-- Security End -->
 
 
         <!-- Team Start -->
