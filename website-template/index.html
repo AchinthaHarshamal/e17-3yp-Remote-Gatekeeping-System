@@ -1010,6 +1010,66 @@
         <!-- Scalability End -->
 
 
+        <!-- Security Start -->
+        <div class="banner wow zoomIn" data-wow-delay="0.1s">
+            <div class="container" style="max-width: 1000px;">
+                <div class="section-header text-center">
+                    <h2>Security Aspects</h2>
+                    <br>
+                    <p style="font-size: 24px;">authentication</p>
+                </div>
+                <div class="container banner-text" style="max-width: 1000px;">
+                    <p>
+                        To authenticate users with their email addresses and passwords,
+                        we are using <b>Firebase Auth</b>,
+                        <br>which provides methods to create and manage users.
+                    </p>
+                    <p>
+                        At an event of Brute-force Attacks, we are temporarilty disabling the account
+                        <br>which is being compromized to protect the system from the attackers.
+                        <br>Firebase's <b>Managed email-password authentication service</b>
+                        tightens the default quota of the endpoints to prevent these attacks.
+                    </p>
+                    <p>
+                        To connect the backend to the hardware node and to communicate with,
+                        <br>we are using a token-based authentication system, which uses <b>JSON Web Tokens - JWT</b>.
+                    </p>
+                </div>
+                <div class="section-header text-center">
+                    <p style="font-size: 24px;">authorization</p>
+                </div>
+                <div class="container banner-text" style="max-width: 1000px;">
+                    <p>
+                        <b>Firebase Security Rules</b> secures the database and the storage, by fine-graining the user access.
+                        We have implemented our own rules which restricts the users
+                        from accessing unauthorized collections of the database.
+                    </p>
+                </div>
+                <div class="section-header text-center">
+                    <p style="font-size: 24px;">hosting</p>
+                </div>
+                <div class="container banner-text" style="max-width: 1000px;">
+                    <p>
+                        We have deployed our web application using the Firebase service, <b>Firebase Hosting</b>.
+                        <br>Since <b>Zero-configuration SSL</b> is built into Firebase Hosting, the content is always delivered securely,
+                        <br>so we don't have to take care of it.
+                    </p>
+                </div>
+                <div class="section-header text-center">
+                    <p style="font-size: 24px;">web & mobile app</p>
+                </div>
+                <div class="container banner-text" style="max-width: 1000px;">
+                    <p>
+                        We have implemented user input validation for both interfaces, at the client-end as well as at the server-end.
+                        <b>Firebase Security Rules</b> provide the validation at the server-end where as
+                        at the user interfaces we have implemented validation manully.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <!-- Security End -->
+
+
         <!-- Team Start -->
         <div class="team" id="team">
             <div class="container">
