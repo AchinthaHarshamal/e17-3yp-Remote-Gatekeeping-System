@@ -1,5 +1,6 @@
 from datetime import datetime
 from time import sleep, time
+from shutil import copyfile
 import pyrebase
 #  third-party helper library for interacting with the REST API
 
@@ -23,7 +24,9 @@ def getFilename():
 def captureImage():
     print("\t<capturing_the_picture...>")
     filename = getFilename()+'.jpg'
-    open('img/'+filename, 'w')
+    src = str(eventNo % 4)+".jpg"
+    copyfile("img/templates/"+src, "img/"+filename)
+    # open('img/'+filename, 'w')
     print("\t<done>")
     return filename
 
@@ -183,6 +186,8 @@ def conversation():
 def recordVoice():
     print("\t<recording_voice...>")
     filename = getFilename()+'N'+str(convCount)+'.mp3'
+    src = "0.mp3"
+    copyfile("aud/templates/"+src, "aud/"+filename)
     open('aud/'+filename, 'w')
     print("\t<done>")
     return filename

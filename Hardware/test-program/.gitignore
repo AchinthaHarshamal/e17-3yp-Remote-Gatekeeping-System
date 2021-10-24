@@ -1,3 +1,4 @@
-aud/
-img/
+aud/*.mp3
+img/*.jpg
+img/*.mp3
 temp.py
