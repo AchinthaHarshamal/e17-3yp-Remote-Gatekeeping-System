@@ -11,7 +11,7 @@ const EventDetailsCard = (props) => {
         <Text style={style.label}>DATE :</Text>
         <View style={style.value}>
           <Text style={style.label}>
-            {props.date.getDate()}/{props.date.getMonth()}/
+            {props.date.getDate()}/{props.date.getMonth() + 1}/
             {props.date.getFullYear()}
           </Text>
         </View>

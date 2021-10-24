@@ -10,6 +10,13 @@ import { useSelector } from "react-redux";
 
 import AudioPlayButton from "../components/AudioPlayButton";
 
+import {
+  AntDesign,
+  FontAwesome,
+  Ionicons,
+  MaterialCommunityIcons,
+} from "@expo/vector-icons";
+
 import firebase from "firebase/app";
 import "firebase/database";
 
@@ -17,21 +24,29 @@ let key;
 
 const ActiveInteractiveScreen = (props) => {
   const details = useSelector((state) => state.activeEvent.activeEventDetails);
-  const [noneStatus, setNoneStatus] = useState(false);
-  const [listneningStatus, setListeningStatus] = useState(false);
-  const [recordingStatus, setRecordingStatus] = useState(false);
-  const [sendingStatus, setSendingStatus] = useState(false);
-  const [mailBoxAccessRequest, setMailBoxAccessRequest] = useState(false);
-  const [mailBoxAccessResponse, setMailBoxAccessResponse] = useState();
-  const [audioURL, setAudioURL] = useState();
+  const [noneStatus, setNoneStatus] = useState(false); //message status is NONE
+  const [listneningStatus, setListeningStatus] = useState(false); //message status is listing
+  const [recordingStatus, setRecordingStatus] = useState(false); //message status is recording
+  const [sendingStatus, setSendingStatus] = useState(false); //messeage status is sending
+  const [mailBoxAccessRequest, setMailBoxAccessRequest] = useState(false); //message type is mailboxaccess
+  const [mailBoxAccessResponse, setMailBoxAccessResponse] = useState(); //message status is access given
+  const [closeEvent, setCloseEvent] = useState(false);
+  const [audioURL, setAudioURL] = useState(); //message url
 
-  const ref = firebase.database().ref("messages/-MjhnXW1CcA_sTXEssD1/");
+  const ref = firebase.database().ref(`messages/${props.nodeId}/`); //getting the firebase url
 
+  //setting a message listener
   const messageListener = async () => {
     await ref.on("value", (snapshot) => {
+      //getting the messages related to the node
       const messages = snapshot.val();
+
+      //getting the key of the last message(intercom message)
       key = Object.keys(messages).pop();
+
+      //getting the last message itself
       const lastMsg = messages[key];
+
       if (lastMsg.msgType == "AUDIO") {
         if (lastMsg.status == "NONE") {
           setNoneStatus(true);
@@ -59,16 +74,19 @@ const ActiveInteractiveScreen = (props) => {
       if (lastMsg.msgType == "MAIL_BOX_ACCESS") {
         setMailBoxAccessRequest(true);
       }
+      if (lastMsg.msgType == "CLOSED") {
+        setCloseEvent(true);
+      }
     });
   };
 
   const updateStatus = (status) => {
-    const ref = firebase.database().ref("messages/-MjhnXW1CcA_sTXEssD1/" + key);
+    const ref = firebase.database().ref(`messages/${props.nodeId}/` + key);
     ref.update({ status: status });
   };
 
   const updateMsgURL = (msgURL) => {
-    const ref = firebase.database().ref("messages/-MjhnXW1CcA_sTXEssD1/" + key);
+    const ref = firebase.database().ref(`messages/${props.nodeId}/` + key);
     ref.update({ msgURL: msgURL });
   };
 
@@ -91,7 +109,7 @@ const ActiveInteractiveScreen = (props) => {
   const sendingHandler = () => {
     if (!recordingStatus) return;
     console.log("Sending your voice");
-    updateMsgURL("messages/-MjhnXW1CcA_sTXEssD1/2021-09-29E2N0.mp3");
+    updateMsgURL(`messages/${props.nodeId}/random.mp3`);
     updateStatus("SENDING");
   };
 
@@ -100,6 +118,12 @@ const ActiveInteractiveScreen = (props) => {
     console.log("Mail box is opened");
     updateStatus("ACCESS_GIVEN");
     setMailBoxAccessResponse(true);
+  };
+
+  const closeEventHandler = () => {
+    if (!closeEvent) return;
+    console.log("Event is closed by the user!");
+    setCloseEvent(true);
   };
 
   const turnOffActiveListener = () => {
@@ -129,6 +153,7 @@ const ActiveInteractiveScreen = (props) => {
         </View>
 
         <View style={{ marginTop: 20 }}>
+          {/* intercom Comminunication section */}
           <View style={styles.fieldContainer}>
             <Text style={styles.label}>Intercom Comminunication</Text>
             {noneStatus ? (
@@ -152,23 +177,21 @@ const ActiveInteractiveScreen = (props) => {
                 styles={noneStatus ? styles.sendButton : styles.disable}
                 uri={audioURL}
               >
-                Listen
+                <AntDesign name="sound" size={24} color="black" />
               </AudioPlayButton>
               <CustomButton3
                 activeOpacity={listneningStatus ? 0.5 : 1}
                 onPress={recordingHandeler}
                 styles={listneningStatus ? styles.sendButton : styles.disable}
               >
-                Record Voice
+                <FontAwesome name="microphone" size={24} color="black" />
               </CustomButton3>
-            </View>
-            <View style={styles.sendButtonContainer}>
               <CustomButton3
                 activeOpacity={recordingStatus ? 0.5 : 1}
                 onPress={sendingHandler}
                 styles={recordingStatus ? styles.sendButton : styles.disable}
               >
-                Send Voice
+                <FontAwesome name="send" size={24} color="black" />
               </CustomButton3>
             </View>
           </View>
@@ -197,16 +220,19 @@ const ActiveInteractiveScreen = (props) => {
                     : styles.disable
                 }
               >
-                Open
+                <MaterialCommunityIcons
+                  name="mailbox-open"
+                  size={24}
+                  color="black"
+                />
               </CustomButton3>
             </View>
           </View>
 
-          <View style={styles.fieldContainer}>
-            <Text style={styles.label}>Close Event</Text>
-            <View style={styles.buttonContainer}>
-              <CustomButton3 onPress={handleOnClose}>Close</CustomButton3>
-            </View>
+          <View style={styles.closeButtonContainer}>
+            <CustomButton3 onPress={handleOnClose} styles={styles.close}>
+              <AntDesign name="close" size={24} color="white" />
+            </CustomButton3>
           </View>
         </View>
       </ScrollView>
@@ -245,6 +271,10 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
   },
+  closeButtonContainer: {
+    alignItems: "center",
+    marginBottom: 20,
+  },
   loadingWheel: {
     flex: 1,
     alignItems: "center",
@@ -269,17 +299,29 @@ const styles = StyleSheet.create({
   },
   sendButton: {
     backgroundColor: "#0ac90d",
+    paddingHorizontal: 5,
+    width: 40,
+    paddingVertical: 5,
   },
   sendButtonContainer: {
     alignItems: "center",
   },
   disable: {
-    backgroundColor: "#C9CAD2",
+    backgroundColor: Colors.cardColor,
+    paddingHorizontal: 5,
+    width: 40,
+    paddingVertical: 5,
   },
   voiceReceived: {
     fontSize: 18,
     color: "#8A8989",
     paddingTop: 5,
+  },
+  close: {
+    backgroundColor: "red",
+    paddingHorizontal: 5,
+    width: 40,
+    paddingVertical: 5,
   },
 });
 
