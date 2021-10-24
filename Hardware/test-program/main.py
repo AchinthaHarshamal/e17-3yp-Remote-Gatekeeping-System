@@ -23,6 +23,7 @@ def getFilename():
 
 def captureImage():
     print("\t<capturing_the_picture...>")
+    sleep(1)
     filename = getFilename()+'.jpg'
     src = str(eventNo % 4)+".jpg"
     copyfile("img/templates/"+src, "img/"+filename)
@@ -68,7 +69,7 @@ def createData(msgType, url):
 
 NODEID = "-MmSuW2k2OdZxIOqkBE-"
 PATH = "messages/"+NODEID+"/"
-DELAY = 500
+DELAY = 120
 audioID = ""
 
 
@@ -185,6 +186,7 @@ def conversation():
 
 def recordVoice():
     print("\t<recording_voice...>")
+    sleep(2)
     filename = getFilename()+'N'+str(convCount)+'.mp3'
     src = "0.mp3"
     copyfile("aud/templates/"+src, "aud/"+filename)
@@ -244,6 +246,7 @@ def waitForPermission() -> bool:
 def getVoice():
     print("\t<downloading_voice...>")
     # storage.child(update).download("img/"+update.split("/")[-1])
+    sleep(2)
     print("\t<done>")
 
 
@@ -328,6 +331,19 @@ if __name__ == "__main__":
                 pass
         else:
             pass
+
+        while conversation():
+            audio = recordVoice()
+            convCount += 2
+            sendVoice()
+            if voiceDelivered():
+                waitForRecording()
+                waitForSending()
+                getVoice()
+                playVoice()
+            else:
+                noReplyResponse()
+                break
 
         audioID = ""
         endEvent()
