@@ -25,7 +25,7 @@ const LogOutButton = (props) => {
 
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: Colors.primaryColor,
+    backgroundColor: "red",
     paddingVertical: 5,
     paddingHorizontal: 10,
     borderRadius: 40,

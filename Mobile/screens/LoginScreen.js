@@ -22,52 +22,26 @@ const LoginScreen = (props) => {
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState();
+  const [formError, setFormError] = useState();
 
   const dispatch = useDispatch();
 
   const handleLogIn = async () => {
     if (email.length == 0 || password.length == 0) {
-      Alert.alert(
-        "Incorrect Details!",
-        "Please fill all the fields",
-        [
-          {
-            text: "OK",
-          },
-        ],
-        { cancelable: true }
-      );
+      setFormError("Please fill all the fields");
       return;
     }
 
     if (!email.includes("@")) {
-      Alert.alert(
-        "Incorrect Details!",
-        "Please enter a valid Email",
-        [
-          {
-            text: "OK",
-          },
-        ],
-        { cancelable: true }
-      );
+      setFormError("Please enter a valid Email");
       return;
     }
 
     if (password.length < 8) {
-      Alert.alert(
-        "Incorrect Details!",
-        "Password should be at least 8 characters!",
-        [
-          {
-            text: "OK",
-          },
-        ],
-        { cancelable: true }
-      );
+      setFormError("Password should be at least 8 characters!");
       return;
     }
-
+    setFormError();
     setIsLoading(true);
     setError(null);
     try {
@@ -82,7 +56,7 @@ const LoginScreen = (props) => {
 
   useEffect(() => {
     if (error) {
-      Alert.alert("An Error Occurred!", error, [{ text: "Okay" }]);
+      setFormError(error);
     }
   }, [error]);
 
@@ -137,6 +111,13 @@ const LoginScreen = (props) => {
               <CustomButton onPress={handleLogIn}>Log In</CustomButton>
             )}
           </View>
+          {formError ? (
+            <Text style={styles.voiceReceived} t>
+              {formError}
+            </Text>
+          ) : (
+            <View></View>
+          )}
         </View>
       </ScrollView>
     </KeyboardAvoidingView>
@@ -208,6 +189,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     justifyContent: "space-around",
     marginTop: 30,
+  },
+  voiceReceived: {
+    fontSize: 12,
+    color: "#8A8989",
+    paddingTop: 10,
+    textAlign: "center",
   },
 });
 
