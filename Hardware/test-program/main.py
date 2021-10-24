@@ -1,5 +1,6 @@
 from datetime import datetime
 from time import sleep, time
+from shutil import copyfile
 import pyrebase
 #  third-party helper library for interacting with the REST API
 
@@ -22,8 +23,11 @@ def getFilename():
 
 def captureImage():
     print("\t<capturing_the_picture...>")
+    sleep(1)
     filename = getFilename()+'.jpg'
-    open('img/'+filename, 'w')
+    src = str(eventNo % 4)+".jpg"
+    copyfile("img/templates/"+src, "img/"+filename)
+    # open('img/'+filename, 'w')
     print("\t<done>")
     return filename
 
@@ -63,9 +67,9 @@ def createData(msgType, url):
     }
 
 
-NODEID = "-MjhnXW1CcA_sTXEssD1"
+NODEID = "-MmSuW2k2OdZxIOqkBE-"
 PATH = "messages/"+NODEID+"/"
-DELAY = 500
+DELAY = 120
 audioID = ""
 
 
@@ -77,8 +81,8 @@ def handleAck(message):
     global not_updated
     try:
         # print(message["data"])
-        # if message["data"].get("ack") == "true":
-        if message["data"] == "true":
+        if message["data"].get("ack") == "true":
+        # if message["data"] == "true":
             not_updated = False
     except:
         pass
@@ -88,8 +92,8 @@ def handleVoiceListen(message):
     global not_updated, audioID
     try:
         # print(message["data"])
-        # if message["data"].get("status") == "LISTENING":
-        if message["data"] == "LISTENING":
+        if message["data"].get("status") == "LISTENING":
+        # if message["data"] == "LISTENING":
             if audioID == "":
                 audioID = message["path"].split("/")[1]
             not_updated = False
@@ -101,8 +105,8 @@ def handleVoiceRecord(message):
     global not_updated
     try:
         # print(message["data"])
-        # if message["data"].get("status") == "RECORDING":
-        if message["data"] == "RECORDING":
+        if message["data"].get("status") == "RECORDING":
+        # if message["data"] == "RECORDING":
             not_updated = False
     except:
         pass
@@ -112,10 +116,11 @@ def handleVoiceSend(message):
     global update, not_updated
     try:
         # print(message["data"])
+        if message["data"].get("status") == "SENDING":
         # if message["data"].get("msgURL")[0] == "m":
-        if message["data"][0] == "m":
-            # update = message["data"].get("msgURL")
-            update = message["data"]
+        # if message["data"][0] == "m":
+            update = message["data"].get("msgURL")
+            # update = message["data"]
             not_updated = False
     except:
         pass
@@ -124,13 +129,13 @@ def handleVoiceSend(message):
 def handleMailboxAccess(message):
     global permitted, not_updated
     try:
-        print(message["data"])
-        # if message["data"].get("msgType") == "ACCESS_GIVEN":
-        if message["data"] == "ACCESS_GIVEN":
+        # print(message["data"])
+        if message["data"].get("status") == "ACCESS_GIVEN":
+        # if message["data"] == "ACCESS_GIVEN":
             not_updated = False
             permitted = True
-        # if message["data"].get("msgType") == "ACCESS_DENIED":
-        elif message["data"] == "ACCESS_DENIED":
+        if message["data"].get("msgType") == "ACCESS_DENIED":
+        # elif message["data"] == "ACCESS_DENIED":
             not_updated = False
     except:
         pass
@@ -181,7 +186,10 @@ def conversation():
 
 def recordVoice():
     print("\t<recording_voice...>")
+    sleep(2)
     filename = getFilename()+'N'+str(convCount)+'.mp3'
+    src = "0.mp3"
+    copyfile("aud/templates/"+src, "aud/"+filename)
     open('aud/'+filename, 'w')
     print("\t<done>")
     return filename
@@ -237,7 +245,8 @@ def waitForPermission() -> bool:
 
 def getVoice():
     print("\t<downloading_voice...>")
-    storage.child(update).download("img/"+update.split("/")[-1])
+    # storage.child(update).download("img/"+update.split("/")[-1])
+    sleep(2)
     print("\t<done>")
 
 
@@ -279,6 +288,10 @@ if __name__ == "__main__":
     1. getVoice() path: img -> aud
     2. auth
     3. change testId
+    4. DELAY
+    5. getVoice() download file
+    6. visitor branch
+    7. voice or mailbox message
 
     ->  noReplyResponse(), closeMailbox(), updateMailboxState()
     """
@@ -286,36 +299,51 @@ if __name__ == "__main__":
     # NODEID = getNodeID()
     eventNo = 0
 
-    startEvent()
-    image = captureImage()
-    isDelivery = identifyUser()
-    sendUserData()
+    while True:
 
-    convCount = 0
-    update = ""
-    while conversation():
-        audio = recordVoice()
-        convCount += 2
-        sendVoice()
-        if voiceDelivered():
-            waitForRecording()
-            waitForSending()
-            getVoice()
-            playVoice()
-        else:
-            noReplyResponse()
-            break
+        startEvent()
+        image = captureImage()
+        isDelivery = identifyUser()
+        sendUserData()
 
-    if isDelivery and audioID != "":
-        permitted = False
-        askMailboxAccess()
-        if permitted:
-            openMailbox()
-            waitForMailboxClosed()
+        convCount = 0
+        update = ""
+        while conversation():
+            audio = recordVoice()
+            convCount += 2
+            sendVoice()
+            if voiceDelivered():
+                waitForRecording()
+                waitForSending()
+                getVoice()
+                playVoice()
+            else:
+                noReplyResponse()
+                break
+
+        if isDelivery and audioID != "":
+            permitted = False
+            askMailboxAccess()
+            if permitted:
+                openMailbox()
+                waitForMailboxClosed()
+            else:
+                pass
         else:
             pass
-    else:
-        pass
 
-    audioID = ""
-    endEvent()
+        while conversation():
+            audio = recordVoice()
+            convCount += 2
+            sendVoice()
+            if voiceDelivered():
+                waitForRecording()
+                waitForSending()
+                getVoice()
+                playVoice()
+            else:
+                noReplyResponse()
+                break
+
+        audioID = ""
+        endEvent()
