@@ -69,7 +69,7 @@ def createData(msgType, url):
 
 NODEID = "-MmSuW2k2OdZxIOqkBE-"
 PATH = "messages/"+NODEID+"/"
-DELAY = 120
+DELAY = 180
 audioID = ""
 
 
@@ -285,8 +285,8 @@ def openMailbox():
 
 
 def waitForMailboxClosed():
-    print("Close the mailbox!")
     sleep(2)
+    print("Mailbox is closed!")
 
 
 def endEvent():
