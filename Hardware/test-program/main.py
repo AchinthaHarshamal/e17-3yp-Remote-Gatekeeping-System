@@ -13,8 +13,21 @@ def getNodeID():
 
 
 def startEvent():
-    input("Press Enter to INIT the system ")
+    input("Press Enter to INIT the system")
     print("------------------------------")
+
+    with open('last_event.txt', 'r') as readfile:
+        for line in readfile:
+            pass
+        data = line.split()
+
+    today = str(datetime.utcnow().date())
+
+    global eventNo
+    eventNo = 0 if data[0] != today else int(data[1]) + 1
+
+    with open('last_event.txt', 'w') as writefile:
+        writefile.write(today+' '+str(eventNo))
 
 
 def getFilename():
@@ -193,9 +206,8 @@ def conversation():
 
 def recordVoice():
     print("\t<recording_voice...>")
-    sleep(2)
     filename = getFilename()+'N'+str(convCount)+'.mp3'
-    src = str(convCount % 2)+".mp3"
+    src = str(int(convCount / 2) % 2)+".mp3"
     copyfile("aud/templates/"+src, "aud/"+filename)
     # open('aud/'+filename, 'w')
     print("\t<done>")
@@ -290,8 +302,6 @@ def waitForMailboxClosed():
 
 
 def endEvent():
-    global eventNo
-    eventNo += 1
     print("------------------------------")
     print("Thank you, Have a nice day!\n")
 
