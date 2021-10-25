@@ -25,7 +25,7 @@ def captureImage():
     print("\t<capturing_the_picture...>")
     sleep(1)
     filename = getFilename()+'.jpg'
-    src = str(eventNo % 4)+".jpg"
+    src = str(eventNo % 5)+".jpg"
     copyfile("img/templates/"+src, "img/"+filename)
     # open('img/'+filename, 'w')
     print("\t<done>")
@@ -69,7 +69,7 @@ def createData(msgType, url):
 
 NODEID = "-MmSuW2k2OdZxIOqkBE-"
 PATH = "messages/"+NODEID+"/"
-DELAY = 120
+DELAY = 180
 audioID = ""
 
 
@@ -180,17 +180,24 @@ def sendUserData():
 
 
 def conversation():
-    msg = input("Do you want to send a message? ")
-    return True if msg == '' else False
+    global firstConv
+    if firstConv:
+        print("Do you want to send a message?")
+        msg = input("Press 1:Yes 2:No ")
+        firstConv = False
+    else:
+        print("Send message or Mailbox access?")
+        msg = input("Press 1:Message 2:Mailbox ")
+    return True if msg == '1' else False
 
 
 def recordVoice():
     print("\t<recording_voice...>")
     sleep(2)
     filename = getFilename()+'N'+str(convCount)+'.mp3'
-    src = "0.mp3"
+    src = str(convCount % 2)+".mp3"
     copyfile("aud/templates/"+src, "aud/"+filename)
-    open('aud/'+filename, 'w')
+    # open('aud/'+filename, 'w')
     print("\t<done>")
     return filename
 
@@ -199,15 +206,21 @@ def sendVoice():
     print("\t<sending_voice...>")
     if convCount == 2:
         storage.child(PATH+audio).put("aud/"+audio)
-        data = createData("AUDIO", PATH+audio)
+        url = storage.child(PATH+audio).get_url(None)
+
+        data = createData("AUDIO", url)
         data["status"] = "NONE"
+
         print("\t<waiting_for_ack...>")
         isAcked = waitForResponse()
         print("\t<acked>")
         db.child("messages").child(NODEID).push(data)
     else:
+        storage.child(PATH+audio).put("aud/"+audio)
+        url = storage.child(PATH+audio).get_url(None)
+
         db.child("messages").child(NODEID).child(audioID).update({"status": "NONE"})
-        db.child("messages").child(NODEID).child(audioID).update({"msgURL": PATH+audio})
+        db.child("messages").child(NODEID).child(audioID).update({"msgURL": url})
     print("\t<sent>")
 
 
@@ -272,8 +285,8 @@ def openMailbox():
 
 
 def waitForMailboxClosed():
-    print("Close the mailbox!")
     sleep(2)
+    print("Mailbox is closed!")
 
 
 def endEvent():
@@ -291,7 +304,6 @@ if __name__ == "__main__":
     4. DELAY
     5. getVoice() download file
     6. visitor branch
-    7. voice or mailbox message
 
     ->  noReplyResponse(), closeMailbox(), updateMailboxState()
     """
@@ -308,6 +320,7 @@ if __name__ == "__main__":
 
         convCount = 0
         update = ""
+        firstConv = True
         while conversation():
             audio = recordVoice()
             convCount += 2
@@ -332,6 +345,7 @@ if __name__ == "__main__":
         else:
             pass
 
+        firstConv = True
         while conversation():
             audio = recordVoice()
             convCount += 2
