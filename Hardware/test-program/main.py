@@ -195,7 +195,7 @@ def recordVoice():
     print("\t<recording_voice...>")
     sleep(2)
     filename = getFilename()+'N'+str(convCount)+'.mp3'
-    src = "0.mp3"
+    src = str(convCount % 2)+".mp3"
     copyfile("aud/templates/"+src, "aud/"+filename)
     # open('aud/'+filename, 'w')
     print("\t<done>")
@@ -206,15 +206,21 @@ def sendVoice():
     print("\t<sending_voice...>")
     if convCount == 2:
         storage.child(PATH+audio).put("aud/"+audio)
-        data = createData("AUDIO", PATH+audio)
+        url = storage.child(PATH+audio).get_url(None)
+
+        data = createData("AUDIO", url)
         data["status"] = "NONE"
+
         print("\t<waiting_for_ack...>")
         isAcked = waitForResponse()
         print("\t<acked>")
         db.child("messages").child(NODEID).push(data)
     else:
+        storage.child(PATH+audio).put("aud/"+audio)
+        url = storage.child(PATH+audio).get_url(None)
+
         db.child("messages").child(NODEID).child(audioID).update({"status": "NONE"})
-        db.child("messages").child(NODEID).child(audioID).update({"msgURL": PATH+audio})
+        db.child("messages").child(NODEID).child(audioID).update({"msgURL": url})
     print("\t<sent>")
 
 
