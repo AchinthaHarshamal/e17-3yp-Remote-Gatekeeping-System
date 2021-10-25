@@ -25,7 +25,7 @@ def captureImage():
     print("\t<capturing_the_picture...>")
     sleep(1)
     filename = getFilename()+'.jpg'
-    src = str(eventNo % 4)+".jpg"
+    src = str(eventNo % 5)+".jpg"
     copyfile("img/templates/"+src, "img/"+filename)
     # open('img/'+filename, 'w')
     print("\t<done>")
