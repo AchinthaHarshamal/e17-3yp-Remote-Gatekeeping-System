@@ -14,6 +14,7 @@
 |User Loging (ii)   | User loging with wrong email or password    | Try to log in with the wrong credential| Blocking the invalid users  |Pass    |
 |Device initialize (i) | The device initializes with the correct serial number & Valid use information. | Checking whether the initialization work correctly or not |Successful signup to valid-user | Pass|
 |Device initialize (ii) | Device initialize with incorrect serial number | Checking whether the initialization work with incorrect serial or not|Unable to sign up an invalid user| Pass|
+|Dashboard Funcinalitys | Histroy Table <br/>Device Status <br/> Number of Events<br/> Chart | To check whether Database Functionalaties works or not| Histroy Table updating correctly <br/> Device Status correctly appearing<br/> Event Count and Usage chart correctly updating | Some cases are stil not working|
 ||||||
 
 <br/>
