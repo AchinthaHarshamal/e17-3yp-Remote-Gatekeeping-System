@@ -180,8 +180,15 @@ def sendUserData():
 
 
 def conversation():
-    msg = input("Do you want to send a message? ")
-    return True if msg == '' else False
+    global firstConv
+    if firstConv:
+        print("Do you want to send a message?")
+        msg = input("Press 1:Yes 2:No ")
+        firstConv = False
+    else:
+        print("Send message or Mailbox access?")
+        msg = input("Press 1:Message 2:Mailbox ")
+    return True if msg == '1' else False
 
 
 def recordVoice():
@@ -190,7 +197,7 @@ def recordVoice():
     filename = getFilename()+'N'+str(convCount)+'.mp3'
     src = "0.mp3"
     copyfile("aud/templates/"+src, "aud/"+filename)
-    open('aud/'+filename, 'w')
+    # open('aud/'+filename, 'w')
     print("\t<done>")
     return filename
 
@@ -291,7 +298,6 @@ if __name__ == "__main__":
     4. DELAY
     5. getVoice() download file
     6. visitor branch
-    7. voice or mailbox message
 
     ->  noReplyResponse(), closeMailbox(), updateMailboxState()
     """
@@ -308,6 +314,7 @@ if __name__ == "__main__":
 
         convCount = 0
         update = ""
+        firstConv = True
         while conversation():
             audio = recordVoice()
             convCount += 2
@@ -332,6 +339,7 @@ if __name__ == "__main__":
         else:
             pass
 
+        firstConv = True
         while conversation():
             audio = recordVoice()
             convCount += 2
