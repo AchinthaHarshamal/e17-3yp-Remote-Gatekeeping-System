@@ -80,7 +80,7 @@ def createData(msgType, url):
     }
 
 
-NODEID = "-MmSuW2k2OdZxIOqkBE-"
+NODEID = "-Mms_cdcEVk_ygXOg6qA"
 PATH = "messages/"+NODEID+"/"
 DELAY = 180
 audioID = ""
@@ -304,6 +304,7 @@ def waitForMailboxClosed():
 def endEvent():
     print("------------------------------")
     print("Thank you, Have a nice day!\n")
+    db.child("messages").child(NODEID).child(audioID).update({"msgType": "CLOSED"})
 
 
 if __name__ == "__main__":
@@ -369,5 +370,5 @@ if __name__ == "__main__":
                 noReplyResponse()
                 break
 
-        audioID = ""
         endEvent()
+        audioID = ""

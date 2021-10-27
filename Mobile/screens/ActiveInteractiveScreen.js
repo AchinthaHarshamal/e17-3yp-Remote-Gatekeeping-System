@@ -230,6 +230,13 @@ const ActiveInteractiveScreen = (props) => {
           </View>
 
           <View style={styles.closeButtonContainer}>
+            {closeEvent ? (
+              <Text style={styles.voiceReceived}>
+                Outsider has closed the event!
+              </Text>
+            ) : (
+              <View></View>
+            )}
             <CustomButton3 onPress={handleOnClose} styles={styles.close}>
               <AntDesign name="close" size={24} color="white" />
             </CustomButton3>
