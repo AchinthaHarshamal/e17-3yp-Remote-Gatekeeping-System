@@ -19,7 +19,7 @@ const Chart = () => {
         datasets: [
           {
             label: 'Number of Messages',
-            data: [0, 0, 0, 0, 0, 1],
+            data: [0, 0, 0, 1, 6, 0],
             fill: false,
             backgroundColor: 'rgb(245, 216, 51)',
             borderColor: 'rgba(137, 118, 8, 0.3)',
