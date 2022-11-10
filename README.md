@@ -22,7 +22,6 @@ Our goal is to provide a user-friendly and completely automated solution for the
 ## Main Components
 - [Smart mailbox](#smart-mailbox)
 - [Control unit with intercom](#control-unit-with-intercom)
-- [Remote gate unlocking system](#remote-gate-unlocking-system)
 - [Mobile controlling interface](#mobile-controlling-interface)
 - [Administrative web services](#administrative-web-services)
 
@@ -51,19 +50,7 @@ This is used for safely receive the delivery package from the delivery person wi
 The speciality of this component is that the homeowners can get the delivery package without having to be at the home when the delivery arrives to the home.They can safetly receive deliveries and it doesn't matter where they are at.   
 Another advantage is that , it reduces the human interactions significantly. This is a very good solution for ongoing corona outbreak as we    
 
-## Remote gate unlocking system
-This is used to lock and unlock the gate remotely.Functionality is very simiar to the smart mailbox.   
-  
-### How it works:  
-1. Whenever someone is at the gate, he/she can request the delivery person to open up the smart mail box.    
-2. Inside user(home owner) gets a notification to his/her phone , informing that someone is at the gate.  
-3. Inside user can access the camera module in the control unit and get a photo of the person at the gate.  
-4. Inside user can commiunicate with the with that person using the intercom system which is integrated to the control unit.This can be used when the person is not identified by the inside user.  
-5. Inside user can unlock the gate.  
-6. Outside person can open the gate and enter.
-  
->NOTE : 
->  Only the locking/unlocking mechanism is provided with the system and the gate will not be provided. This lock can be applied only for basic types of gates and will not support all the gatedoors with different orientations.
+
   
   
 ## Mobile controlling interface
@@ -84,5 +71,5 @@ Web services provide another interface for the users to interact with the system
 
 
 ## Testing Results
-  - for *Administrative Web Service* Testing results **click [here](./Testing/TESTING.md)**
+  - for Testing results **click [here](./Testing/TESTING.md)**
   
