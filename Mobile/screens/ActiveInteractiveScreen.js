@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { View, StyleSheet, Text, Image } from "react-native";
 import { Audio } from 'expo-av';
 
-
 import Header from "../components/Header";
 import CustomButton3 from "../components/CustomButton3";
 import { ScrollView, State } from "react-native-gesture-handler";
@@ -20,9 +19,7 @@ import {
 
 import firebase from "firebase/app";
 import "firebase/database";
-
-// // temp
-import "firebase/storage"; //---->end
+import "firebase/storage"; 
 
 let key;
 
@@ -34,11 +31,22 @@ const ActiveInteractiveScreen = (props) => {
   const [sendingStatus, setSendingStatus] = useState(false); //messeage status is sending
   const [mailBoxAccessRequest, setMailBoxAccessRequest] = useState(false); //message type is mailboxaccess
   const [mailBoxAccessResponse, setMailBoxAccessResponse] = useState(); //message status is access given
-  const [closeEvent, setCloseEvent] = useState(false);
+  const [closeEvent, setCloseEvent] = useState(false);      // for closing the event
   const [audioURL, setAudioURL] = useState(); //message url
-  const [recording, setRecording] = React.useState(); //to store the recording file
+  const [recording, setRecording] = useState(); //to store the recording file
+  const [messageCount,setMessageCount] = useState(0); // to store the number of the audio
+  const [eventCount,setEventCount] = useState(); // to store the event number
 
   const ref = firebase.database().ref(`messages/${props.nodeId}/`); //getting the firebase url
+
+  const messageURL = "https://firebasestorage.googleapis.com/v0/b/gate-keeper-6fad9.appspot.com/o/";
+
+  const date = new Date();
+
+  const currDate = `${date.getFullYear()}-${date.getMonth()}-${date.getDay()}`;
+
+  // for storing the messages links : useful for implementing records : not implemented
+  const audioMessages = [];
 
   //setting a message listener
   const messageListener = async () => {
@@ -52,6 +60,9 @@ const ActiveInteractiveScreen = (props) => {
       //getting the last message itself
       const lastMsg = messages[key];
 
+      // store the event counter
+      setEventCount(lastMsg.event);      
+
       if (lastMsg.msgType == "AUDIO") {
         if (lastMsg.status == "NONE") {
           setNoneStatus(true);
@@ -59,6 +70,9 @@ const ActiveInteractiveScreen = (props) => {
           setRecordingStatus(false);
           setSendingStatus(false);
           setAudioURL(lastMsg.msgURL);
+
+          // storing the url
+          audioMessages.push(lastMsg.msgURL);
         } else if (lastMsg.status == "LISTENING") {
           setNoneStatus(false);
           setListeningStatus(true);
@@ -74,6 +88,9 @@ const ActiveInteractiveScreen = (props) => {
           setListeningStatus(false);
           setRecordingStatus(false);
           setSendingStatus(true);
+
+          // storing the url
+          audioMessages.push(lastMsg.msgURL);
         }
       }
       if (lastMsg.msgType == "MAIL_BOX_ACCESS") {
@@ -106,6 +123,7 @@ const ActiveInteractiveScreen = (props) => {
   const listeningHandler = () => {
     if (!noneStatus) return;
     console.log("Listening to the voice");
+    
     updateStatus("LISTENING");
   };
 
@@ -185,10 +203,13 @@ const ActiveInteractiveScreen = (props) => {
     const storageRef = firebase.storage().ref();
 
     // upload the file to the storage
-    await storageRef.child('uploads/hikz.m4a').put(file);
+    await storageRef.child(`messages/${props.nodeId}/${currDate}E${eventCount}_${messageCount}.m4a`).put(file);
 
     // update the message url : comment for DEBUG
-    // updateMsgURL(`messages/${props.nodeId}/random.mp3`);
+    updateMsgURL(`${messageURL}messages%2F${props.nodeId}%2F${currDate}E${eventCount}_${messageCount}.m4a?alt=media`);
+    
+    // update the count
+    setMessageCount(messageCount+1);
 
     // update the status
     updateStatus("SENDING");
