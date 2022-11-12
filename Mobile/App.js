@@ -16,7 +16,6 @@ import ReduxThunk from "redux-thunk";
 import firebase from "firebase/app";
 import { firebaseConfig } from "./firebase/firebase";
 
-import AudioRecordingScreen from "./screens/AudioRecordingScreen";
 
 const fetchFonts = () => {
   return Font.loadAsync({
