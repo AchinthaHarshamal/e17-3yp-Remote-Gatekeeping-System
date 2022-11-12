@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { View, StyleSheet, Text, Image } from "react-native";
-import { Audio } from "expo-av";
+import { Audio } from 'expo-av';
+
 
 import Header from "../components/Header";
 import CustomButton3 from "../components/CustomButton3";
@@ -20,6 +21,9 @@ import {
 import firebase from "firebase/app";
 import "firebase/database";
 
+// // temp
+import "firebase/storage"; //---->end
+
 let key;
 
 const ActiveInteractiveScreen = (props) => {
@@ -32,6 +36,7 @@ const ActiveInteractiveScreen = (props) => {
   const [mailBoxAccessResponse, setMailBoxAccessResponse] = useState(); //message status is access given
   const [closeEvent, setCloseEvent] = useState(false);
   const [audioURL, setAudioURL] = useState(); //message url
+  const [recording, setRecording] = React.useState(); //to store the recording file
 
   const ref = firebase.database().ref(`messages/${props.nodeId}/`); //getting the firebase url
 
@@ -80,37 +85,114 @@ const ActiveInteractiveScreen = (props) => {
     });
   };
 
+  // for updating the status of the message body in firebase
   const updateStatus = (status) => {
     const ref = firebase.database().ref(`messages/${props.nodeId}/` + key);
     ref.update({ status: status });
   };
 
+  // for updating the url of the message body in firebase
   const updateMsgURL = (msgURL) => {
     const ref = firebase.database().ref(`messages/${props.nodeId}/` + key);
     ref.update({ msgURL: msgURL });
   };
 
+  // for initial render
   useEffect(() => {
     messageListener();
   }, []);
 
+  // for lisenting for message
   const listeningHandler = () => {
     if (!noneStatus) return;
     console.log("Listening to the voice");
     updateStatus("LISTENING");
   };
 
+  // start recording
+  async function startRecording() {
+    try {
+
+      // get permissions
+      const permission = await Audio.requestPermissionsAsync();
+
+      // check if user grants permissions
+      if (permission.status === "granted") {
+        
+        // then start set audio recording settings
+        await Audio.setAudioModeAsync({
+          allowsRecordingIOS: true,
+          playsInSilentModeIOS: true
+        });
+        
+        // start the recording
+        const { recording } = await Audio.Recording.createAsync(
+          Audio.RecordingOptionsPresets.HIGH_QUALITY
+        );
+        
+        //update the recording
+        setRecording(recording);
+
+      } else {
+
+        // if the user does not give permissions
+        console.error("Please grant permission to app to access microphone");
+      }
+      // if there is any errors
+    } catch (err) {
+      console.error('Failed to start recording', err);
+    }
+  }
+
+  // recording handler
   const recordingHandeler = () => {
     if (!listneningStatus) return;
     console.log("Recording your voice");
     updateStatus("RECORDING");
+
+    //start recording
+    startRecording();
   };
 
-  const sendingHandler = () => {
+  // stop recording
+  async function stopRecording() {
+    setRecording(undefined);
+    await recording.stopAndUnloadAsync();
+  }
+
+  // send the record to the server
+  const sendingHandler = async () => {
     if (!recordingStatus) return;
+
+    // stop the recording
+    await stopRecording();
+
+    // print the state to the console
     console.log("Sending your voice");
-    updateMsgURL(`messages/${props.nodeId}/random.mp3`);
+    
+    console.log("Recordings = ");
+    console.log(recording);
+    console.log(recording.getURI());
+    console.log(recording);
+
+    // get the uri
+    const response = await fetch(recording.getURI());
+
+    // create the file
+    const file = await response.blob();
+
+    // get a reference to the storage
+    const storageRef = firebase.storage().ref();
+
+    // upload the file to the storage
+    await storageRef.child('uploads/hikz.m4a').put(file);
+
+    // update the message url : comment for DEBUG
+    // updateMsgURL(`messages/${props.nodeId}/random.mp3`);
+
+    // update the status
     updateStatus("SENDING");
+
   };
 
   const mailBoxAccessHandler = () => {
