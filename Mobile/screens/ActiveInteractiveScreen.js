@@ -45,6 +45,9 @@ const ActiveInteractiveScreen = (props) => {
 
   const currDate = `${date.getFullYear()}-${date.getMonth()}-${date.getDay()}`;
 
+  // for storing the messages links : useful for implementing records : not implemented
+  const audioMessages = [];
+
   //setting a message listener
   const messageListener = async () => {
     await ref.on("value", (snapshot) => {
@@ -67,6 +70,9 @@ const ActiveInteractiveScreen = (props) => {
           setRecordingStatus(false);
           setSendingStatus(false);
           setAudioURL(lastMsg.msgURL);
+
+          // storing the url
+          audioMessages.push(lastMsg.msgURL);
         } else if (lastMsg.status == "LISTENING") {
           setNoneStatus(false);
           setListeningStatus(true);
@@ -82,6 +88,9 @@ const ActiveInteractiveScreen = (props) => {
           setListeningStatus(false);
           setRecordingStatus(false);
           setSendingStatus(true);
+
+          // storing the url
+          audioMessages.push(lastMsg.msgURL);
         }
       }
       if (lastMsg.msgType == "MAIL_BOX_ACCESS") {
@@ -114,6 +123,7 @@ const ActiveInteractiveScreen = (props) => {
   const listeningHandler = () => {
     if (!noneStatus) return;
     console.log("Listening to the voice");
+    
     updateStatus("LISTENING");
   };
 
