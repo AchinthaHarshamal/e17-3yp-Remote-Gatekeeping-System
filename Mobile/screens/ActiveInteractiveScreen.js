@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { View, StyleSheet, Text, Image } from "react-native";
-import { Audio } from "expo-av";
+import { Audio } from 'expo-av';
 
 import Header from "../components/Header";
 import CustomButton3 from "../components/CustomButton3";
@@ -19,6 +19,7 @@ import {
 
 import firebase from "firebase/app";
 import "firebase/database";
+import "firebase/storage"; 
 
 let key;
 
@@ -30,10 +31,22 @@ const ActiveInteractiveScreen = (props) => {
   const [sendingStatus, setSendingStatus] = useState(false); //messeage status is sending
   const [mailBoxAccessRequest, setMailBoxAccessRequest] = useState(false); //message type is mailboxaccess
   const [mailBoxAccessResponse, setMailBoxAccessResponse] = useState(); //message status is access given
-  const [closeEvent, setCloseEvent] = useState(false);
+  const [closeEvent, setCloseEvent] = useState(false);      // for closing the event
   const [audioURL, setAudioURL] = useState(); //message url
+  const [recording, setRecording] = useState(); //to store the recording file
+  const [messageCount,setMessageCount] = useState(0); // to store the number of the audio
+  const [eventCount,setEventCount] = useState(); // to store the event number
 
   const ref = firebase.database().ref(`messages/${props.nodeId}/`); //getting the firebase url
+
+  const messageURL = "https://firebasestorage.googleapis.com/v0/b/gate-keeper-6fad9.appspot.com/o/";
+
+  const date = new Date();
+
+  const currDate = `${date.getFullYear()}-${date.getMonth()}-${date.getDay()}`;
+
+  // for storing the messages links : useful for implementing records : not implemented
+  const audioMessages = [];
 
   //setting a message listener
   const messageListener = async () => {
@@ -47,6 +60,9 @@ const ActiveInteractiveScreen = (props) => {
       //getting the last message itself
       const lastMsg = messages[key];
 
+      // store the event counter
+      setEventCount(lastMsg.event);      
+
       if (lastMsg.msgType == "AUDIO") {
         if (lastMsg.status == "NONE") {
           setNoneStatus(true);
@@ -54,6 +70,9 @@ const ActiveInteractiveScreen = (props) => {
           setRecordingStatus(false);
           setSendingStatus(false);
           setAudioURL(lastMsg.msgURL);
+
+          // storing the url
+          audioMessages.push(lastMsg.msgURL);
         } else if (lastMsg.status == "LISTENING") {
           setNoneStatus(false);
           setListeningStatus(true);
@@ -69,6 +88,9 @@ const ActiveInteractiveScreen = (props) => {
           setListeningStatus(false);
           setRecordingStatus(false);
           setSendingStatus(true);
+
+          // storing the url
+          audioMessages.push(lastMsg.msgURL);
         }
       }
       if (lastMsg.msgType == "MAIL_BOX_ACCESS") {
@@ -80,37 +102,118 @@ const ActiveInteractiveScreen = (props) => {
     });
   };
 
+  // for updating the status of the message body in firebase
   const updateStatus = (status) => {
     const ref = firebase.database().ref(`messages/${props.nodeId}/` + key);
     ref.update({ status: status });
   };
 
+  // for updating the url of the message body in firebase
   const updateMsgURL = (msgURL) => {
     const ref = firebase.database().ref(`messages/${props.nodeId}/` + key);
     ref.update({ msgURL: msgURL });
   };
 
+  // for initial render
   useEffect(() => {
     messageListener();
   }, []);
 
+  // for lisenting for message
   const listeningHandler = () => {
     if (!noneStatus) return;
     console.log("Listening to the voice");
+    
     updateStatus("LISTENING");
   };
 
+  // start recording
+  async function startRecording() {
+    try {
+
+      // get permissions
+      const permission = await Audio.requestPermissionsAsync();
+
+      // check if user grants permissions
+      if (permission.status === "granted") {
+        
+        // then start set audio recording settings
+        await Audio.setAudioModeAsync({
+          allowsRecordingIOS: true,
+          playsInSilentModeIOS: true
+        });
+        
+        // start the recording
+        const { recording } = await Audio.Recording.createAsync(
+          Audio.RecordingOptionsPresets.HIGH_QUALITY
+        );
+        
+        //update the recording
+        setRecording(recording);
+
+      } else {
+
+        // if the user does not give permissions
+        console.error("Please grant permission to app to access microphone");
+      }
+      // if there is any errors
+    } catch (err) {
+      console.error('Failed to start recording', err);
+    }
+  }
+
+  // recording handler
   const recordingHandeler = () => {
     if (!listneningStatus) return;
     console.log("Recording your voice");
     updateStatus("RECORDING");
+
+    //start recording
+    startRecording();
   };
 
-  const sendingHandler = () => {
+  // stop recording
+  async function stopRecording() {
+    setRecording(undefined);
+    await recording.stopAndUnloadAsync();
+  }
+
+  // send the record to the server
+  const sendingHandler = async () => {
     if (!recordingStatus) return;
+
+    // stop the recording
+    await stopRecording();
+
+    // print the state to the console
     console.log("Sending your voice");
-    updateMsgURL(`messages/${props.nodeId}/random.mp3`);
+    
+    console.log("Recordings = ");
+    console.log(recording);
+    console.log(recording.getURI());
+    console.log(recording);
+
+    // get the uri
+    const response = await fetch(recording.getURI());
+
+    // create the file
+    const file = await response.blob();
+
+    // get a reference to the storage
+    const storageRef = firebase.storage().ref();
+
+    // upload the file to the storage
+    await storageRef.child(`messages/${props.nodeId}/${currDate}E${eventCount}_${messageCount}.m4a`).put(file);
+
+    // update the message url : comment for DEBUG
+    updateMsgURL(`${messageURL}messages%2F${props.nodeId}%2F${currDate}E${eventCount}_${messageCount}.m4a?alt=media`);
+    
+    // update the count
+    setMessageCount(messageCount+1);
+
+    // update the status
     updateStatus("SENDING");
+
   };
 
   const mailBoxAccessHandler = () => {
