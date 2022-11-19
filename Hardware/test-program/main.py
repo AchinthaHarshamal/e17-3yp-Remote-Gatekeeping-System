@@ -3,6 +3,26 @@ from time import sleep, time
 from shutil import copyfile
 import pyrebase
 #  third-party helper library for interacting with the REST API
+import RPi.GPIO as GPIO
+from picamera import PiCamera
+from signal import signal, SIGTERM, SIGHUP, pause
+from rpi_lcd import LCD
+
+
+def initKeys():
+    GPIO.setwarnings(False)
+    GPIO.setmode(GPIO.BOARD) # Use physical pin numbering
+    GPIO.setup(8, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+    GPIO.setup(10, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+
+
+def first_choice():
+    while True:
+        if GPIO.input(8) == GPIO.HIGH:
+            return True
+        elif GPIO.input(10) == GPIO.HIGH:
+            return False
+        sleep(0.1)
 
 
 def getNodeID():
@@ -12,9 +32,27 @@ def getNodeID():
     return nodeid
 
 
+def safe_exit(signum, frame):
+    exit(1)
+    
+def print_lcd(str1, str2):
+    lcd = LCD()
+    try:
+        signal(SIGTERM, safe_exit)
+        signal(SIGHUP, safe_exit)
+        lcd.text(str1, 1)
+        lcd.text(str2, 2)
+    except KeyboardInterrupt:
+        pass
+
+
 def startEvent():
-    input("Press Enter to INIT the system")
+    print("Press Enter to INIT the system")
     print("------------------------------")
+    print_lcd('Press (1) to', 'INIT the system')
+    sleep(1)
+    if first_choice():
+        pass
 
     with open('last_event.txt', 'r') as readfile:
         for line in readfile:
@@ -36,18 +74,24 @@ def getFilename():
 
 def captureImage():
     print("\t<capturing_the_picture...>")
+    print_lcd('Capturing the', 'Image...')
     sleep(1)
     filename = getFilename()+'.jpg'
     src = str(eventNo % 5)+".jpg"
     copyfile("img/templates/"+src, "img/"+filename)
+    #camera = PiCamera()
+    sleep(5)
+    #camera.capture('/home/pi/Desktop/3yp/e17-3yp-Remote-Gatekeeping-System/Hardware/test-program/img/' + filename)
+    #camera.close()
     # open('img/'+filename, 'w')
     print("\t<done>")
     return filename
 
 
 def identifyUser():
-    userType = input("Delivery (d) or a Visitor (v)? ")
-    return True if userType == "d" else False  # true if delivery
+    print("Delivery (1) or a Visitor (2)? ")
+    print_lcd('Delivery (1) or', 'a Visitor (2)?')
+    return first_choice()  # true if delivery
 
 
 config = {
@@ -170,9 +214,13 @@ def waitForResponse():
     waiting = True
     while not_updated and waiting:
         print("\t\t<waiting_for_response...>")
+        print_lcd('Waiting for', 'the response...')
         sleep(1)
         waiting = timeout(init_time)
-    stream.close()
+    try:
+        stream.close()
+    except AttributeError:
+        pass
     not_updated = True
     print("\t\t<responded>")
     return waiting
@@ -180,6 +228,7 @@ def waitForResponse():
 
 def sendUserData():
     print("\t<sending_user_information...>")
+    print_lcd('Sending user', 'information...')
     storage.child(PATH+image).put("img/"+image)
     url = storage.child(PATH+image).get_url(None)
 
@@ -196,16 +245,19 @@ def conversation():
     global firstConv
     if firstConv:
         print("Do you want to send a message?")
-        msg = input("Press 1:Yes 2:No ")
+        print("Press 1:Yes 2:No ")
+        print_lcd('Send a message?', '1:Yes, 2:No')
         firstConv = False
     else:
         print("Send message or Mailbox access?")
-        msg = input("Press 1:Message 2:Mailbox ")
-    return True if msg == '1' else False
+        print("Press 1:Message 2:Mailbox ")
+        print_lcd('Msg or Mailbox?', '1:Msg, 2:Mailbox')
+    return first_choice()
 
 
 def recordVoice():
     print("\t<recording_voice...>")
+    print_lcd('Recording', 'voice...')
     filename = getFilename()+'N'+str(convCount)+'.mp3'
     src = str(int(convCount / 2) % 2)+".mp3"
     copyfile("aud/templates/"+src, "aud/"+filename)
@@ -216,6 +268,7 @@ def recordVoice():
 
 def sendVoice():
     print("\t<sending_voice...>")
+    print_lcd('Sending', 'voice...')
     if convCount == 2:
         storage.child(PATH+audio).put("aud/"+audio)
         url = storage.child(PATH+audio).get_url(None)
@@ -224,6 +277,7 @@ def sendVoice():
         data["status"] = "NONE"
 
         print("\t<waiting_for_ack...>")
+        print_lcd('Waiting for', 'ack...')
         isAcked = waitForResponse()
         print("\t<acked>")
         db.child("messages").child(NODEID).push(data)
@@ -231,6 +285,7 @@ def sendVoice():
         storage.child(PATH+audio).put("aud/"+audio)
         url = storage.child(PATH+audio).get_url(None)
 
+        #################################################
         db.child("messages").child(NODEID).child(audioID).update({"status": "NONE"})
         db.child("messages").child(NODEID).child(audioID).update({"msgURL": url})
     print("\t<sent>")
@@ -238,31 +293,38 @@ def sendVoice():
 
 def voiceDelivered():
     print("\t<waiting_for_listen...>")
+    print_lcd('Waitong for', 'listening...')
     initStream(handleVoiceListen)
     isListening = waitForResponse()
     print("\t<listening>")
     print("User is listening!")
+    print_lcd('User is', 'listening...')
     return isListening
 
 
 def waitForRecording():
     print("\t<waiting_for_record...>")
+    print_lcd('Waitong for', 'record...')
     initStream(handleVoiceRecord)
     isRecording = waitForResponse()
     print("\t<recording>")
     print("User is recording!")
+    print_lcd('User is', 'recording...')
 
 
 def waitForSending():
     print("\t<waiting_for_send...>")
+    print_lcd('Waitong for', 'sending...')
     initStream(handleVoiceSend)
     isSending = waitForResponse()
     print("\t<sending>")
     print("User is sending!")
+    print_lcd('User is', 'sending...')
 
 
-def waitForPermission() -> bool:
+def waitForPermission():
     print("\t<waiting_for_permission...>")
+    print_lcd('Waitong for', 'permission...')
     initStream(handleMailboxAccess)
     permitted = waitForResponse()
     print("\t<replied>")
@@ -270,6 +332,7 @@ def waitForPermission() -> bool:
 
 def getVoice():
     print("\t<downloading_voice...>")
+    print_lcd('Downloading', 'voice...')
     # storage.child(update).download("img/"+update.split("/")[-1])
     sleep(2)
     print("\t<done>")
@@ -277,6 +340,7 @@ def getVoice():
 
 def playVoice():
     print("Playing user's message")
+    print_lcd('Playing user', 'message...')
     print("\t<playing_voice...>")
     sleep(2)
     print("\t<done>")
@@ -287,24 +351,33 @@ def noReplyResponse():
 
 
 def askMailboxAccess():
+    #################################################
     db.child("messages").child(NODEID).child(audioID).update({"msgType": "MAIL_BOX_ACCESS"})
     waitForPermission()
     print("User permitted access!" if permitted else "User denied access!")
+    if permitted:
+        print_lcd('User permitted', 'access!')
+    else:
+        print_lcd('User denied', 'access!')
 
 
 def openMailbox():
     print("Mailbox lock is open, place the delivery")
+    print_lcd('Mailbox is', 'open!')
 
 
 def waitForMailboxClosed():
     sleep(2)
     print("Mailbox is closed!")
+    print_lcd('Mailbox is', 'closed!')
 
 
 def endEvent():
     print("------------------------------")
     print("Thank you, Have a nice day!\n")
+    print_lcd('Thank you', 'Have a nice day')
     db.child("messages").child(NODEID).child(audioID).update({"msgType": "CLOSED"})
+    sleep(2)
 
 
 if __name__ == "__main__":
@@ -324,6 +397,7 @@ if __name__ == "__main__":
 
     while True:
 
+        initKeys()
         startEvent()
         image = captureImage()
         isDelivery = identifyUser()
@@ -333,6 +407,7 @@ if __name__ == "__main__":
         update = ""
         firstConv = True
         while conversation():
+            sleep(1)
             audio = recordVoice()
             convCount += 2
             sendVoice()
@@ -356,8 +431,11 @@ if __name__ == "__main__":
         else:
             pass
 
+        sleep(1)
+        print('SECOND CONV')
         firstConv = True
         while conversation():
+            db.child("messages").child(NODEID).child(audioID).update({"msgType": "AUDIO"})
             audio = recordVoice()
             convCount += 2
             sendVoice()
