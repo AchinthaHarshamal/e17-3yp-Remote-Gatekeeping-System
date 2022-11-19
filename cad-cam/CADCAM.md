@@ -5,8 +5,7 @@
 - Thickness: 12mm
 - Weight: 10Kg
 
-<img src="images\3.png" width="400">
-
+<img src="./images/3.png"  width="600">
 
 
 **Control Unit**
