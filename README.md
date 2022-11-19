@@ -77,3 +77,10 @@ Web services provide another interface for the users to interact with the system
 ## CAD & CAM
   - CAD and CAM views are availalbe [here](./cad-cam/CADCAM.md) 
   - Desing files are available [here](./cad-cam/)
+
+## Packagins
+  - Control unit
+
+    <img src="docs\images\packaging.png" width="300">
+
+  - Mailbox
