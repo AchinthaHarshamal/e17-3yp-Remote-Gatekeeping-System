@@ -51,9 +51,9 @@ const EventDetailsCard = (props) => {
           <Text style={style.label}>{props.isMailBoxAccessed}</Text>
         </View>
       </View>
-      <View style={style.buttonConatiner}>
+      {/* <View style={style.buttonConatiner}>
         <CustomButton2>Play Voice Messages</CustomButton2>
-      </View>
+      </View> */}
     </View>
   );
 };
