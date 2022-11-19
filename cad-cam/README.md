@@ -5,7 +5,7 @@
 - Thickness: 12mm
 - Weight: 10Kg
 
-<img src="./images/3.png"  width="600">
+<img src="cad-cam\images\3.png"  width="600">
 
 
 **Control Unit**
