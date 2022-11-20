@@ -83,5 +83,12 @@ Web services provide another interface for the users to interact with the system
   - Control unit
 
     <img src="docs\images\packaging.png" width="300">
+    <img src="docs\images\controlunit1.jpg" width="300">
+    <img src="docs\images\controlunit2.jpg" width="300">
 
   - Mailbox
+
+    <img src="docs\images\mailbox1.jpg" width="300">
+    <img src="docs\images\mailbox2.jpg" width="300">
+    <img src="docs\images\mailbox3.jpg" width="300">
+    
