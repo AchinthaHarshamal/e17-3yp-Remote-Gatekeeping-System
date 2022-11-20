@@ -32,3 +32,15 @@
 ||||||
 
 
+
+**Hardware**
+- Type : Manuall
+- Framework , Simulators & Libraris :  
+
+
+| Test        | Description    | Pupose|Expected Result| Result |
+|-------------|----------------|-------|-|-------|
+|Mailbox Locking Unlocking|Check whether mailbox locking unlocking machanism work properly|check the securie delivery taking|Mobile phone user is able to open the mailbox|pass|
+|Camera test|Capture a photo, using mobile phone signal|check the camera functionalaties|correctly capture the photo and shows on the phone|pass|
+|Mic & Speaker test|Capture a voice using mic and play on the phone, Captue a voice using phone|Check the end to end |Corectly work mic, speake with phone|fail|
+||||||
