@@ -82,9 +82,9 @@ Web services provide another interface for the users to interact with the system
 ## Packagins
   - Control unit
 
-    <img src="docs\images\packaging.png" width="300">
-    <img src="docs\images\controlunit1.jpg" width="100">
-    <img src="docs\images\controlunit2.jpg" width="100">
+    <img src="docs\images\packaging.png" width="300"><br>
+    <img src="docs\images\controlunit1.jpg" width="150"><br>
+    <img src="docs\images\controlunit2.jpg" width="150"><br>
 
   - Mailbox
 
