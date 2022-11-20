@@ -100,5 +100,8 @@ Web services provide another interface for the users to interact with the system
 
   - Design manual is implemented using graphics.
 
-    <img src="milestone4-files/Manuals/User_Manual/Moblie App/Screens/Interaction_Steps.png" width="100"><br>
+    <img src="milestone4-files/Manuals/User_Manual/Moblie App/Screens/Interaction_Steps.png" width="150"><br>
+    <img src="milestone4-files/Manuals/User_Manual/Moblie App/Screens/Previous_Events_Screen.png" width="150"><br>
+    <img src="milestone4-files/Manuals/User_Manual/Moblie App/Screens/Close_Event_Screen.png" width="150"><br>
+
 
