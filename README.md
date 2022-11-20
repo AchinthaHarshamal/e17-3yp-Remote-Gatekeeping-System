@@ -88,7 +88,7 @@ Web services provide another interface for the users to interact with the system
 
   - Mailbox
 
-    <img src="docs\images\mailbox1.jpg" width="100">
-    <img src="docs\images\mailbox2.jpg" width="100">
-    <img src="docs\images\mailbox3.jpg" width="100">
+    <img src="docs\images\mailbox1.jpg" width="100"><br>
+    <img src="docs\images\mailbox2.jpg" width="150"><br>
+    <img src="docs\images\mailbox3.jpg" width="150"><br>
     
