@@ -36,6 +36,7 @@ This is the main component of the system. This is where the iot device is at and
 4. Controlling the smart mailbox and smart gatelocking system.  
 
 ## Smart mailbox
+
 This is used for safely receive the delivery package from the delivery person without having any physical interactions with the delivery person. It doesn't matter where the homeowner when the delivery person comes to the door, delivery can be get into the hands of homeowner without having to worry about the facts such as delivey might get lost or damaged.  
   
 ### How it works:  
