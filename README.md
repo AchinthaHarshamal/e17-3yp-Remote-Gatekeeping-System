@@ -96,3 +96,15 @@ Web services provide another interface for the users to interact with the system
   - User Manual is available [here](./milestone4-files/Manuals/User_Manual/Group_19_User_Manual.pdf) 
   - Design Manual is available [here](./milestone4-files/Manuals/Design_Manual/Group_19_Design_Manual.pdf)
     
+## Design Manual
+
+  - Design manual is implemented using graphics.
+
+    <img src="milestone4-files/Manuals/User_Manual/Moblie App/Screens/Interaction_Steps.png" width="150">
+    <img src="milestone4-files/Manuals/User_Manual/Web App/MainComponents.png" width="150"><br>
+    <img src="milestone4-files/Manuals/User_Manual/Moblie App/Screens/Previous_Events_Screen.png" width="150">
+    <img src="milestone4-files/Manuals/User_Manual/Web App/Software Components.png" width="150"><br>
+    <img src="milestone4-files/Manuals/User_Manual/Moblie App/Screens/Close_Event_Screen.png" width="150">
+    <img src="milestone4-files/Manuals/User_Manual/Web App/Specifications.png" width="150"><br>
+
+
