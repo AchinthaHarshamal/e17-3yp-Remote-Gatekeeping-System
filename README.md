@@ -77,7 +77,7 @@ Web services provide another interface for the users to interact with the system
 
 ## CAD & CAM
   - CAD and CAM views are availalbe [here](./cad-cam/CADCAM.md) 
-  - Desing files are available [here](./cad-cam/)
+  - Design files are available [here](./cad-cam/)
 
 ## Packagins
   - Control unit
@@ -91,4 +91,8 @@ Web services provide another interface for the users to interact with the system
     <img src="docs\images\mailbox1.jpg" width="100"><br>
     <img src="docs\images\mailbox2.jpg" width="150"><br>
     <img src="docs\images\mailbox3.jpg" width="150"><br>
+    
+## Manuals
+  - User Manual is available [here](./milestone4-files/Manuals/User_Manual/Group_19_User_Manual.pdf) 
+  - Design Manual is available [here](./milestone4-files/Manuals/Design_Manual/Group_19_Design_Manual.pdf)
     
